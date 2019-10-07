@@ -4,6 +4,7 @@ public class Avatar
     public int strikeCount; //
     public int vertPos; //vertical position of avatar (y axis)
     public int horzPos; //horizontal position of avatar (x axis)
+    public boolean pizzaDelivered;
 
     private Avatar()
     {
@@ -12,28 +13,32 @@ public class Avatar
         strikeCount = 0;
         vertPos = 0;
         horzPos = 0; //sets  initial position of avatar to (0, 0)
-
+        pizzaDelivered = false;
     }
 
-    private void moveUp()
+    public void moveUp()
     {
         vertPos += 1;
     }
 
-    private void moveDown()
+    public void moveDown()
     {
         vertPos -= 1;
     }
 
-    private void moveRight()
+    public void moveRight()
     {
         horzPos += 1;
     }
 
-    private void moveLeft()
+    public void moveLeft()
     {
         horzPos -= 1;
     }
 
-    
+    public boolean deliverPizza()
+    {
+        pizzaDelivered = true;
+        return pizzaDelivered;
+    }
 }
