@@ -41,4 +41,15 @@ public class Avatar
         pizzaDelivered = true;
         return pizzaDelivered;
     }
+
+    public void receiveTip(int tipAmount)
+    {
+        tipMoney += tipAmount;
+    }
+
+    public void addStrike()
+    {
+        strikeCount += 1;
+    }
+
 }
