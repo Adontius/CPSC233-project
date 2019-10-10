@@ -6,7 +6,8 @@ public class Avatar
     public int horzPos; //horizontal position of avatar (x axis)
     public boolean pizzaDelivered;
 
-    private Avatar()
+    //Hello
+    public Avatar()
     {
         //initializes avatar stats at zero
         tipMoney = 0; 
