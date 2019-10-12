@@ -10,7 +10,7 @@ public class Map {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				if(i == 0 && j == 0) {
-					System.out.print("|_S_|");
+					System.out.print("|_P_|");
 				} else if(counter % 6 == 0) {
 					System.out.print("|_H_|");
 				} else {
