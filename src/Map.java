@@ -56,9 +56,9 @@ public class Map {
 				if(i == playerPositionX && j == playerPositionY) {
 					System.out.print("|_^_|");
 				} else if(hasHouseAndOrder[counter]){
-					System.out.print("|*H*|");
-				} else if(hasHouse[counter]) {
 					System.out.print("|_H_|");
+				} else if(hasHouse[counter]) {
+					System.out.print("|_h_|");
 				} else {
 					System.out.print("|___|");
 				}

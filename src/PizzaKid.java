@@ -25,7 +25,7 @@ public class PizzaKid {
 
 	public static void showPlayScreen() {
 		String num = "";
-		System.out.println("You are ^. Houses are H. House with order is *H*");
+		System.out.println("You are ^. Houses are h. House with order is h");
 		System.out.println("Deliver the Pizzas!");
 		System.out.println("Enter:");
 		System.out.println("W to move up");
