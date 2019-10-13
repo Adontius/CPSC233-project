@@ -4,11 +4,13 @@ import java.util.Random;
 public class Map {
 	
 	private Grid[][] grids;
-	private int playerPositionX, playerPositionY; // change to Grid later
+	private static Avatar player = new Avatar();
+	private int playerPositionX, playerPositionY; // change to Avatar later
 //	private ArrayList<Integer> housePositionX;
 //	private ArrayList<Integer> housePositionY;
 	private boolean[] hasHouse;
 	private static boolean[] hasHouseAndOrder;
+	private static int[] houses = {2, 3, 4, 5, 6, 7, 8, 9, 20, 22, 23, 24, 25, 26, 28, 29, 30, 34, 38, 39, 40, 42, 46, 50, 52, 54, 56, 58, 59, 60, 62, 66, 69, 70, 74, 79, 80, 82, 83, 84, 85, 86, 88, 89, 90};
 	
 	public Map() {
 		grids = new Grid[10][10];
@@ -147,10 +149,15 @@ public class Map {
 	
 	public static void generateOrder() {
 		// 45 houses
-		int[] houses = {2, 3, 4, 5, 6, 7, 8, 9, 20, 22, 23, 24, 25, 26, 28, 29, 30, 34, 38, 39, 40, 42, 46, 50, 52, 54, 56, 58, 59, 60, 62, 66, 69, 70, 74, 79, 80, 82, 83, 84, 85, 86, 88, 89, 90};
 		Random r = new Random();
 		int index = r.nextInt(45);
 		hasHouseAndOrder[houses[index]] = true;
 	}
 	
+//	public static void generateObstacle() {
+//		ArrayList<Integer> roads = new ArrayList<Integer>();
+//		for(int i = 0; i < 100; i++) {
+//			if()
+//		}
+//	}
 }
