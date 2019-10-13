@@ -25,16 +25,16 @@ public class PizzaKid {
 
 	public static void showPlayScreen() {
 		String num = "";
+		System.out.println("You are ^. Houses are H. House with order is *H*");
+		System.out.println("Deliver the Pizzas!");
+		System.out.println("Enter:");
+		System.out.println("W to move up");
+		System.out.println("S to move down");
+		System.out.println("D to move right");
+		System.out.println("A to move left");
+		System.out.println("Enter 0 to quit");
 		do {
-			System.out.println("You are P");
-			System.out.println("Houses are H");
-			System.out.println("Deliver the Pizzas!");
-			System.out.println("Enter:");
-			System.out.println("W to move up");
-			System.out.println("S to move down");
-			System.out.println("D to move right");
-			System.out.println("A to move left");
-			System.out.println("Enter 0 to quit");
+			map.generateOrder();
 			map.showMap();
 			num = input.nextLine().toLowerCase();
 			checkIfValid(num);
