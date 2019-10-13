@@ -19,13 +19,37 @@ public class Map {
 		generateHouses();
 	}
 	
+	public int getPlayerPositionX() {
+		return playerPositionX;
+	}
+	
+	public int getPlayerPositionY() {
+		return playerPositionY;
+	}
+	
+	public boolean getHasHouseAtIndex(int index) {
+		return hasHouse[index];
+	}
+	
+	public void setPlayerPositionX(int i) {
+		if(i >= 0 && i < 10) {
+			playerPositionX = i;
+		}
+	}
+	
+	public void setPlayerPositionY(int i) {
+		if(i >= 0 && i < 10) {
+			playerPositionY = i;
+		}
+	}
+	
 	public void showMap() {
 		for(int i = 0; i < 10; i++) {
 			System.out.print(" ___ ");
 		}
 		System.out.println();
 		int counter = 0;
-		for(int i = playerPositionX; i < 10; i++) {
+		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				if(i == playerPositionX && j == playerPositionY) {
 					System.out.print("|_P_|");
