@@ -8,6 +8,7 @@ public class PizzaKid {
 	
 	public static void main(String[] args) {
 		map.showMap();
+		System.out.println("Hi");
 	}
 
 }
