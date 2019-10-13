@@ -33,6 +33,10 @@ public class Map {
 		return hasHouse[index];
 	}
 	
+	public boolean getHasHouseAndOrderAtIndex(int index) {
+		return hasHouseAndOrder[index];
+	}
+	
 	public void setPlayerPositionX(int i) {
 		if(i >= 0 && i < 10) {
 			playerPositionX = i;
@@ -43,6 +47,10 @@ public class Map {
 		if(i >= 0 && i < 10) {
 			playerPositionY = i;
 		}
+	}
+	
+	public void setHasHouseAndOrderAtIndexFalse(int i) {
+		hasHouseAndOrder[i] = false;
 	}
 	
 	public void showMap() {
@@ -56,9 +64,9 @@ public class Map {
 				if(i == playerPositionX && j == playerPositionY) {
 					System.out.print("|_^_|");
 				} else if(hasHouseAndOrder[counter]){
-					System.out.print("|_H_|");
+					System.out.print("|_O_|");
 				} else if(hasHouse[counter]) {
-					System.out.print("|_h_|");
+					System.out.print("|_H_|");
 				} else {
 					System.out.print("|___|");
 				}
