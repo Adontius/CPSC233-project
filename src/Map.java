@@ -10,7 +10,9 @@ public class Map {
 //	private ArrayList<Integer> housePositionY;
 	private boolean[] hasHouse;
 	private static boolean[] hasHouseAndOrder;
+	private static boolean[] hasObstacle;
 	private static int[] houses = {2, 3, 4, 5, 6, 7, 8, 9, 20, 22, 23, 24, 25, 26, 28, 29, 30, 34, 38, 39, 40, 42, 46, 50, 52, 54, 56, 58, 59, 60, 62, 66, 69, 70, 74, 79, 80, 82, 83, 84, 85, 86, 88, 89, 90};
+	static ArrayList<Integer> roads = new ArrayList<Integer>();
 	
 	public Map() {
 		grids = new Grid[10][10];
@@ -18,6 +20,7 @@ public class Map {
 		playerPositionY = 0;
 		hasHouse = new boolean[100];
 		hasHouseAndOrder = new boolean[100];
+		hasObstacle = new boolean[100];
 //		housePositionX = new ArrayList<Integer>(12);
 //		housePositionY = new ArrayList<Integer>(12);
 		generateHouses();
@@ -39,6 +42,10 @@ public class Map {
 		return hasHouseAndOrder[index];
 	}
 	
+	public boolean getHasObstacleAtIndex(int index) {
+		return hasObstacle[index];
+	}
+	
 	public void setPlayerPositionX(int i) {
 		if(i >= 0 && i < 10) {
 			playerPositionX = i;
@@ -56,6 +63,7 @@ public class Map {
 	}
 	
 	public void showMap() {
+		System.out.println();
 		for(int i = 0; i < 10; i++) {
 			System.out.print(" ___ ");
 		}
@@ -69,6 +77,8 @@ public class Map {
 					System.out.print("|_O_|");
 				} else if(hasHouse[counter]) {
 					System.out.print("|_H_|");
+				} else if(hasObstacle[counter]) {
+					System.out.print("|_X_|");
 				} else {
 					System.out.print("|___|");
 				}
@@ -154,10 +164,29 @@ public class Map {
 		hasHouseAndOrder[houses[index]] = true;
 	}
 	
-//	public static void generateObstacle() {
-//		ArrayList<Integer> roads = new ArrayList<Integer>();
-//		for(int i = 0; i < 100; i++) {
-//			if()
-//		}
-//	}
+	public static int generateObstacle() {
+		roads = new ArrayList<Integer>();
+		int counter = 0;
+		for(int i = 1; i <= 100; i++) {
+			if(i == houses[counter]) {
+				if (counter < 44) {
+					counter++;
+				}
+			} else {
+				roads.add(i);
+			}
+		}
+		// add obstacle on roadway
+		Random r = new Random();
+		int randNum = r.nextInt(45);
+		hasObstacle[roads.get(2)] = true;
+//		hasObstacle[roads.get(randNum)] = true;
+		return randNum;
+	}
+	
+	public static void removeObstacle(int num) {
+		hasObstacle[roads.get(num)] = false;
+		System.out.println("obstacle " + num + " removed");
+	}
+	
 }
