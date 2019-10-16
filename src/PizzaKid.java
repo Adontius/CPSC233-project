@@ -47,11 +47,11 @@ public class PizzaKid {
 			if(counter % 3 == 0) {
 				map.generateOrder();
 			}
-			if(counter % 4 == 0) {
-				System.out.println("obstacle: " + obstacle);
-				map.removeObstacle(obstacle);
-				obstacle = map.generateObstacle();
-			}
+			// if(counter % 4 == 0) {
+			// 	System.out.println("obstacle: " + obstacle);
+			// 	map.removeObstacle(obstacle);
+			// 	obstacle = map.generateObstacle();
+			// }
 			map.showMap();
 			num = input.nextLine().toLowerCase();
 			checkIfValid(num);
@@ -96,7 +96,7 @@ public class PizzaKid {
 		System.out.println();
 	}
 	
-	private static void chechIfDelivered() {
+	private static void checkIfDelivered() {
 		//checks for each direction if house has order and removes order if true
 		if (map.getPlayerPositionX() >= 1 && map.getHasHouseAndOrderAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1))) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1));
@@ -116,7 +116,7 @@ public class PizzaKid {
 		}
 	}
 	
-	private static void chechIfObstacle() {
+	private static void checkIfObstacle() {
 		//checks for each direction if house has order and removes order if true
 		if (map.getPlayerPositionX() >= 1 && map.getHasHouseAndOrderAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1))) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1));
