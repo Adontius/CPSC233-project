@@ -3,11 +3,9 @@ import java.util.Random;
 
 public class Map {
 	
-	private Grid[][] grids;
+	private Grid[][] grids; 
 	private static Avatar player = new Avatar();
-	private int playerPositionX, playerPositionY; // change to Avatar later
-//	private ArrayList<Integer> housePositionX;
-//	private ArrayList<Integer> housePositionY;
+
 	private boolean[] hasHouse;
 	private static boolean[] hasHouseAndOrder;
 	private static boolean[] hasObstacle;
@@ -16,22 +14,17 @@ public class Map {
 	
 	public Map() {
 		grids = new Grid[10][10];
-		playerPositionX = 0;
-		playerPositionY = 0;
-		hasHouse = new boolean[100];
-		hasHouseAndOrder = new boolean[100];
-		hasObstacle = new boolean[100];
+		hasHouse = new boolean[100]; //boolean to store whether or not a cell on the grid has a House in it
+		hasHouseAndOrder = new boolean[100]; //boolean to store whether or not a cell on the grid has a House with an order (customer) in it
+		hasObstacle = new boolean[100]; //boolean to store whether or not a cell on the grid has an obstacle in it
 //		housePositionX = new ArrayList<Integer>(12);
 //		housePositionY = new ArrayList<Integer>(12);
 		generateHouses();
 	}
 	
-	public int getPlayerPositionX() {
-		return playerPositionX;
-	}
-	
-	public int getPlayerPositionY() {
-		return playerPositionY;
+	public Avatar getPlayer()
+	{
+		return player;
 	}
 	
 	public boolean getHasHouseAtIndex(int index) {
@@ -44,18 +37,6 @@ public class Map {
 	
 	public boolean getHasObstacleAtIndex(int index) {
 		return hasObstacle[index];
-	}
-	
-	public void setPlayerPositionX(int i) {
-		if(i >= 0 && i < 10) {
-			playerPositionX = i;
-		}
-	}
-	
-	public void setPlayerPositionY(int i) {
-		if(i >= 0 && i < 10) {
-			playerPositionY = i;
-		}
 	}
 	
 	public void setHasHouseAndOrderAtIndexFalse(int i) {
@@ -71,7 +52,7 @@ public class Map {
 		int counter = 0;
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
-				if(i == playerPositionX && j == playerPositionY) {
+				if(i == player.horzPos && j == player.vertPos) {
 					System.out.print("|_^_|");
 				} else if(hasHouseAndOrder[counter]){
 					System.out.print("|_O_|");
@@ -119,42 +100,7 @@ public class Map {
 			}
 		}
 		
-//		for(int i = 2; i < 10; i++) {
-//			housePositionX.add(1);
-//			housePositionY.add(i);
-//			housePositionX.add(i);
-//			housePositionY.add(1);
-//		}
-//		for(int i = 2; i < 7; i++) {
-//			housePositionX.add(2);
-//			housePositionY.add(i);
-//			housePositionX.add(8);
-//			housePositionY.add(i);
-//		}
-//		for(int i = 4; i < 7; i++) {
-//			housePositionX.add(i);
-//			housePositionY.add(2);
-//			housePositionX.add(i);
-//			housePositionY.add(2);
-//		}
-//		
-//		for(int i = 5; i < 9; i++) {
-//			housePositionX.add(9);
-//			housePositionY.add(i);
-//		}
-//		
-//		housePositionX.add(3);
-//		housePositionY.add(4);
-//		housePositionX.add(7);
-//		housePositionY.add(4);
-//
-//		housePositionX.add(5);
-//		housePositionY.add(4);
-//
-//		housePositionX.add(9);
-//		housePositionY.add(2);
-//		housePositionX.add(9);
-//		housePositionY.add(6);
+
 	}
 	
 	public static void generateOrder() {

@@ -21,20 +21,33 @@ public class Avatar
         pizzaDelivered = false;
     }
 
-    public void setVertPos(int vertPos)//sets avatar's vertical position
+    // public void setVertPos(int vertPos)
+    //     this.vertPos = vertPos;
+    // }
+    public void setVertPos(int i) //sets the avatar's vertical position
     {
-        this.vertPos = vertPos;
+		if(i >= 0 && i < 20) {
+			this.vertPos = i;
+		}
     }
+    
+    public void setHorzPos(int i) //sets the avatar's horizontal position
+    {
+        if(i >= 0 && i < 20) 
+        {
+			this.horzPos = i;
+		}
+	}
 
     public int getVertPos()//returns the vertical position of the avatar
     {
         return this.vertPos;
     }
 
-    public void setHorzPos(int horzPos)//sets the avatar's horizontal position
-    {
-        this.horzPos = horzPos;
-    }
+    // public void setHorzPos(int horzPos)
+    // {
+    //     this.horzPos = horzPos;
+    // }
 
     public int getHorzPos()//returns the horizontal position of the avatar
     {

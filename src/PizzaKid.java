@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class PizzaKid {
 
-	private static Avatar player = new Avatar();
+	// private static Avatar player = new Avatar();
 	private static Map map = new Map();
 	// collectibles
 	private static Scanner input = new Scanner(System.in);
@@ -68,27 +68,27 @@ public class PizzaKid {
 	}
 
 	private static void checkIfValid(String str) {
-		if (map.getPlayerPositionX() == 0 && str.equals("w") || map.getPlayerPositionY() == 0 && str.equals("a")
-				|| map.getPlayerPositionX() == 9 && str.equals("s")
-				|| map.getPlayerPositionY() == 9 && str.equals("d")) {
+		if (map.getPlayer().getHorzPos() == 0 && str.equals("w") || map.getPlayer().getVertPos() == 0 && str.equals("a")
+				|| map.getPlayer().getHorzPos() == 9 && str.equals("s")
+				|| map.getPlayer().getVertPos() == 9 && str.equals("d")) {
 			System.out.println("Invalid move, try again");
 		} else {
 			if (str.equals("w")
-					&& !map.getHasHouseAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1))
-					&& !map.getHasObstacleAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1))) {
-				map.setPlayerPositionX(map.getPlayerPositionX() - 1);
+					&& !map.getHasHouseAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))
+					&& !map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))) {
+				map.getPlayer().setHorzPos(map.getPlayer().getHorzPos() - 1);
 			} else if (str.equals("s")
-					&& !map.getHasHouseAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() + 1))
-					&& !map.getHasObstacleAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() + 1))) {
-				map.setPlayerPositionX(map.getPlayerPositionX() + 1);
+					&& !map.getHasHouseAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1))
+					&& !map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1))) {
+				map.getPlayer().setHorzPos(map.getPlayer().getHorzPos() + 1);
 			} else if (str.equals("d")
-					&& !map.getHasHouseAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) + 1)
-					&& !map.getHasObstacleAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) + 1)) {
-				map.setPlayerPositionY(map.getPlayerPositionY() + 1);
+					&& !map.getHasHouseAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1)
+					&& !map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1)) {
+				map.getPlayer().setVertPos(map.getPlayer().getVertPos() + 1);
 			} else if (str.equals("a")
-					&& !map.getHasHouseAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) - 1)
-					&& !map.getHasObstacleAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) - 1)) {
-				map.setPlayerPositionY(map.getPlayerPositionY() - 1);
+					&& !map.getHasHouseAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1)
+					&& !map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1)) {
+				map.getPlayer().setVertPos(map.getPlayer().getVertPos() - 1);
 			} else {
 				System.out.println("Invalid move, try again");
 			}
@@ -98,60 +98,60 @@ public class PizzaKid {
 	
 	private static void checkIfDelivered() {
 		//checks for each direction if house has order and removes order if true
-		if (map.getPlayerPositionX() >= 1 && map.getHasHouseAndOrderAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1))) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1));
+		if (map.getPlayer().getHorzPos() >= 1 && map.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1));
 			score += 2.50;
 		}
-		if (map.getPlayerPositionX() <= 8 && map.getHasHouseAndOrderAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() + 1))) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() + 1));
+		if (map.getPlayer().getHorzPos() <= 8 && map.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1))) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1));
 			score += 2.50;
 		}
-		if (map.getPlayerPositionY() <= 8 && map.getHasHouseAndOrderAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) + 1)) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) + 1);
+		if (map.getPlayer().getVertPos() <= 8 && map.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1)) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1);
 			score += 2.50;
 		}
-		if (map.getPlayerPositionY() >= 1 && map.getHasHouseAndOrderAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) - 1)) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) - 1);
+		if (map.getPlayer().getVertPos() >= 1 && map.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1)) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1);
 			score += 2.50;
 		}
 	}
 	
 	private static void checkIfObstacle() {
 		//checks for each direction if house has order and removes order if true
-		if (map.getPlayerPositionX() >= 1 && map.getHasHouseAndOrderAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1))) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1));
+		if (map.getPlayer().getHorzPos() >= 1 && map.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1));
 			strike += 1;
 		}
-		if (map.getPlayerPositionX() <= 8 && map.getHasHouseAndOrderAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() + 1))) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() + 1));
+		if (map.getPlayer().getHorzPos() <= 8 && map.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1))) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1));
 			strike += 1;
 		}
-		if (map.getPlayerPositionY() <= 8 && map.getHasHouseAndOrderAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) + 1)) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) + 1);
+		if (map.getPlayer().getVertPos() <= 8 && map.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1)) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1);
 			strike += 1;
 		}
-		if (map.getPlayerPositionY() >= 1 && map.getHasHouseAndOrderAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) - 1)) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) - 1);
+		if (map.getPlayer().getVertPos() >= 1 && map.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1)) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1);
 			strike += 1;
 		}
 	}
 
 	private static void checkIfHit() {
 		//checks for each direction if theres obstacle and adds strike if true
-		if (map.getPlayerPositionX() >= 1 && map.getHasObstacleAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1))) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() - 1));
+		if (map.getPlayer().getHorzPos() >= 1 && map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1));
 			strike += 1;
 		}
-		if (map.getPlayerPositionX() <= 8 && map.getHasObstacleAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() + 1))) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX() + 1));
+		if (map.getPlayer().getHorzPos() <= 8 && map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1))) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1));
 			strike += 1;
 		}
-		if (map.getPlayerPositionY() <= 8 && map.getHasObstacleAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) + 1)) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) + 1);
+		if (map.getPlayer().getVertPos() <= 8 && map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1)) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1);
 			strike += 1;
 		}
-		if (map.getPlayerPositionY() >= 1 && map.getHasObstacleAtIndex(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) - 1)) {
-			map.setHasHouseAndOrderAtIndexFalse(map.getPlayerPositionY() + 10 * (map.getPlayerPositionX()) - 1);
+		if (map.getPlayer().getVertPos() >= 1 && map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1)) {
+			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1);
 			strike += 1;
 		}
 	}
