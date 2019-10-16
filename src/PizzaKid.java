@@ -55,7 +55,7 @@ public class PizzaKid {
 			map.showMap();
 			num = input.nextLine().toLowerCase();
 			checkIfValid(num);
-			chechIfDelivered();
+			checkIfDelivered();
 			checkIfHit();
 			counter++;
 		} while (!num.equals("0") && counter <= 100 && strike <= 3);

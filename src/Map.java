@@ -164,29 +164,29 @@ public class Map {
 		hasHouseAndOrder[houses[index]] = true;
 	}
 	
-	public static int generateObstacle() {
-		roads = new ArrayList<Integer>();
-		int counter = 0;
-		for(int i = 1; i <= 100; i++) {
-			if(i == houses[counter]) {
-				if (counter < 44) {
-					counter++;
-				}
-			} else {
-				roads.add(i);
-			}
-		}
-		// add obstacle on roadway
-		Random r = new Random();
-		int randNum = r.nextInt(45);
-		hasObstacle[roads.get(2)] = true;
-//		hasObstacle[roads.get(randNum)] = true;
-		return randNum;
-	}
+// 	public static int generateObstacle() {
+// 		roads = new ArrayList<Integer>();
+// 		int counter = 0;
+// 		for(int i = 1; i <= 100; i++) {
+// 			if(i == houses[counter]) {
+// 				if (counter < 44) {
+// 					counter++;
+// 				}
+// 			} else {
+// 				roads.add(i);
+// 			}
+// 		}
+// 		// add obstacle on roadway
+// 		Random r = new Random();
+// 		int randNum = r.nextInt(45);
+// 		hasObstacle[roads.get(2)] = true;
+// //		hasObstacle[roads.get(randNum)] = true;
+// 		return randNum;
+// 	}
 	
-	public static void removeObstacle(int num) {
-		hasObstacle[roads.get(num)] = false;
-		System.out.println("obstacle " + num + " removed");
-	}
+// 	public static void removeObstacle(int num) {
+// 		hasObstacle[roads.get(num)] = false;
+// 		System.out.println("obstacle " + num + " removed");
+// 	}
 	
 }
