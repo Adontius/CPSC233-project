@@ -12,10 +12,10 @@ public class Grid {
     }
 
     public void setPositionNumber(int p){
-        int PositionNumber = p;
+        PositionNumber = p;
     }
 
     public void setSymbol(char s){
-        char symbol = 's';
+        symbol = s;
     }
 }
