@@ -4,7 +4,7 @@ import java.util.Random;
 public class Map {
 	
 	private Grid[][] grids; 
-	private static Avatar player = new Avatar();
+	private static Avatar player;
 
 	private boolean[] hasHouse;
 	private static boolean[] hasHouseAndOrder;
@@ -17,11 +17,13 @@ public class Map {
 		hasHouse = new boolean[100]; //boolean to store whether or not a cell on the grid has a House in it
 		hasHouseAndOrder = new boolean[100]; //boolean to store whether or not a cell on the grid has a House with an order (customer) in it
 		hasObstacle = new boolean[100]; //boolean to store whether or not a cell on the grid has an obstacle in it
+		player = new Avatar();
 //		housePositionX = new ArrayList<Integer>(12);
 //		housePositionY = new ArrayList<Integer>(12);
 		generateHouses();
+		generateRoads();
 	}
-	
+
 	public Avatar getPlayer()
 	{
 		return player;
@@ -127,33 +129,30 @@ public class Map {
 	public static void generateOrder() {
 		// 45 houses
 		Random r = new Random();
-		int index = r.nextInt(45);
+		int index = r.nextInt(houses.length);
 		hasHouseAndOrder[houses[index]] = true;
 	}
 	
-// 	public static int generateObstacle() {
-// 		roads = new ArrayList<Integer>();
-// 		int counter = 0;
-// 		for(int i = 1; i <= 100; i++) {
-// 			if(i == houses[counter]) {
-// 				if (counter < 44) {
-// 					counter++;
-// 				}
-// 			} else {
-// 				roads.add(i);
-// 			}
-// 		}
-// 		// add obstacle on roadway
-// 		Random r = new Random();
-// 		int randNum = r.nextInt(45);
-// 		hasObstacle[roads.get(2)] = true;
-// //		hasObstacle[roads.get(randNum)] = true;
-// 		return randNum;
-// 	}
+	public void generateRoads() {
+ 		roads = new ArrayList<Integer>();
+ 		int counter = 0;
+ 		for(int i = 1; i <= 100; i++) {
+ 			if(i == houses[counter]) {
+ 				if (counter < houses.length - 1) {
+ 					counter++;
+ 				}
+ 			} else {
+ 				roads.add(i);
+ 			}
+ 		}
+	}
+
 	
-// 	public static void removeObstacle(int num) {
-// 		hasObstacle[roads.get(num)] = false;
-// 		System.out.println("obstacle " + num + " removed");
-// 	}
-	
+ 	public static void generateObstacle() {
+ 		// add obstacle on roadway
+ 		Random r = new Random();
+ 		int randNum = r.nextInt(roads.size());
+ 		hasObstacle[roads.get(randNum)] = true;
+ 	}
+
 }
