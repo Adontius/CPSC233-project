@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - PizzaKid",
+            "request": "launch",
+            "mainClass": "PizzaKid",
+            "projectName": "CPSC233-project"
+        }
+    ]
+}
