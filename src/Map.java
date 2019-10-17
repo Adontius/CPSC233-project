@@ -151,8 +151,9 @@ public class Map {
  		// add obstacle on roadway
  		Random r = new Random();
  		int randNum = r.nextInt(roads.size());
- 		hasObstacle[roads.get(randNum)] = true;
+ 		hasObstacle[roads.get(randNum) - 1] = true;
  		return roads.get(randNum);
  	}
+ 	
 
 }

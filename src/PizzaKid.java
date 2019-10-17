@@ -55,7 +55,7 @@ public class PizzaKid {
 				if (counter % 7 == 0 && counter != 0) {
 					map.generateObstacle();
 				}
-				if (counter % 4 == 0) {
+				if (counter % 5 == 0) {
 					map.generateOrder();
 				}
 				map.showMap();
@@ -112,28 +112,34 @@ public class PizzaKid {
 		System.out.println();
 	}
 
-	private static void checkIfDelivered() {
+	private static boolean checkIfDelivered() {
+		boolean delivered = false;
 		// checks for each direction if house has order and removes order if true
 		if (map.getPlayer().getHorzPos() >= 1 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1));
 			map.getPlayer().setTipMoney(map.getPlayer().getTipMoney() + tipAmount);
+			delivered = true;
 		}
 		if (map.getPlayer().getHorzPos() <= 8 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1))) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1));
 			map.getPlayer().setTipMoney(map.getPlayer().getTipMoney() + tipAmount);
+			delivered = true;
 		}
 		if (map.getPlayer().getVertPos() <= 8 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1)) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1);
 			map.getPlayer().setTipMoney(map.getPlayer().getTipMoney() + tipAmount);
+			delivered = true;
 		}
 		if (map.getPlayer().getVertPos() >= 1 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1)) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1);
 			map.getPlayer().setTipMoney(map.getPlayer().getTipMoney() + tipAmount);
+			delivered = true;
 		}
+		return delivered;
 	}
 
 	private static void checkIfObstacle() {
