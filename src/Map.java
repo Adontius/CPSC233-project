@@ -147,12 +147,12 @@ public class Map {
  		}
 	}
 
-	
- 	public static void generateObstacle() {
+ 	public static int generateObstacle() {
  		// add obstacle on roadway
  		Random r = new Random();
  		int randNum = r.nextInt(roads.size());
  		hasObstacle[roads.get(randNum)] = true;
+ 		return roads.get(randNum);
  	}
 
 }
