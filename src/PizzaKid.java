@@ -12,7 +12,6 @@ public class PizzaKid {
 	private static int tipAmount = 5;
 
 	public static void main(String[] args) {
-		System.out.println(map.roads);
 		showStartScreen();
 		showPlayScreen();
 	}
