@@ -7,8 +7,9 @@ public class PizzaKid {
 	private static Map map = new Map();
 	// collectibles
 	private static Scanner input = new Scanner(System.in);
-	private static double score = 0;
-	private static int strike = 0;
+	// private static double score = 0;
+	// private static int strike = 0;
+	private static int tipAmount = 5;
 
 	public static void main(String[] args) {
 		showStartScreen();
@@ -44,13 +45,13 @@ public class PizzaKid {
 			System.out.println("Good luck!");
 			System.out.println();
 			int counter = 0;
-			score = 0;
-			strike = 0;
+			map.getPlayer().setTipMoney(0);
+			map.getPlayer().setStrikeCount(0);
 			map.generateOrder();
 			do {
-				System.out.println("Tip money: $" + score);
+				System.out.println("Tip money: $" + map.getPlayer().getTipMoney());
 				System.out.println("Move: " + counter);
-				System.out.println("Strike: " + strike);
+				System.out.println("Strikes: " + map.getPlayer().getStrikeCount());
 				if (counter % 20 == 0 && counter != 0) {
 					map.generateObstacle();
 				}
@@ -63,14 +64,14 @@ public class PizzaKid {
 				checkIfDelivered();
 				checkIfHit();
 				counter++;
-			} while (!num.equals("0") && counter <= 100 && strike <= 3);
+			} while (!num.equals("0") && counter <= 100 && map.getPlayer().getStrikeCount() <= 3);
 			System.out.println("Game Over");
 			if (counter > 100) {
 				System.out.println("Your moves have ended!");
-			} else if (strike > 3) {
+			} else if (map.getPlayer().getStrikeCount() > 3) {
 				System.out.println("You had more than 3 strikes!");
 			}
-			System.out.println("Total tip: $" + score);
+			System.out.println("Total tip: $" + map.getPlayer().getTipMoney());
 			System.out.println();
 			System.out.println("Enter 0 to quit");
 			System.out.println("Enter anything else to continue playing");
@@ -116,22 +117,22 @@ public class PizzaKid {
 		if (map.getPlayer().getHorzPos() >= 1 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1));
-			score += 2.50;
+			map.getPlayer().setTipMoney(map.getPlayer().getTipMoney() + tipAmount);
 		}
 		if (map.getPlayer().getHorzPos() <= 8 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1))) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1));
-			score += 2.50;
+			map.getPlayer().setTipMoney(map.getPlayer().getTipMoney() + tipAmount);
 		}
 		if (map.getPlayer().getVertPos() <= 8 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1)) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1);
-			score += 2.50;
+			map.getPlayer().setTipMoney(map.getPlayer().getTipMoney() + tipAmount);
 		}
 		if (map.getPlayer().getVertPos() >= 1 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1)) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1);
-			score += 2.50;
+			map.getPlayer().setTipMoney(map.getPlayer().getTipMoney() + tipAmount);
 		}
 	}
 
@@ -140,22 +141,22 @@ public class PizzaKid {
 		if (map.getPlayer().getHorzPos() >= 1 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1));
-			strike += 1;
+			map.getPlayer().addStrike();
 		}
 		if (map.getPlayer().getHorzPos() <= 8 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1))) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1));
-			strike += 1;
+			map.getPlayer().addStrike();
 		}
 		if (map.getPlayer().getVertPos() <= 8 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1)) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1);
-			strike += 1;
+			map.getPlayer().addStrike();
 		}
 		if (map.getPlayer().getVertPos() >= 1 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1)) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1);
-			strike += 1;
+			map.getPlayer().addStrike();
 		}
 	}
 
@@ -164,22 +165,22 @@ public class PizzaKid {
 		if (map.getPlayer().getHorzPos() >= 1
 				&& map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1));
-			strike += 1;
+			map.getPlayer().addStrike();
 		}
 		if (map.getPlayer().getHorzPos() <= 8
 				&& map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1))) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() + 1));
-			strike += 1;
+			map.getPlayer().addStrike();
 		}
 		if (map.getPlayer().getVertPos() <= 8
 				&& map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1)) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) + 1);
-			strike += 1;
+			map.getPlayer().addStrike();
 		}
 		if (map.getPlayer().getVertPos() >= 1
 				&& map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1)) {
 			map.setHasHouseAndOrderAtIndexFalse(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos()) - 1);
-			strike += 1;
+			map.getPlayer().addStrike();
 		}
 	}
 
