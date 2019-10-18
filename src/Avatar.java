@@ -21,9 +21,6 @@ public class Avatar
         pizzaDelivered = false;
     }
 
-    // public void setVertPos(int vertPos)
-    //     this.vertPos = vertPos;
-    // }
     public void setVertPos(int i) //sets the avatar's vertical position
     {
 		if(i >= 0 && i < 20) {
@@ -43,11 +40,6 @@ public class Avatar
     {
         return this.vertPos;
     }
-
-    // public void setHorzPos(int horzPos)
-    // {
-    //     this.horzPos = horzPos;
-    // }
 
     public int getHorzPos()//returns the horizontal position of the avatar
     {
@@ -113,6 +105,11 @@ public class Avatar
     public void setStrikeCount(int strikeCount)//setter method to set the number of strikes the avatar has.
     {
         this.strikeCount = strikeCount;
+    }
+
+    public int getStrikeCount()
+    {
+        return this.strikeCount;
     }
 
 }
