@@ -64,12 +64,12 @@ public class PizzaKid {
 				checkIfDelivered();
 				checkIfHit(num);
 				counter++;
-			} while (!num.equals("0") && counter <= 100 && map.getPlayer().getStrikeCount() <= 3);
+			} while (!num.equals("0") && counter <= 100 && map.getPlayer().getStrikeCount() < 3);
 			System.out.println("Game Over");
 			if (counter > 100) {
 				System.out.println("Your moves have ended!");
 			} else if (map.getPlayer().getStrikeCount() >= 3) {
-				System.out.println("You had more than 3 strikes!");
+				System.out.println("You got 3 strikes!");
 			}
 			System.out.println("Total tip: $" + map.getPlayer().getTipMoney());
 			System.out.println();
