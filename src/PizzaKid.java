@@ -1,7 +1,21 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class PizzaKid {
+import javafx.scene.control.Button;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.control.Label;
+
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+
+import org.graalvm.compiler.phases.common.NodeCounterPhase.Stage;
+
+public class PizzaKid extends Application{
 
 	// private static Avatar player = new Avatar();
 	private static Map map = new Map();
@@ -14,7 +28,23 @@ public class PizzaKid {
 	public static void main(String[] args) {
 		showStartScreen();
 		showPlayScreen();
+		launch(args);
 	}
+
+	public void start(Stage primaryStage) throws Exception
+	{
+	StackPane root = new StackPane();
+	Label label1 = new Label("O");
+	label1.setFont(Font.font("Courier New", 54);
+	Label label2 = new Label("c");
+	root.getChildren.add(label1);
+	root.getChildren.add(label2);
+	
+	Scene scene = new Scene(root, 300, 100);
+	primaryStage.setScene(scene);
+	primaryStage.show();
+	}
+
 
 	public static void showStartScreen() {
 		System.out.println("Welcome to PizzaKid!");
@@ -189,5 +219,7 @@ public class PizzaKid {
 			map.getPlayer().addStrike();
 		}
 	}
+
+	
 
 }
