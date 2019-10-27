@@ -1,19 +1,20 @@
 import java.util.Scanner;
-
-import javafx.scene.control.Button;
-import javafx.scene.Parent;
-import javafx.scene.layout.AnchorPane;
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.text.Font;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.control.Label;
-
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
-import org.graalvm.compiler.phases.common.NodeCounterPhase.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 
 public class PizzaKid extends Application{
 
@@ -24,27 +25,24 @@ public class PizzaKid extends Application{
 	// private static double score = 0;
 	// private static int strike = 0;
 	private static int tipAmount = 5;
+	
+	int height = 700;
+	int width = 1000;
+	int buttonHeight = 80;
+	int buttonWidth = 100;
+	int mapHeight = 500;
+	int mapWidth = 800;
+	int gridSize = 10;
+	StackPane root = new StackPane();
+	VBox startScreen = new VBox();
+	BorderPane playScreen = new BorderPane();
+	
 
 	public static void main(String[] args) {
-		showStartScreen();
-		showPlayScreen();
+//		showStartScreen();
+//		showPlayScreen();
 		launch(args);
 	}
-
-	public void start(Stage primaryStage) throws Exception
-	{
-	StackPane root = new StackPane();
-	Label label1 = new Label("O");
-	label1.setFont(Font.font("Courier New", 54);
-	Label label2 = new Label("c");
-	root.getChildren.add(label1);
-	root.getChildren.add(label2);
-	
-	Scene scene = new Scene(root, 300, 100);
-	primaryStage.setScene(scene);
-	primaryStage.show();
-	}
-
 
 	public static void showStartScreen() {
 		System.out.println("Welcome to PizzaKid!");
@@ -219,7 +217,105 @@ public class PizzaKid extends Application{
 			map.getPlayer().addStrike();
 		}
 	}
-
 	
+	//GUI stuff
+	public void start(Stage primaryStage) {
+
+		initializeStartScreen();
+		initializePlayScreen();
+
+		root.getChildren().add(playScreen);
+		root.getChildren().add(startScreen);
+
+		Scene scene = new Scene(root, width, height);
+		primaryStage.setTitle("PizzaKid");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	public void initializeStartScreen() {
+		String style = "-fx-background-color: rgba(0, 0, 0, 1);";
+		startScreen.setStyle(style);
+
+		HBox top = new HBox();
+		top.setAlignment(Pos.CENTER);
+		top.setMinHeight(height / 2);
+
+		Label opening = new Label("Welcome to PizzaKid");
+		opening.setFont(Font.font("Comfortaa", 40));
+		opening.setTextFill(Color.FLORALWHITE);
+
+		HBox bottom = new HBox();
+		bottom.setAlignment(Pos.CENTER);
+		bottom.setMinHeight(height / 2);
+
+		Button start = new Button("Start");
+		start.setFont(Font.font("Arial Black", 20));
+		start.setMinSize(buttonWidth, buttonHeight);
+
+		playScreen.setMinHeight(height);
+		playScreen.setMinWidth(width);
+		String style2 = "-fx-background-color: rgba(245, 250, 250, 1);";
+		playScreen.setStyle(style2);
+
+		start.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				startScreen.setVisible(false);
+				playScreen.toFront();
+			}
+		});
+
+		top.getChildren().add(opening);
+		bottom.getChildren().add(start);
+		startScreen.getChildren().add(top);
+		startScreen.getChildren().add(bottom);
+	}
+
+	public void initializePlayScreen() {
+		HBox heading = new HBox();
+
+		Label title = new Label("PizzaKid");
+		title.setFont(Font.font("Comfortaa", 30));
+		title.setTextFill(Color.BLACK);
+		title.setAlignment(Pos.CENTER_LEFT);
+		title.setMinWidth(width / 2);
+		title.setPadding(new Insets(10, 0, 0, 50));
+		heading.getChildren().add(title);
+
+		Label time = new Label("Time left: ");
+		time.setFont(Font.font("Arial", 15));
+		time.setTextFill(Color.BLACK);
+		time.setAlignment(Pos.CENTER);
+		time.setMinWidth(width / 4);
+		heading.getChildren().add(time);
+
+		Label tips = new Label("Tips: ");
+		tips.setFont(Font.font("Arial", 15));
+		tips.setTextFill(Color.BLACK);
+		tips.setAlignment(Pos.CENTER);
+		tips.setMinWidth(width / 4);
+		heading.getChildren().add(tips);
+
+		heading.setAlignment(Pos.CENTER);
+		playScreen.setTop(heading);
+
+		GridPane map = new GridPane();
+		map.setVgap(5);
+		map.setHgap(5);
+		map.setPadding(new Insets(10,10,10,10));
+		for (int i = 0; i < gridSize; i++) {
+			for (int j = 0; j < gridSize; j++) {
+				Label x = new Label(i + ", " + j);
+				x.setAlignment(Pos.CENTER);
+				x.setMinHeight(mapHeight/gridSize);
+				x.setMinWidth(mapWidth/gridSize);
+				map.add(x, j, i);
+			}
+		}
+		map.setAlignment(Pos.CENTER);
+		playScreen.setCenter(map);
+	}
+
 
 }
