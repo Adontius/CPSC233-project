@@ -1,16 +1,23 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+
 public class Map {
 	
 	private Grid[][] grids; 
 	private static Avatar player;
 
 	private boolean[] hasHouse;
-	private static boolean[] hasHouseAndOrder;
-	private static boolean[] hasObstacle;
-	private static int[] houses = { 3, 4, 5, 6, 7, 8, 9, 20, 30, 33, 34, 35, 36, 39, 40, 43, 44, 45, 46, 50, 60, 70, 73, 74, 77, 78, 80, 83, 84, 87, 88, 90, 93, 94, 97, 98};
+	private boolean[] hasHouseAndOrder;
+	private boolean[] hasObstacle;
+	private int[] houses = { 3, 4, 5, 6, 7, 8, 9, 20, 30, 33, 34, 35, 36, 39, 40, 43, 44, 45, 46, 50, 60, 70, 73, 74, 77, 78, 80, 83, 84, 87, 88, 90, 93, 94, 97, 98};
 	static ArrayList<Integer> roads = new ArrayList<Integer>();
+	private int size;
+	private int mapHeight;
+	private int mapWidth;
 	
 	public Map() {
 		grids = new Grid[10][10];
@@ -21,7 +28,10 @@ public class Map {
 //		housePositionX = new ArrayList<Integer>(12);
 //		housePositionY = new ArrayList<Integer>(12);
 		generateHouses();
-		generateRoads();
+		generateRoads();	
+		size = 10;
+		mapHeight = 400;
+		mapWidth = 800;
 	}
 
 	public Avatar getPlayer()
@@ -126,7 +136,7 @@ public class Map {
 
 	}
 	
-	public static void generateOrder() {
+	public void generateOrder() {
 		// 45 houses
 		Random r = new Random();
 		int index = r.nextInt(houses.length);
@@ -147,7 +157,7 @@ public class Map {
  		}
 	}
 
- 	public static int generateObstacle() {
+ 	public int generateObstacle() {
  		// add obstacle on roadway
  		Random r = new Random();
  		int randNum = r.nextInt(roads.size());
@@ -155,5 +165,38 @@ public class Map {
  		return roads.get(randNum);
  	}
  	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	//GUI stuff
+	
+	public void showGUIMap(GridPane map) {
+		int counter = 0;
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				Label x;
+				if(i == player.horzPos && j == player.vertPos) {
+					x = new Label("Player");
+				} else if(hasHouseAndOrder[counter]){
+					x = new Label("HouseOrder");
+				} else if(hasHouse[counter]) {
+					x = new Label("House");
+				} else if(hasObstacle[counter]) {
+					x = new Label("Obstacle");
+				} else {
+					x = new Label("");
+				}
+				counter++;
+				x.setAlignment(Pos.CENTER);
+				x.setMinHeight(mapHeight/size);
+				x.setMinWidth(mapWidth/size);
+				map.add(x, j, i);
+			}
+		}
+	}
 
 }

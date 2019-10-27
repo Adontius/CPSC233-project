@@ -19,23 +19,12 @@ import javafx.geometry.Insets;
 public class PizzaKid extends Application{
 
 	// private static Avatar player = new Avatar();
-	private static Map map = new Map();
+	private Map map = new Map();
 	// collectibles
 	private static Scanner input = new Scanner(System.in);
 	// private static double score = 0;
 	// private static int strike = 0;
 	private static int tipAmount = 5;
-	
-	int height = 700;
-	int width = 1000;
-	int buttonHeight = 80;
-	int buttonWidth = 100;
-	int mapHeight = 500;
-	int mapWidth = 800;
-	int gridSize = 10;
-	StackPane root = new StackPane();
-	VBox startScreen = new VBox();
-	BorderPane playScreen = new BorderPane();
 	
 
 	public static void main(String[] args) {
@@ -53,7 +42,7 @@ public class PizzaKid extends Application{
 		} while (!num.equals("1"));
 	}
 
-	public static void showPlayScreen() {
+	public void showPlayScreen() {
 		String num = "";
 		do {
 			map = new Map();
@@ -107,7 +96,7 @@ public class PizzaKid extends Application{
 		} while (!num.equals("0"));
 	}
 
-	private static void checkIfValid(String str) {
+	public void checkIfValid(String str) {
 		if (map.getPlayer().getHorzPos() == 0 && str.equals("w") || map.getPlayer().getVertPos() == 0 && str.equals("a")
 				|| map.getPlayer().getHorzPos() == 9 && str.equals("s")
 				|| map.getPlayer().getVertPos() == 9 && str.equals("d")) {
@@ -140,7 +129,7 @@ public class PizzaKid extends Application{
 		System.out.println();
 	}
 
-	private static boolean checkIfDelivered() {
+	public boolean checkIfDelivered() {
 		boolean delivered = false;
 		// checks for each direction if house has order and removes order if true
 		if (map.getPlayer().getHorzPos() >= 1 && map
@@ -170,7 +159,7 @@ public class PizzaKid extends Application{
 		return delivered;
 	}
 
-	private static void checkIfObstacle() {
+	public void checkIfObstacle() {
 		// checks for each direction if house has order and removes order if true
 		if (map.getPlayer().getHorzPos() >= 1 && map
 				.getHasHouseAndOrderAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))) {
@@ -194,7 +183,7 @@ public class PizzaKid extends Application{
 		}
 	}
 
-	private static void checkIfHit(String str) {
+	public void checkIfHit(String str) {
 		// checks for each direction if theres obstacle and adds strike if true
 		if (str.equals("w") && map.getPlayer().getHorzPos() >= 1
 				&& map.getHasObstacleAtIndex(map.getPlayer().getVertPos() + 10 * (map.getPlayer().getHorzPos() - 1))) {
@@ -218,7 +207,31 @@ public class PizzaKid extends Application{
 		}
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//GUI stuff
+	
+	int height = 700;
+	int width = 1000;
+	int buttonHeight = 80;
+	int buttonWidth = 100;
+	int gridSize = 10;
+	StackPane root = new StackPane();
+	VBox startScreen = new VBox();
+	BorderPane playScreen = new BorderPane();
+	
 	public void start(Stage primaryStage) {
 
 		initializeStartScreen();
@@ -234,9 +247,12 @@ public class PizzaKid extends Application{
 	}
 
 	public void initializeStartScreen() {
+		
+		//setting start screen style
 		String style = "-fx-background-color: rgba(0, 0, 0, 1);";
 		startScreen.setStyle(style);
-
+		
+		// title
 		HBox top = new HBox();
 		top.setAlignment(Pos.CENTER);
 		top.setMinHeight(height / 2);
@@ -245,6 +261,7 @@ public class PizzaKid extends Application{
 		opening.setFont(Font.font("Comfortaa", 40));
 		opening.setTextFill(Color.FLORALWHITE);
 
+		//start button
 		HBox bottom = new HBox();
 		bottom.setAlignment(Pos.CENTER);
 		bottom.setMinHeight(height / 2);
@@ -253,15 +270,12 @@ public class PizzaKid extends Application{
 		start.setFont(Font.font("Arial Black", 20));
 		start.setMinSize(buttonWidth, buttonHeight);
 
-		playScreen.setMinHeight(height);
-		playScreen.setMinWidth(width);
-		String style2 = "-fx-background-color: rgba(245, 250, 250, 1);";
-		playScreen.setStyle(style2);
-
+		//event in start button
 		start.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				startScreen.setVisible(false);
+				playScreen.setVisible(true);
 				playScreen.toFront();
 			}
 		});
@@ -273,49 +287,88 @@ public class PizzaKid extends Application{
 	}
 
 	public void initializePlayScreen() {
+		
+		//setting playScreen
+		playScreen.setMinHeight(height);
+		playScreen.setMinWidth(width);
+		String style2 = "-fx-background-color: rgba(245, 250, 250, 1);";
+		playScreen.setStyle(style2);
+		
+		//setting heading containing title, time, and tips
 		HBox heading = new HBox();
-
 		Label title = new Label("PizzaKid");
+		Label time = new Label("Time left: ");
+		Label tips = new Label("Tips: ");
+		
+		setHeadings(title, time, tips);
+
+		heading.getChildren().add(title);
+		heading.getChildren().add(time);
+		heading.getChildren().add(tips);
+
+		heading.setAlignment(Pos.CENTER);
+		playScreen.setTop(heading);
+		
+		//setting map
+		GridPane map = new GridPane();
+		setMap(map);
+		
+		playScreen.setCenter(map);
+		
+		//setting footer containing quit button
+		HBox footer = new HBox();
+		footer.setMinWidth(width);
+		
+		Button quit = new Button("Quit");
+		quit.setFont(Font.font("Arial Black", 15));
+		quit.setMinSize(buttonWidth/2, buttonHeight/2);
+		quit.setAlignment(Pos.CENTER);
+		
+		footer.setAlignment(Pos.CENTER_RIGHT);
+		footer.setPadding(new Insets(10,50,20,10));
+		footer.getChildren().add(quit);
+		
+		playScreen.setBottom(footer);
+
+		//event in quit button
+		quit.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				playScreen.setVisible(false);
+				startScreen.setVisible(true);
+				startScreen.toFront();
+			}
+		});
+	}
+
+	private void setHeadings(Label title, Label time, Label tips) {
+		//title
 		title.setFont(Font.font("Comfortaa", 30));
 		title.setTextFill(Color.BLACK);
 		title.setAlignment(Pos.CENTER_LEFT);
 		title.setMinWidth(width / 2);
 		title.setPadding(new Insets(10, 0, 0, 50));
-		heading.getChildren().add(title);
 
-		Label time = new Label("Time left: ");
+		//time
 		time.setFont(Font.font("Arial", 15));
 		time.setTextFill(Color.BLACK);
 		time.setAlignment(Pos.CENTER);
 		time.setMinWidth(width / 4);
-		heading.getChildren().add(time);
 
-		Label tips = new Label("Tips: ");
+		//tips
 		tips.setFont(Font.font("Arial", 15));
 		tips.setTextFill(Color.BLACK);
 		tips.setAlignment(Pos.CENTER);
 		tips.setMinWidth(width / 4);
-		heading.getChildren().add(tips);
-
-		heading.setAlignment(Pos.CENTER);
-		playScreen.setTop(heading);
-
-		GridPane map = new GridPane();
+	}
+	
+	private void setMap(GridPane map) {
 		map.setVgap(5);
 		map.setHgap(5);
 		map.setPadding(new Insets(10,10,10,10));
-		for (int i = 0; i < gridSize; i++) {
-			for (int j = 0; j < gridSize; j++) {
-				Label x = new Label(i + ", " + j);
-				x.setAlignment(Pos.CENTER);
-				x.setMinHeight(mapHeight/gridSize);
-				x.setMinWidth(mapWidth/gridSize);
-				map.add(x, j, i);
-			}
-		}
+		
+		this.map.showGUIMap(map);
+		
 		map.setAlignment(Pos.CENTER);
-		playScreen.setCenter(map);
 	}
-
-
 }
