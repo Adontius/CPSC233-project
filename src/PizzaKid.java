@@ -31,7 +31,6 @@ import javafx.scene.input.KeyEvent;
 
 public class PizzaKid extends Application {
 
-	// private static Avatar player = new Avatar();
 	private Map map = new Map();
 	// collectibles
 	private static Scanner input = new Scanner(System.in);
