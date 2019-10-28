@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+
 public class Map {
 	
 	private Grid[][] grids; 
@@ -164,9 +165,6 @@ public class Map {
  		hasObstacle[roads.get(randNum) - 1] = true;
  		return roads.get(randNum);
  	}
- 	
- 	
- 	
  	
  	
  	
