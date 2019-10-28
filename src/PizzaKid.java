@@ -33,8 +33,7 @@ public class PizzaKid extends Application {
 	private Map map = new Map();
 	// collectibles
 	private static Scanner input = new Scanner(System.in);
-	// private static double score = 0;
-	// private static int strike = 0;
+
 	private static int tipAmount = 5;
 
 	public static void main(String[] args) {
