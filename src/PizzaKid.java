@@ -1,3 +1,4 @@
+
 //hello from alice
 
 import java.awt.event.ActionListener;
@@ -8,6 +9,7 @@ import java.util.TimerTask;
 import java.util.Timer;
 //import javax.swing.Timer;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,8 +26,6 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.event.Event;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -34,7 +34,7 @@ public class PizzaKid extends Application {
 	private Map map = new Map();
 	// collectibles
 	private static Scanner input = new Scanner(System.in);
-	private static int tipAmount = 5;
+	private int tipAmount = 5;
 
 	public static void main(String[] args) {
 		// showStartScreen();
@@ -216,7 +216,6 @@ public class PizzaKid extends Application {
 		}
 	}
 
-
 	// GUI stuff
 
 	int height = 700;
@@ -230,6 +229,10 @@ public class PizzaKid extends Application {
 	int seconds = 0;
 	boolean isPlaying = false;
 	int timeDisplay = 0;
+	GridPane mapGUI = new GridPane();
+
+	// 0 - stop, 1 - up, 2 - left, 3 - down, 4 - right
+	int direction = 0;
 
 	public void start(Stage primaryStage) {
 
@@ -310,10 +313,9 @@ public class PizzaKid extends Application {
 		playScreen.setTop(heading);
 
 		// setting map
-		GridPane map = new GridPane();
-		setMap(map);
+		setMap(mapGUI);
 
-		playScreen.setCenter(map);
+		playScreen.setCenter(mapGUI);
 
 		// setting footer containing quit button
 		HBox footer = new HBox();
@@ -339,24 +341,64 @@ public class PizzaKid extends Application {
 				startScreen.toFront();
 			}
 		});
-		
+
 		// playing the game
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
 			public void handle(KeyEvent ke) {
-				if (ke.getCode() == KeyCode.W) {
-					
+				if (map.getPlayer().getHorzPos() == 0 && ke.getCode() == KeyCode.W
+						|| map.getPlayer().getVertPos() == 0 && ke.getCode() == KeyCode.A
+						|| map.getPlayer().getHorzPos() == 9 && ke.getCode() == KeyCode.D
+						|| map.getPlayer().getVertPos() == 9 && ke.getCode() == KeyCode.S) {
+					System.out.println("Invalid move, try again");
+				} else {if (ke.getCode() == KeyCode.W) {
+						if (!map.getHasHouseAtIndex(
+								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() - 1))
+								&& !map.getHasObstacleAtIndex(
+										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() - 1))) {
+							PizzaKid.this.map.getPlayer().moveUp();
+						}
+					}
+					if (ke.getCode() == KeyCode.S) {
+						if (!map.getHasHouseAtIndex(
+								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() + 1))
+								&& !map.getHasObstacleAtIndex(
+										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() + 1))) {
+							PizzaKid.this.map.getPlayer().moveDown();
+						}
+					}
+					if (ke.getCode() == KeyCode.D) {
+						if (!map.getHasHouseAtIndex(
+								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) + 1)
+								&& !map.getHasObstacleAtIndex(
+										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) + 1)) {
+							PizzaKid.this.map.getPlayer().moveRight();
+						}
+
+					}
+					if (ke.getCode() == KeyCode.A) {
+						if (!map.getHasHouseAtIndex(
+								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) - 1)
+								&& !map.getHasObstacleAtIndex(
+										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) - 1)) {
+							PizzaKid.this.map.getPlayer().moveLeft();
+						}
+					}
 				}
-				if (ke.getCode() == KeyCode.A) {
-					
-				}
-				if (ke.getCode() == KeyCode.D) {
-					
-				}
-				if (ke.getCode() == KeyCode.S) {
-					
-				}
+				System.out.println("Vert Pos: " + map.getPlayer().getVertPos());
+				System.out.println("Horz Pos: " + map.getPlayer().getHorzPos());
 			}
 		});
+
+		AnimationTimer timer = new AnimationTimer() {
+
+			@Override
+			public void handle(long arg0) {
+				map.showGUIMap(mapGUI);
+			}
+
+		};
+		timer.start();
 	}
 
 	private void setHeadings(Label title, Label time, Label tips) {

@@ -3,113 +3,118 @@
 //and getter methods.
 //author @alice
 
-public class Avatar
-{
-    private int tipMoney; //counter for amount of tip money the avatar has accumulated. Has setter and getter.
-    public int strikeCount; //counter for number of strikes the avatar has accummulated. Has setter and getter.
-    public int vertPos; //vertical position of avatar (y axis). Has setter and getter.
-    public int horzPos; //horizontal position of avatar (x axis). Has setter and getter.
-    public boolean pizzaDelivered; //booelan to store whether pizza has been delivered (true) or not (false). Has setter and getter.
+public class Avatar {
+	private int tipMoney; // counter for amount of tip money the avatar has accumulated. Has setter and
+							// getter.
+	public int strikeCount; // counter for number of strikes the avatar has accummulated. Has setter and
+							// getter.
+	public int vertPos; // vertical position of avatar (y axis). Has setter and getter.
+	public int horzPos; // horizontal position of avatar (x axis). Has setter and getter.
+	public boolean pizzaDelivered; // booelan to store whether pizza has been delivered (true) or not (false). Has
+									// setter and getter.
 
-    public Avatar()
-    {
-        //initializes avatar stats at zero
-        tipMoney = 0; 
-        strikeCount = 0;
-        vertPos = 0;
-        horzPos = 0; //sets initial position of avatar to (0, 0)
-        pizzaDelivered = false;
-    }
+	public Avatar() {
+		// initializes avatar stats at zero
+		tipMoney = 0;
+		strikeCount = 0;
+		vertPos = 0;
+		horzPos = 0; // sets initial position of avatar to (0, 0)
+		pizzaDelivered = false;
+	}
 
-    public void setVertPos(int i) //sets the avatar's vertical position
-    {
-		if(i >= 0 && i < 20) {
+	public void setVertPos(int i) // sets the avatar's vertical position
+	{
+		if (i >= 0 && i < 20) {
 			this.vertPos = i;
 		}
-    }
-    
-    public void setHorzPos(int i) //sets the avatar's horizontal position
-    {
-        if(i >= 0 && i < 20) 
-        {
+	}
+
+	public void setHorzPos(int i) // sets the avatar's horizontal position
+	{
+		if (i >= 0 && i < 20) {
 			this.horzPos = i;
 		}
 	}
 
-    public int getVertPos()//returns the vertical position of the avatar
-    {
-        return this.vertPos;
-    }
+	public int getVertPos()// returns the vertical position of the avatar
+	{
+		return this.vertPos;
+	}
 
-    public int getHorzPos()//returns the horizontal position of the avatar
-    {
-        return this.horzPos;
-    }
+	public int getHorzPos()// returns the horizontal position of the avatar
+	{
+		return this.horzPos;
+	}
 
-    public void moveUp() //moves avatar one unit up (y + 1)
-    {
-        vertPos += 1;
-    }
+	public void moveUp() // moves avatar one unit up (y + 1)
+	{
+		if (vertPos > 0) {
+			vertPos -= 1;
+		}
+	}
 
-    public void moveDown() //moves avatar one unit down (y - 1)
-    {
-        vertPos -= 1;
-    }
+	public void moveDown() // moves avatar one unit down (y - 1)
+	{
+		vertPos += 1;
+	}
 
-    public void moveRight()//moves avatar one unit right (x + 1)
-    {
-        horzPos += 1;
-    }
+	public void moveRight()// moves avatar one unit right (x + 1)
+	{
+		horzPos += 1;
+	}
 
-    public void moveLeft()//moves avatar one unit left (x - 1)
-    {
-        horzPos -= 1;
-    }
+	public void moveLeft()// moves avatar one unit left (x - 1)
+	{
+		if (horzPos > 0) {
+			horzPos -= 1;
+		}
+	}
 
-    public boolean deliverPizza() //when invoked, sets pizzaDelivered to true to signal that a pizza has been delivered. No count of pizzas required
-    {
-        pizzaDelivered = true;
-        return this.pizzaDelivered;
-    }
+	public boolean deliverPizza() // when invoked, sets pizzaDelivered to true to signal that a pizza has been
+									// delivered. No count of pizzas required
+	{
+		pizzaDelivered = true;
+		return this.pizzaDelivered;
+	}
 
-    public void setPizzaDelivered(boolean pizzaDelivered)//setter method to set whether pizza has been delivered (true) or not (false)
-    {
-        this.pizzaDelivered = pizzaDelivered;
-    }
+	public void setPizzaDelivered(boolean pizzaDelivered)// setter method to set whether pizza has been delivered (true)
+															// or not (false)
+	{
+		this.pizzaDelivered = pizzaDelivered;
+	}
 
-    public boolean getPizzaDelivered()//getter method that returns whether the pizza has been delivered (true) or not (false)
-    {
-        return this.pizzaDelivered;
-    }
+	public boolean getPizzaDelivered()// getter method that returns whether the pizza has been delivered (true) or not
+										// (false)
+	{
+		return this.pizzaDelivered;
+	}
 
-    public void receiveTip(int tipAmount)//adds the customer's tip to the avatar's tip money balance
-    {
-        tipMoney += tipAmount;
-    }
+	public void receiveTip(int tipAmount)// adds the customer's tip to the avatar's tip money balance
+	{
+		tipMoney += tipAmount;
+	}
 
-    public void setTipMoney(int tipMoney)//setter method for tipMoney
-    {
-        this.tipMoney = tipMoney;
-    }
+	public void setTipMoney(int tipMoney)// setter method for tipMoney
+	{
+		this.tipMoney = tipMoney;
+	}
 
-    public int getTipMoney()
-    {
-        return this.tipMoney;
-    }
+	public int getTipMoney() {
+		return this.tipMoney;
+	}
 
-    public void addStrike()//adds a strike to the avatar' strike count.
-    {
-        strikeCount += 1;
-    }
+	public void addStrike()// adds a strike to the avatar' strike count.
+	{
+		strikeCount += 1;
+	}
 
-    public void setStrikeCount(int strikeCount)//setter method to set the number of strikes the avatar has.
-    {
-        this.strikeCount = strikeCount;
-    }
+	public void setStrikeCount(int strikeCount)// setter method to set the number of strikes the avatar has.
+	{
+		this.strikeCount = strikeCount;
+	}
 
-    public int getStrikeCount()
-    {
-        return this.strikeCount;
-    }
+	public int getStrikeCount() {
+		return this.strikeCount;
+	}
 
 }
