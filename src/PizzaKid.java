@@ -390,15 +390,15 @@ public class PizzaKid extends Application {
 			}
 		});
 
-		AnimationTimer timer = new AnimationTimer() {
-
-			@Override
-			public void handle(long arg0) {
-				map.showGUIMap(mapGUI);
-			}
-
-		};
-		timer.start();
+//		AnimationTimer timer = new AnimationTimer() {
+//
+//			@Override
+//			public void handle(long arg0) {
+//				map.showGUIMap(mapGUI);
+//			}
+//
+//		};
+//		timer.start();
 	}
 
 	private void setHeadings(Label title, Label time, Label tips) {
