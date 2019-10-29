@@ -3,15 +3,14 @@
 //and getter methods.
 //author @alice
 
+//important note: y-axis is flipped, so decreasing vertPos value means avatar moves up and vice versa
+
 public class Avatar {
-	private int tipMoney; // counter for amount of tip money the avatar has accumulated. Has setter and
-							// getter.
-	public int strikeCount; // counter for number of strikes the avatar has accummulated. Has setter and
-							// getter.
+	private int tipMoney; // counter for amount of tip money the avatar has accumulated. Has setter and getter.
+	public int strikeCount; // counter for number of strikes the avatar has accummulated. Has setter and getter.
 	public int vertPos; // vertical position of avatar (y axis). Has setter and getter.
 	public int horzPos; // horizontal position of avatar (x axis). Has setter and getter.
-	public boolean pizzaDelivered; // booelan to store whether pizza has been delivered (true) or not (false). Has
-									// setter and getter.
+	public boolean pizzaDelivered; // booelan to store whether pizza has been delivered (true) or not (false). Has setter and getter.
 
 	public Avatar() {
 		// initializes avatar stats at zero
