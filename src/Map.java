@@ -194,7 +194,7 @@ public class Map {
 		int counter = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				Label x = new Label(i+j+"");
+				Label x = new Label();
 				counter++;
 				x.setAlignment(Pos.CENTER);
 				x.setMinHeight(mapHeight / size);

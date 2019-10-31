@@ -371,8 +371,6 @@ public class PizzaKid extends Application {
 						}
 					}
 				}
-				System.out.println("Vert Pos: " + map.getPlayer().getVertPos());
-				System.out.println("Horz Pos: " + map.getPlayer().getHorzPos());
 			}
 		});
 
