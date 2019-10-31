@@ -195,6 +195,7 @@ public class Map {
 					x = new Label("Obstacle");
 				} else {
 					x = new Label("");
+					x.setStyle("-fx-background-color: rgba(245, 250, 250, 1);");
 				}
 				counter++;
 				x.setAlignment(Pos.CENTER);
@@ -215,7 +216,6 @@ public class Map {
 				x.setAlignment(Pos.CENTER);
 				x.setMinHeight(mapHeight / size);
 				x.setMinWidth(mapWidth / size);
-				x.setStyle("-fx-background-color: rgba(245, 250, 250, 1);");
 				map.add(x, j, i);
 			}
 		}

@@ -291,7 +291,7 @@ public class PizzaKid extends Application {
 		// setting playScreen
 		playScreen.setMinHeight(height);
 		playScreen.setMinWidth(width);
-		String style2 = "-fx-background-color: rgba(245, 250, 250, 1);";
+		String style2 = "-fx-background-color: rgba(100, 100, 100, 1);";
 		playScreen.setStyle(style2);
 
 		// setting heading containing title, time, and tips
@@ -380,7 +380,7 @@ public class PizzaKid extends Application {
 			long before = 0;
 			@Override
 			public void handle(long now) {
-				if(now - before >= 500000000) {
+				if(now - before >= 1000000000) {
 					map.updateDirection();
 					map.clearGUIMap(mapGUI);
 					map.showGUIMap(mapGUI);
