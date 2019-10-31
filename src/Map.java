@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -5,6 +6,8 @@ import com.sun.prism.paint.Color;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class Map {
@@ -170,8 +173,14 @@ public class Map {
 			for (int j = 0; j < size; j++) {
 				Label x;
 				if (i == player.vertPos && j == player.horzPos) {
-					x = new Label("Player");
-					x.setStyle("-fx-background-image: url(//pixelartmaker.com/art/1f35e220dd65e03);");
+					x = new Label();
+//					Image image = new Image("http://pixelartmaker.com/art/1f35e220dd65e03", true);
+					File imageFile = new File("C:\\Users\\agrav\\eclipse-workspace\\CPSC233-project\\src\\car.png");
+					Image car = new Image(imageFile.toURI().toString());
+					ImageView carView = new ImageView(car);
+					carView.setFitHeight(mapHeight / size);
+					carView.setFitWidth(mapWidth / size);
+					x.setGraphic(carView);
 				} else if (hasHouseAndOrder[counter]) {
 					x = new Label("HouseOrder");
 				} else if (hasHouse[counter]) {
@@ -207,8 +216,6 @@ public class Map {
 	}
 	
 	public boolean hasObstacleOnTop() {
-		System.out.println(player.getHorzPos() + 10 * (player.getVertPos() - 1));
-		System.out.println(getHasHouseAtIndex(player.getHorzPos() + 10 * (player.getVertPos())));
 		return (getHasHouseAtIndex(player.getHorzPos() + 10 * (player.getVertPos() - 1)) && getHasObstacleAtIndex(player.getHorzPos() + 10 * (player.getVertPos() - 1)));
 	}
 	
@@ -225,13 +232,13 @@ public class Map {
 	}
 	
 	public void updateDirection() {
-		if (player.direction == 1 && !hasObstacleOnTop()) {
+		if (player.direction == 1 && !hasObstacleOnTop() && player.getVertPos() > 0) {
 			player.moveUp();
-		} else if (player.direction == 2 && !hasObstacleOnLeft()) {
+		} else if (player.direction == 2 && !hasObstacleOnLeft() && player.getHorzPos() > 0) {
 			player.moveLeft();
-		} else if (player.direction == 3 && !hasObstacleOnBottom()) {
+		} else if (player.direction == 3 && !hasObstacleOnBottom() && player.getVertPos() < 9) {
 			player.moveDown();
-		} else if (player.direction == 4 && !hasObstacleOnRight()) {
+		} else if (player.direction == 4 && !hasObstacleOnRight() && player.getHorzPos() < 9) {
 			player.moveRight();
 		}
 	}
