@@ -20,6 +20,7 @@ public class Avatar {
 		tipMoney = 0;
 		strikeCount = 0;
 		vertPos = 0;
+		direction = 0;
 		horzPos = 0; // sets initial position of avatar to (0, 0)
 		pizzaDelivered = false;
 	}

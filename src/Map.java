@@ -171,6 +171,7 @@ public class Map {
 				Label x;
 				if (i == player.vertPos && j == player.horzPos) {
 					x = new Label("Player");
+					x.setStyle("-fx-background-image: url(//pixelartmaker.com/art/1f35e220dd65e03);");
 				} else if (hasHouseAndOrder[counter]) {
 					x = new Label("HouseOrder");
 				} else if (hasHouse[counter]) {

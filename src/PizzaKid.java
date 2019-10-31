@@ -334,6 +334,7 @@ public class PizzaKid extends Application {
 				playScreen.setVisible(false);
 				startScreen.setVisible(true);
 				startScreen.toFront();
+				map = new Map();
 			}
 		});
 
@@ -379,7 +380,7 @@ public class PizzaKid extends Application {
 			long before = 0;
 			@Override
 			public void handle(long now) {
-				if(now - before >= 1000000000) {
+				if(now - before >= 500000000) {
 					map.updateDirection();
 					map.clearGUIMap(mapGUI);
 					map.showGUIMap(mapGUI);
