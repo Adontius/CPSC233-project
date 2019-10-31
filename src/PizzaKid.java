@@ -231,9 +231,6 @@ public class PizzaKid extends Application {
 	int timeDisplay = 0;
 	GridPane mapGUI = new GridPane();
 
-	// 0 - stop, 1 - up, 2 - left, 3 - down, 4 - right
-	int direction = 0;
-
 	public void start(Stage primaryStage) {
 
 		initializeStartScreen();
@@ -249,7 +246,7 @@ public class PizzaKid extends Application {
 	}
 
 	public void initializeStartScreen() {
-
+		
 		// setting start screen style
 		String style = "-fx-background-color: rgba(0, 0, 0, 1);";
 		startScreen.setStyle(style);
@@ -315,8 +312,6 @@ public class PizzaKid extends Application {
 		// setting map
 		setMap(mapGUI);
 
-		playScreen.setCenter(mapGUI);
-
 		// setting footer containing quit button
 		HBox footer = new HBox();
 		footer.setMinWidth(width);
@@ -344,19 +339,19 @@ public class PizzaKid extends Application {
 
 		// playing the game
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
 			public void handle(KeyEvent ke) {
 				if (map.getPlayer().getHorzPos() == 0 && ke.getCode() == KeyCode.W
 						|| map.getPlayer().getVertPos() == 0 && ke.getCode() == KeyCode.A
 						|| map.getPlayer().getHorzPos() == 9 && ke.getCode() == KeyCode.D
 						|| map.getPlayer().getVertPos() == 9 && ke.getCode() == KeyCode.S) {
-					System.out.println("Invalid move, try again");
-				} else {if (ke.getCode() == KeyCode.W) {
+				} else {
+					if (ke.getCode() == KeyCode.W) {
 						if (!map.getHasHouseAtIndex(
 								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() - 1))
 								&& !map.getHasObstacleAtIndex(
 										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() - 1))) {
-							PizzaKid.this.map.getPlayer().moveUp();
+//							PizzaKid.this.map.getPlayer().moveUp();
+							map.getPlayer().setDirection(1);
 						}
 					}
 					if (ke.getCode() == KeyCode.S) {
@@ -364,7 +359,8 @@ public class PizzaKid extends Application {
 								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() + 1))
 								&& !map.getHasObstacleAtIndex(
 										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() + 1))) {
-							PizzaKid.this.map.getPlayer().moveDown();
+//							PizzaKid.this.map.getPlayer().moveDown();
+							map.getPlayer().setDirection(3);
 						}
 					}
 					if (ke.getCode() == KeyCode.D) {
@@ -372,7 +368,8 @@ public class PizzaKid extends Application {
 								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) + 1)
 								&& !map.getHasObstacleAtIndex(
 										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) + 1)) {
-							PizzaKid.this.map.getPlayer().moveRight();
+//							PizzaKid.this.map.getPlayer().moveRight();
+							map.getPlayer().setDirection(4);
 						}
 
 					}
@@ -381,7 +378,8 @@ public class PizzaKid extends Application {
 								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) - 1)
 								&& !map.getHasObstacleAtIndex(
 										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) - 1)) {
-							PizzaKid.this.map.getPlayer().moveLeft();
+//							PizzaKid.this.map.getPlayer().moveLeft();
+							map.getPlayer().setDirection(2);
 						}
 					}
 				}
@@ -390,15 +388,24 @@ public class PizzaKid extends Application {
 			}
 		});
 
-//		AnimationTimer timer = new AnimationTimer() {
-//
-//			@Override
-//			public void handle(long arg0) {
-//				map.showGUIMap(mapGUI);
-//			}
-//
-//		};
-//		timer.start();
+		AnimationTimer timer = new AnimationTimer() {
+
+			long before = 0;
+			@Override
+			public void handle(long now) {
+				if(now - before >= 500000000) {
+					map.getPlayer().updateDirection();
+					map.clearGUIMap(mapGUI);
+					map.showGUIMap(mapGUI);
+					before = now;
+				}
+			}
+
+		};
+		timer.start();
+		
+
+		playScreen.setCenter(mapGUI);
 	}
 
 	private void setHeadings(Label title, Label time, Label tips) {
