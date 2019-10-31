@@ -184,7 +184,13 @@ public class Map {
 				} else if (hasHouseAndOrder[counter]) {
 					x = new Label("HouseOrder");
 				} else if (hasHouse[counter]) {
-					x = new Label("House");
+					x = new Label();
+					File imageFile = new File("C:\\Users\\agrav\\eclipse-workspace\\CPSC233-project\\src\\house1.png");
+					Image house = new Image(imageFile.toURI().toString());
+					ImageView houseView = new ImageView(house);
+					houseView.setFitHeight(mapWidth / size);
+					houseView.setFitWidth(mapWidth / size);
+					x.setGraphic(houseView);
 				} else if (hasObstacle[counter]) {
 					x = new Label("Obstacle");
 				} else {
