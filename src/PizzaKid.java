@@ -346,38 +346,26 @@ public class PizzaKid extends Application {
 						|| map.getPlayer().getVertPos() == 9 && ke.getCode() == KeyCode.S) {
 				} else {
 					if (ke.getCode() == KeyCode.W) {
-						if (!map.getHasHouseAtIndex(
-								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() - 1))
-								&& !map.getHasObstacleAtIndex(
-										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() - 1))) {
+						if (!map.hasObstacleOnTop()) {
 //							PizzaKid.this.map.getPlayer().moveUp();
 							map.getPlayer().setDirection(1);
 						}
 					}
 					if (ke.getCode() == KeyCode.S) {
-						if (!map.getHasHouseAtIndex(
-								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() + 1))
-								&& !map.getHasObstacleAtIndex(
-										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() + 1))) {
+						if (!map.hasObstacleOnBottom()) {
 //							PizzaKid.this.map.getPlayer().moveDown();
 							map.getPlayer().setDirection(3);
 						}
 					}
 					if (ke.getCode() == KeyCode.D) {
-						if (!map.getHasHouseAtIndex(
-								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) + 1)
-								&& !map.getHasObstacleAtIndex(
-										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) + 1)) {
+						if (!map.hasObstacleOnRight()) {
 //							PizzaKid.this.map.getPlayer().moveRight();
 							map.getPlayer().setDirection(4);
 						}
 
 					}
 					if (ke.getCode() == KeyCode.A) {
-						if (!map.getHasHouseAtIndex(
-								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) - 1)
-								&& !map.getHasObstacleAtIndex(
-										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) - 1)) {
+						if (!map.hasObstacleOnLeft()) {
 //							PizzaKid.this.map.getPlayer().moveLeft();
 							map.getPlayer().setDirection(2);
 						}
@@ -393,8 +381,8 @@ public class PizzaKid extends Application {
 			long before = 0;
 			@Override
 			public void handle(long now) {
-				if(now - before >= 500000000) {
-					map.getPlayer().updateDirection();
+				if(now - before >= 1000000000) {
+					map.updateDirection();
 					map.clearGUIMap(mapGUI);
 					map.showGUIMap(mapGUI);
 					before = now;

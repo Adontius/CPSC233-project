@@ -124,16 +124,4 @@ public class Avatar {
 			direction = i;
 		}
 	}
-
-	public void updateDirection() {
-		if (direction == 1) {
-			moveUp();
-		} else if (direction == 2) {
-			moveLeft();
-		} else if (direction == 3) {
-			moveDown();
-		} else if (direction == 4) {
-			moveRight();
-		}
-	}
 }

@@ -194,7 +194,7 @@ public class Map {
 		int counter = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				Label x = new Label();
+				Label x = new Label(i+j+"");
 				counter++;
 				x.setAlignment(Pos.CENTER);
 				x.setMinHeight(mapHeight / size);
@@ -204,5 +204,36 @@ public class Map {
 			}
 		}
 	}
+	
+	public boolean hasObstacleOnTop() {
+		System.out.println(player.getHorzPos() + 10 * (player.getVertPos() - 1));
+		System.out.println(getHasHouseAtIndex(player.getHorzPos() + 10 * (player.getVertPos())));
+		return (getHasHouseAtIndex(player.getHorzPos() + 10 * (player.getVertPos() - 1)) && getHasObstacleAtIndex(player.getHorzPos() + 10 * (player.getVertPos() - 1)));
+	}
+	
+	public boolean hasObstacleOnBottom() {
+		return (getHasHouseAtIndex(player.getHorzPos() + 10 * (player.getVertPos() + 1)) && getHasObstacleAtIndex(player.getHorzPos() + 10 * (player.getVertPos() + 1)));
+	}
+
+	public boolean hasObstacleOnRight() {
+		return (getHasHouseAtIndex(player.getHorzPos() + 10 * (player.getVertPos()) + 1) && getHasObstacleAtIndex(player.getHorzPos() + 10 * (player.getVertPos()) + 1));
+	}
+
+	public boolean hasObstacleOnLeft() {
+		return (getHasHouseAtIndex(player.getHorzPos() + 10 * (player.getVertPos()) + 1) && getHasObstacleAtIndex(player.getHorzPos() + 10 * (player.getVertPos()) - 1));
+	}
+	
+	public void updateDirection() {
+		if (player.direction == 1 && !hasObstacleOnTop()) {
+			player.moveUp();
+		} else if (player.direction == 2 && !hasObstacleOnLeft()) {
+			player.moveLeft();
+		} else if (player.direction == 3 && !hasObstacleOnBottom()) {
+			player.moveDown();
+		} else if (player.direction == 4 && !hasObstacleOnRight()) {
+			player.moveRight();
+		}
+	}
+	
 
 }
