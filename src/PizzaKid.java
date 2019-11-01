@@ -51,6 +51,10 @@ public class PizzaKid extends Application {
 		} while (!num.equals("1"));
 	}
 
+	/**
+	 * gives instructions and actions for game
+	 */
+	
 	public void showPlayScreen() {
 		String num = "";
 		do {
@@ -104,6 +108,11 @@ public class PizzaKid extends Application {
 			num = input.nextLine().toLowerCase();
 		} while (!num.equals("0"));
 	}
+	
+	/**
+	 * checks player movement validity
+	 * @param str
+	 */
 
 	public void checkIfValid(String str) {
 		if (map.getPlayer().getHorzPos() == 0 && str.equals("w") || map.getPlayer().getVertPos() == 0 && str.equals("a")
@@ -137,6 +146,11 @@ public class PizzaKid extends Application {
 		}
 		System.out.println();
 	}
+	
+	/**
+	 * check if the pizzas are delivered
+	 * @return
+	 */
 
 	public boolean checkIfDelivered() {
 		boolean delivered = false;
@@ -168,6 +182,10 @@ public class PizzaKid extends Application {
 		return delivered;
 	}
 
+	/**
+	 * checks the obstacles
+	 */
+	
 	public void checkIfObstacle() {
 		// checks for each direction if house has order and removes order if true
 		if (map.getPlayer().getHorzPos() >= 1 && map
@@ -192,6 +210,11 @@ public class PizzaKid extends Application {
 		}
 	}
 
+	/**
+	 * checks if the obstalces are hit and adds a strike 
+	 * @param str
+	 */
+	
 	public void checkIfHit(String str) {
 		// checks for each direction if theres obstacle and adds strike if true
 		if (str.equals("w") && map.getPlayer().getHorzPos() >= 1
