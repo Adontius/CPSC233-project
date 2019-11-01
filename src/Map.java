@@ -175,7 +175,7 @@ public class Map {
 				if (i == player.vertPos && j == player.horzPos) {
 					x = new Label();
 //					Image image = new Image("http://pixelartmaker.com/art/1f35e220dd65e03", true);
-					File imageFile = new File("C:\\Users\\agrav\\eclipse-workspace\\CPSC233-project\\src\\car.png");
+					File imageFile = new File("C:\\Users\\anson\\Pictures\\car.png");
 					Image car = new Image(imageFile.toURI().toString());
 					ImageView carView = new ImageView(car);
 					carView.setFitHeight(mapHeight / size);
@@ -185,7 +185,7 @@ public class Map {
 					x = new Label("HouseOrder");
 				} else if (hasHouse[counter]) {
 					x = new Label();
-					File imageFile = new File("C:\\Users\\agrav\\eclipse-workspace\\CPSC233-project\\src\\house1.png");
+					File imageFile = new File("C:\\Users\\anson\\Pictures\\house.png");
 					Image house = new Image(imageFile.toURI().toString());
 					ImageView houseView = new ImageView(house);
 					houseView.setFitHeight(mapWidth / size);
