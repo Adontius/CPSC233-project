@@ -62,7 +62,11 @@ public class Map {
 		hasHouseAndOrder[i] = false;
 	}
 
-	public void showMap() {
+	/**
+	 * prints out the Location of certain objects in the game
+	 */
+	
+	public void showMap() {			
 		System.out.println();
 		for (int i = 0; i < 10; i++) {
 			System.out.print(" ___ ");
@@ -88,7 +92,11 @@ public class Map {
 		}
 	}
 
-	public void generateHouses() {
+	/**
+	 * generates the location of houses in the map
+	 */
+	
+	public void generateHouses() {			
 		for (int i = 0; i < hasHouse.length; i++) {
 			if (i >= 3 && i <= 9) {
 				hasHouse[i] = true;
@@ -166,8 +174,12 @@ public class Map {
 	}
 
 	// GUI stuff
-
-	public void showGUIMap(GridPane map) {
+	/**
+	 * Gui implimentation of the map 
+	 * @param map
+	 */
+	
+	public void showGUIMap(GridPane map) {		
 		int counter = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
@@ -205,8 +217,11 @@ public class Map {
 			}
 		}
 	}
-
-	public void clearGUIMap(GridPane map) {
+/**
+ * put empty elements into the gui map used for regenerating the map and animations
+ * @param map
+ */
+	public void clearGUIMap(GridPane map) { 	
 		
 		int counter = 0;
 		for (int i = 0; i < size; i++) {
@@ -220,6 +235,11 @@ public class Map {
 			}
 		}
 	}
+	
+	/**
+	 * Locates the obstacles 
+	 * @return
+	 */
 	
 	public boolean hasObstacleOnTop() {
 		return (getHasHouseAtIndex(player.getHorzPos() + 10 * (player.getVertPos() - 1)) && getHasObstacleAtIndex(player.getHorzPos() + 10 * (player.getVertPos() - 1)));
