@@ -37,7 +37,7 @@ public class GameTimer extends Application
 		Scene scene = new Scene(root, 300, 300);
 		
 		//Details of the timer label
-		timerLabel.setText());
+		//timerLabel.setText();
 		timerLabel.setTextFill(Color.INDIANRED);
 		
 	}
