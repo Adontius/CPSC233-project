@@ -1,5 +1,5 @@
-
-public class Grid {
+//contains different characteristics and actions of grids
+public class Grid {				
     private int PositionNumber;
     private char symbol;
 

@@ -11,12 +11,16 @@ public class Avatar {
 	public int vertPos; // vertical position of avatar (y axis). Has setter and getter.
 	public int horzPos; // horizontal position of avatar (x axis). Has setter and getter.
 	public boolean pizzaDelivered; // booelan to store whether pizza has been delivered (true) or not (false). Has setter and getter.
-
+	
+	// 0 - stop, 1 - up, 2 - left, 3 - down, 4 - right
+	int direction = 0;
+	
 	public Avatar() {
 		// initializes avatar stats at zero
 		tipMoney = 0;
 		strikeCount = 0;
 		vertPos = 0;
+		direction = 0;
 		horzPos = 0; // sets initial position of avatar to (0, 0)
 		pizzaDelivered = false;
 	}
@@ -115,5 +119,10 @@ public class Avatar {
 	public int getStrikeCount() {
 		return this.strikeCount;
 	}
-
+	
+	public void setDirection(int i) {
+		if (i >= 0 && i <= 4) {
+			direction = i;
+		}
+	}
 }
