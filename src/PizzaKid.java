@@ -36,74 +36,11 @@ public class PizzaKid extends Application {
 	private static Scanner input = new Scanner(System.in);
 	private int tipAmount = 5;
 
-	public static void main(String[] args) {
-		// showStartScreen();
-		// showPlayScreen();
+	public static void main(String[] args) 
+	{
 		launch(args);
 	}
 
-	public static void showStartScreen() {
-		System.out.println("Welcome to PizzaKid!");
-		String num = "";
-		do {
-			System.out.println("Enter 1 to Start Playing");
-			num = input.nextLine();
-		} while (!num.equals("1"));
-	}
-
-	public void showPlayScreen() {
-		String num = "";
-		do {
-			map = new Map();
-			System.out.println();
-			System.out.println("You are ^. Houses are H. House with order is O. Obstacles are X");
-			System.out.println("Deliver a Pizza, earn tips!");
-			System.out.println("Earn the most tips in 100 moves!");
-			System.out.println("Hit an obstacle, earn a strike. 3 stirkes = Game Over!");
-			System.out.println();
-			System.out.println("Enter:");
-			System.out.println("W to move up");
-			System.out.println("S to move down");
-			System.out.println("D to move right");
-			System.out.println("A to move left");
-			System.out.println("Enter 0 to quit");
-			System.out.println();
-			System.out.println("Good luck!");
-			System.out.println();
-			int counter = 0;
-			map.getPlayer().setTipMoney(0);
-			map.getPlayer().setStrikeCount(0);
-			map.generateOrder();
-			do {
-				System.out.println("Tip money: $" + map.getPlayer().getTipMoney());
-				System.out.println("Move: " + counter);
-				System.out.println("Strikes: " + map.getPlayer().getStrikeCount());
-				if (counter % 7 == 0 && counter != 0) {
-					map.generateObstacle();
-				}
-				if (counter % 5 == 0) {
-					map.generateOrder();
-				}
-				map.showMap();
-				num = input.nextLine().toLowerCase();
-				checkIfValid(num);
-				checkIfDelivered();
-				checkIfHit(num);
-				counter++;
-			} while (!num.equals("0") && counter <= 100 && map.getPlayer().getStrikeCount() < 3);
-			System.out.println("Game Over");
-			if (counter > 100) {
-				System.out.println("Your moves have ended!");
-			} else if (map.getPlayer().getStrikeCount() >= 3) {
-				System.out.println("You got 3 strikes!");
-			}
-			System.out.println("Total tip: $" + map.getPlayer().getTipMoney());
-			System.out.println();
-			System.out.println("Enter 0 to quit");
-			System.out.println("Enter anything else to continue playing");
-			num = input.nextLine().toLowerCase();
-		} while (!num.equals("0"));
-	}
 
 	public void checkIfValid(String str) {
 		if (map.getPlayer().getHorzPos() == 0 && str.equals("w") || map.getPlayer().getVertPos() == 0 && str.equals("a")
@@ -346,48 +283,7 @@ public class PizzaKid extends Application {
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			public void handle(KeyEvent ke) {
-				if (map.getPlayer().getHorzPos() == 0 && ke.getCode() == KeyCode.W
-						|| map.getPlayer().getVertPos() == 0 && ke.getCode() == KeyCode.A
-						|| map.getPlayer().getHorzPos() == 9 && ke.getCode() == KeyCode.D
-						|| map.getPlayer().getVertPos() == 9 && ke.getCode() == KeyCode.S) {
-					System.out.println("Invalid move, try again");
-				} else {if (ke.getCode() == KeyCode.W) {
-						if (!map.getHasHouseAtIndex(
-								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() - 1))
-								&& !map.getHasObstacleAtIndex(
-										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() - 1))) {
-							PizzaKid.this.map.getPlayer().moveUp();
-						}
-					}
-					if (ke.getCode() == KeyCode.S) {
-						if (!map.getHasHouseAtIndex(
-								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() + 1))
-								&& !map.getHasObstacleAtIndex(
-										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos() + 1))) {
-							PizzaKid.this.map.getPlayer().moveDown();
-						}
-					}
-					if (ke.getCode() == KeyCode.D) {
-						if (!map.getHasHouseAtIndex(
-								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) + 1)
-								&& !map.getHasObstacleAtIndex(
-										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) + 1)) {
-							PizzaKid.this.map.getPlayer().moveRight();
-						}
-
-					}
-					if (ke.getCode() == KeyCode.A) {
-						if (!map.getHasHouseAtIndex(
-								map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) - 1)
-								&& !map.getHasObstacleAtIndex(
-										map.getPlayer().getHorzPos() + 10 * (map.getPlayer().getVertPos()) - 1)) {
-							PizzaKid.this.map.getPlayer().moveLeft();
-						}
-					}
-				}
-				System.out.println("Vert Pos: " + map.getPlayer().getVertPos());
-				System.out.println("Horz Pos: " + map.getPlayer().getHorzPos());
-			}
+				
 		});
 
 //		AnimationTimer timer = new AnimationTimer() {
