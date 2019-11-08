@@ -284,6 +284,8 @@ public class PizzaKid extends Application {
 
 			public void handle(KeyEvent ke) {
 				
+			}
+				
 		});
 
 //		AnimationTimer timer = new AnimationTimer() {
