@@ -25,6 +25,15 @@ public class Avatar {
 		pizzaDelivered = false;
 	}
 
+	public Avatar(Avatar player) {
+		this.tipMoney = player.tipMoney;
+		this.strikeCount = player.strikeCount;
+		this.vertPos = player.vertPos;
+		this.direction = player.direction;
+		this.horzPos = player.horzPos; // sets initial position of avatar to (0, 0)
+		this.pizzaDelivered = player.pizzaDelivered;
+	}
+
 	public void setVertPos(int i) // sets the avatar's vertical position
 	{
 		if (i >= 0 && i < 20) {
