@@ -1,21 +1,11 @@
 
 public class PizzaKid {
 	
+	public static Map map;
+	
 	public static void main(String[] args) {
-		Tile[][] tiles = createTilesFor12();
-		for(int i = 0; i < 12; i++) {
-			for(int j = 0; j < 12; j++) {
-				// trees
-				if(tiles[i][j] instanceof Trees) {
-					System.out.print("|T|");
-				} else if(tiles[i][j] instanceof House) {
-					System.out.print("|H|");
-				} else if(tiles[i][j] instanceof Road) {
-					System.out.print("| |");
-				}
-			}
-			System.out.println();
-		}
+		map = new Map(new Avatar(), 12, createTilesFor12());
+		map.displayMapToConsople();
 	}
 	
 	/**

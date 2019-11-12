@@ -1,14 +1,3 @@
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Random;
-
-import com.sun.prism.paint.Color;
-
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 
 public class Map {
 
@@ -16,13 +5,13 @@ public class Map {
 	Tile tiles[][];
 	int size;
 
-	public Map(int size, Tile tiles[][]) {
-		player = new Avatar();
-		this.size = size;
-		this.tiles = tiles;
+	public Map(Avatar player, int size, Tile tiles[][]) {
+		setPlayer(player);
+		setSize(size);
+		setTiles(tiles);
 	}
 
-	//getters and setters
+	//getters
 	public int getSize() {
 		return size;
 	}
@@ -42,8 +31,9 @@ public class Map {
 		return player2;
 	}
 	
+	//setters
 	public void setSize(int size) {
-
+		this.size = size;
 	}
 
 	public void setTiles(Tile[][] tiles2) {
@@ -60,4 +50,26 @@ public class Map {
 		player = player2;
 	}
 	
+	/**
+	 * displays the map to the console
+	 */
+	public void displayMapToConsople() {
+		for(int i = 0; i < 12; i++) {
+			for(int j = 0; j < 12; j++) {
+				// trees
+				if(tiles[i][j] instanceof Trees) {
+					System.out.print("|T |");
+				} else if(tiles[i][j] instanceof House) {
+					System.out.print("|H |");
+				} else if(tiles[i][j] instanceof Pothole) {
+					System.out.print("|X |");
+				} else if(tiles[i][j] instanceof Customer) {
+					System.out.print("|H'|");
+				} else if(tiles[i][j] instanceof Road) {
+					System.out.print("|  |");
+				}
+			}
+			System.out.println();
+		}
+	}
 }
