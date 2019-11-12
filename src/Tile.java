@@ -5,7 +5,7 @@
  * House, Obstacle, and Road classes extend this abstract class.
  */
 
-public abstract class Tile extends Map
+public abstract class Tile
 {
 	
 }
