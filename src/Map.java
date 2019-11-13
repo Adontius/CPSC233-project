@@ -107,6 +107,9 @@ public class Map {
 		tiles[randomHouseRowPosition][randomHouseColPosition] = new Customer();
 	}
 	
+	/**
+	 * turns the customer back into a house - used after delivering pizza
+	 */
 	public void removeCustomer() {
 		for (int i = 0; i < 12; i++) {
 			for (int j = 0; j < 12; j++) {
