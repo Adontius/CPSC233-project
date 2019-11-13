@@ -5,32 +5,32 @@ public class PizzaKid {
 	
 	public static void main(String[] args) {
 		Avatar testPlayer = new Avatar();
-		testPlayer.setHorzPos(6);
-		testPlayer.setVertPos(5);
+		testPlayer.setRow(6);
+		testPlayer.setCol(5);
 		map = new Map(testPlayer, 12, createTilesFor12());
 		map.displayMapToConsople();
-		System.out.println(checkIfValidMove(4));
+		System.out.println(checkIfValidMove(3));
 	}
 	
-//	public void generateCustomer() {
-//		
-//	}
+	public void generateCustomer() {
+		
+	}
 	
 	/**
 	 * checks the direction that the player is going and returns the object that is in it
 	 * @param direction - int value that represents the direction that the player is going
 	 * @return Tile - The object that is in the surroundings
 	 */
-	public Tile checkSurroundings(int direction) {
+	public static Tile checkSurroundings(int direction) {
 		// direction: 0 - stop, 1 - up, 2 - left, 3 - down, 4 - right
 		if(direction == 1) {
-			return map.getTiles()[map.getPlayer().getHorzPos() - 1][map.getPlayer().getVertPos()];
+			return map.getTiles()[map.getPlayer().getRow() - 1][map.getPlayer().getCol()];
 		} else if(direction == 2) {
-			return map.getTiles()[map.getPlayer().getHorzPos()][map.getPlayer().getVertPos() - 1];
+			return map.getTiles()[map.getPlayer().getRow()][map.getPlayer().getCol() - 1];
 		} else if(direction == 3) {
-			return map.getTiles()[map.getPlayer().getHorzPos() + 1][map.getPlayer().getVertPos()];
+			return map.getTiles()[map.getPlayer().getRow() + 1][map.getPlayer().getCol()];
 		} else if(direction == 4) {
-			return map.getTiles()[map.getPlayer().getHorzPos()][map.getPlayer().getVertPos() + 1];
+			return map.getTiles()[map.getPlayer().getRow()][map.getPlayer().getCol() + 1];
 		} else {
 			return null;
 		}
@@ -48,10 +48,10 @@ public class PizzaKid {
 	 * @param direction - int value that represents the direction that the player is going
 	 * @return boolean - true if the move is valid, false if otherwise
 	 */
-	public boolean checkIfValidMove(int direction) {
+	public static boolean checkIfValidMove(int direction) {
 		// direction: 0 - stop, 1 - up, 2 - left, 3 - down, 4 - right
 		if(direction == 1) {
-			if(map.getPlayer().getHorzPos() > 0) {
+			if(map.getPlayer().getRow() > 0) {
 				if(checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else {
@@ -61,7 +61,7 @@ public class PizzaKid {
 				return false;
 			}
 		} else if(direction == 2) {
-			if(map.getPlayer().getVertPos() > 0) {
+			if(map.getPlayer().getCol() > 0) {
 				if(checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else {
@@ -71,7 +71,7 @@ public class PizzaKid {
 				return false;
 			}
 		} else if(direction == 3) {
-			if(map.getPlayer().getHorzPos() < map.getSize() - 1) {
+			if(map.getPlayer().getRow() < map.getSize() - 1) {
 				if(checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else {
@@ -81,7 +81,7 @@ public class PizzaKid {
 				return false;
 			}
 		} else if(direction == 4) {
-			if(map.getPlayer().getVertPos() < map.getSize() - 1) {
+			if(map.getPlayer().getCol() < map.getSize() - 1) {
 				if(checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else {

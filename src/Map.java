@@ -58,7 +58,7 @@ public class Map {
 			for(int j = 0; j < 12; j++) {
 				// trees
 
-				if(i == getPlayer().getHorzPos() && j == getPlayer().getVertPos()) {
+				if(i == getPlayer().getRow() && j == getPlayer().getCol()) {
 					System.out.print("|^ |");
 				} else if(tiles[i][j] instanceof Trees) {
 					System.out.print("|T |");

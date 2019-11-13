@@ -8,8 +8,8 @@
 public class Avatar {
 	private int tipMoney; // counter for amount of tip money the avatar has accumulated. Has setter and getter.
 	public int strikeCount; // counter for number of strikes the avatar has accummulated. Has setter and getter.
-	public int vertPos; // vertical position of avatar (y axis). Has setter and getter.
-	public int horzPos; // horizontal position of avatar (x axis). Has setter and getter.
+	public int col; // vertical position of avatar (y axis). Has setter and getter.
+	public int row; // horizontal position of avatar (x axis). Has setter and getter.
 	public boolean pizzaDelivered; // booelan to store whether pizza has been delivered (true) or not (false). Has setter and getter.
 	
 	// 0 - stop, 1 - up, 2 - left, 3 - down, 4 - right
@@ -19,66 +19,66 @@ public class Avatar {
 		// initializes avatar stats at zero
 		tipMoney = 0;
 		strikeCount = 0;
-		vertPos = 0;
+		col = 0;
 		direction = 0;
-		horzPos = 0; // sets initial position of avatar to (0, 0)
+		row = 0; // sets initial position of avatar to (0, 0)
 		pizzaDelivered = false;
 	}
 
 	public Avatar(Avatar player) {
 		this.tipMoney = player.tipMoney;
 		this.strikeCount = player.strikeCount;
-		this.vertPos = player.vertPos;
+		this.col = player.col;
 		this.direction = player.direction;
-		this.horzPos = player.horzPos; // sets initial position of avatar to (0, 0)
+		this.row = player.row; // sets initial position of avatar to (0, 0)
 		this.pizzaDelivered = player.pizzaDelivered;
 	}
 
-	public void setVertPos(int i) // sets the avatar's vertical position
+	public void setCol(int i) // sets the avatar's vertical position
 	{
 		if (i >= 0 && i < 20) {
-			this.vertPos = i;
+			this.col = i;
 		}
 	}
 
-	public void setHorzPos(int i) // sets the avatar's horizontal position
+	public void setRow(int i) // sets the avatar's horizontal position
 	{
 		if (i >= 0 && i < 20) {
-			this.horzPos = i;
+			this.row = i;
 		}
 	}
 
-	public int getVertPos()// returns the vertical position of the avatar
+	public int getCol()// returns the vertical position of the avatar
 	{
-		return this.vertPos;
+		return this.col;
 	}
 
-	public int getHorzPos()// returns the horizontal position of the avatar
+	public int getRow()// returns the horizontal position of the avatar
 	{
-		return this.horzPos;
+		return this.row;
 	}
 
 	public void moveUp() // moves avatar one unit up (y + 1)
 	{
-		if (vertPos > 0) {
-			vertPos -= 1;
+		if (col > 0) {
+			col -= 1;
 		}
 	}
 
 	public void moveDown() // moves avatar one unit down (y - 1)
 	{
-		vertPos += 1;
+		col += 1;
 	}
 
 	public void moveRight()// moves avatar one unit right (x + 1)
 	{
-		horzPos += 1;
+		row += 1;
 	}
 
 	public void moveLeft()// moves avatar one unit left (x - 1)
 	{
-		if (horzPos > 0) {
-			horzPos -= 1;
+		if (row > 0) {
+			row -= 1;
 		}
 	}
 
