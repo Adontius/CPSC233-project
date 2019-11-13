@@ -4,5 +4,5 @@
  */
 public class House extends Tile
 {
-
+	boolean hasOrder = false;
 }

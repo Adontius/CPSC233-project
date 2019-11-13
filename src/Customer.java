@@ -10,5 +10,7 @@
 
 public class Customer extends House 
 {
-
+	public Customer() {
+		super.hasOrder = true;
+	}
 }
