@@ -53,32 +53,6 @@ public class Map {
 	}
 
 	/**
-	 * displays the map to the console
-	 */
-	public void displayMapToConsople() {
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 12; j++) {
-				// trees
-
-				if (i == getPlayer().getRow() && j == getPlayer().getCol()) {
-					System.out.print("|^ |");
-				} else if (tiles[i][j] instanceof Trees) {
-					System.out.print("|T |");
-				} else if (tiles[i][j] instanceof Pothole) {
-					System.out.print("|X |");
-				} else if (tiles[i][j] instanceof Customer) {
-					System.out.print("|**|");
-				} else if (tiles[i][j] instanceof House) {
-					System.out.print("|H |");
-				} else if (tiles[i][j] instanceof Road) {
-					System.out.print("|  |");
-				}
-			}
-			System.out.println();
-		}
-	}
-
-	/**
 	 * generates a customer by doing the following:
 	 * - creating arraylists of row numbers and column numbers, with each index representing a house
 	 * - adding existing houses to the arraylists
@@ -105,6 +79,7 @@ public class Map {
 		int randomHouseColPosition = colNumbers.get(randInt);
 		
 		tiles[randomHouseRowPosition][randomHouseColPosition] = new Customer();
+		player.setPizzaDelivered(false);
 	}
 	
 	/**
@@ -120,6 +95,7 @@ public class Map {
 				}
 			}
 		}
+		player.deliverPizza();
 	}
 
 }

@@ -1,18 +1,10 @@
+import com.sun.org.apache.xpath.internal.SourceTree;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 public class PizzaKid {
 
 	public static Map map;
 
-	public static void main(String[] args) {
-		Avatar testPlayer = new Avatar();
-		testPlayer.setRow(6);
-		testPlayer.setCol(5);
-		map = new Map(testPlayer, 12, createTilesFor12());
-		map.generateCustomer();
-		map.displayMapToConsople();
-		map.removeCustomer();
-		System.out.println(checkIfValidMove(3));
-	}
 
 	/**
 	 * checks the direction that the player is going and returns the object that is
@@ -42,7 +34,7 @@ public class PizzaKid {
 	 * cancelling timer
 	 */
 	public void deliverPizza() {
-		
+		map.removeCustomer();
 	}
 
 	/**
@@ -97,39 +89,19 @@ public class PizzaKid {
 		}
 		return false;
 	}
-
-	/**
-	 * hard coding : creates the tiles needed for the map layout of a 12x12 map
-	 * 
-	 * @return - a 2d array of tiles
-	 */
-	public static Tile[][] createTilesFor12() {
-		Tile[][] tiles = new Tile[12][12];
-
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 12; j++) {
-				// trees
-				if (i == 0 || j == 0 || i == 11 || j == 11) {
-					tiles[i][j] = new Trees();
-				} else if (j == 1 && i > 2 && i < 11) {
-					tiles[i][j] = new House();
-				} else if ((j == 4 || j == 5) && i > 6 && i < 11) {
-					tiles[i][j] = new House();
-				} else if ((j == 8 || j == 9) && i > 7 && i < 11) {
-					tiles[i][j] = new House();
-				} else if ((i == 4 || i == 5) && j > 3 && j < 8) {
-					tiles[i][j] = new House();
-				} else if (i == 1 && j > 3 && j < 11) {
-					tiles[i][j] = new House();
-				} else if (j == 10 && i > 3 && i < 6) {
-					tiles[i][j] = new House();
-				} else {
-					tiles[i][j] = new Road();
-				}
-			}
-		}
-
-		return tiles;
+	
+	
+	public static void move(int direction) {
+		if(direction == 1) {
+			map.getPlayer().moveUp();
+		} else if(direction == 2) {
+			map.getPlayer().moveLeft();
+		} else if(direction == 3) {
+			map.getPlayer().moveDown();
+			System.out.println("moved down");
+		} else if(direction == 4) {
+			map.getPlayer().moveRight();
+		} 
 	}
-
+	
 }

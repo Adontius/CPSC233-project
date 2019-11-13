@@ -60,9 +60,7 @@ public class Avatar {
 
 	public void moveUp() // moves avatar one unit up (y + 1)
 	{
-		if (col > 0) {
-			col -= 1;
-		}
+		col -= 1;
 	}
 
 	public void moveDown() // moves avatar one unit down (y - 1)
@@ -77,9 +75,7 @@ public class Avatar {
 
 	public void moveLeft()// moves avatar one unit left (x - 1)
 	{
-		if (row > 0) {
-			row -= 1;
-		}
+		row -= 1;
 	}
 
 	public boolean deliverPizza() // when invoked, sets pizzaDelivered to true to signal that a pizza has been
