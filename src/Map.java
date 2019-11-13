@@ -1,12 +1,12 @@
 
 public class Map {
 
-	Avatar player;
-	Tile tiles[][];
-	int size;
+	private Avatar player;
+	private Tile tiles[][];
+	private int size;
 
 	public Map(Avatar player, int size, Tile tiles[][]) {
-		setPlayer(player);
+		this.player = player;
 		setSize(size);
 		setTiles(tiles);
 	}
@@ -57,7 +57,10 @@ public class Map {
 		for(int i = 0; i < 12; i++) {
 			for(int j = 0; j < 12; j++) {
 				// trees
-				if(tiles[i][j] instanceof Trees) {
+
+				if(i == getPlayer().getHorzPos() && j == getPlayer().getVertPos()) {
+					System.out.print("|^ |");
+				} else if(tiles[i][j] instanceof Trees) {
 					System.out.print("|T |");
 				} else if(tiles[i][j] instanceof House) {
 					System.out.print("|H |");
