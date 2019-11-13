@@ -19,9 +19,9 @@ public class Avatar {
 		// initializes avatar stats at zero
 		tipMoney = 0;
 		strikeCount = 0;
-		col = 0;
+		col = 1;
 		direction = 0;
-		row = 0; // sets initial position of avatar to (0, 0)
+		row = 1; // sets initial position of avatar to (1, 1)
 		pizzaDelivered = false;
 	}
 
