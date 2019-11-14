@@ -21,7 +21,7 @@ public class Map
 		return mapSize;
 	}
 
-	public Tile[][] getTiles() //
+	public Tile[][] getTiles() 
 	{
 		Tile[][] tiles2 = new Tile[tiles.length][tiles.length];
 		for (int i = 0; i < tiles.length; i++) 
@@ -34,7 +34,8 @@ public class Map
 		return tiles2;
 	}
 
-	public Avatar getPlayer() {
+	public Avatar getPlayer() 
+	{
 		return player;
 	}
 	
