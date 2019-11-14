@@ -18,10 +18,13 @@ public class Map {
 		return size;
 	}
 
-	public Tile[][] getTiles() {
+	public Tile[][] getTiles() //creates 2D array of tiles (i x j)
+	{
 		Tile[][] tiles2 = new Tile[tiles.length][tiles.length];
-		for (int i = 0; i < tiles.length; i++) {
-			for (int j = 0; j < tiles.length; j++) {
+		for (int i = 0; i < tiles.length; i++) 
+		{
+			for (int j = 0; j < tiles.length; j++) 
+			{
 				tiles2[i][j] = tiles[i][j];
 			}
 		}

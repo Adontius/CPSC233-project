@@ -74,8 +74,13 @@ public class Avatar {
 		row -= 1;
 	}
 
-	public boolean deliverPizza() // when invoked, sets pizzaDelivered to true to signal that a pizza has been
-									// delivered. No count of pizzas required
+	
+	/**
+	 * deliverPizza(): when invoked, sets pizzaDelivered to true to signal that a pizza has been
+	 * delivered. Invoked by player using a button or click. No count of pizzas required.
+	 * @return returns Boolean of whether pizza has been delivered (true) or not (false)
+	 */
+	public boolean deliverPizza() 
 	{
 		pizzaDelivered = true;
 		return this.pizzaDelivered;
