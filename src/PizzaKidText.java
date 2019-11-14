@@ -68,14 +68,16 @@ public class PizzaKidText extends PizzaKid
 			
 			do 
 			{
-				System.out.println("Tip money: $" + collectibles.getTipMoney());
+				System.out.println("Tip money: $" + collectibles.getTipMoney());//alice edited this to replace map reference with collectibles reference
 				System.out.println("Move: " + counter);
-				System.out.println("Strikes: " + collectibles.getStrikeCount());
-				if(map.getPlayer().getPizzaDelivered()) 
+				System.out.println("Strikes: " + collectibles.getStrikeCount());//'''
+				
+				if(map.getPlayer().getPizzaDelivered() == true) //alice edited this to add " == true"
 				{
 					map.generateCustomer();
+					map.getPlayer().setPizzaDelivered(false); //resets pizzaDelivered after player delivers pizza to a customer
 				}
-				displayMapToConsople();
+				displayMapToConsole();
 				num = input.nextLine().toLowerCase();
 				
 
@@ -158,7 +160,7 @@ public class PizzaKidText extends PizzaKid
 	/**
 	 * displays the map to the console
 	 */
-	public static void displayMapToConsople() {
+	public static void displayMapToConsole() {
 		for (int i = 0; i < 12; i++) {
 			for (int j = 0; j < 12; j++) {
 				// trees
