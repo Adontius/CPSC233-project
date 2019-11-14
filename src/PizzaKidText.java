@@ -1,21 +1,27 @@
+/* This class displays/plays the text-based version of the PizzaKid game. It uses logic from the parent PizzaKid class.
+ * 
+ */
 import java.util.Scanner;
 
 public class PizzaKidText extends PizzaKid 
 {
 
+	public static Collectibles collectibles = new Collectibles(0,0);
+
 	private static Scanner input = new Scanner(System.in);
 	
 	public static void main(String[] args) 
 	{
-		map = new Map(new Avatar(), 12, createTilesFor12());
+		Map map = new Map(new Avatar(), 12, createTilesFor12());
+		Collectibles collectibles = new Collectibles(0,0);
 		play();
 //		map.generateCustomer();
-//		map.displayMapToConsople();
+//		map.displayMapToConsole();
 //		map.removeCustomer();
 	}
 
 	/**
-	 * The method where the player plays the game, shows:
+	 * The method where the player plays the game. Invokes other methods to display the appropriate 'screens':
 	 * - Start Screen
 	 * - Play Screen
 	 */
@@ -58,17 +64,15 @@ public class PizzaKidText extends PizzaKid
 			System.out.println();
 			int counter = 0;
 			
-			Collectibles.setTipMoney(0);///////
-			map.getPlayer().setTipMoney(0);
-			map.getPlayer().setStrikeCount(0);
 			map.generateCustomer();
 			
 			do 
 			{
-				System.out.println("Tip money: $" + map.getPlayer().getTipMoney());
+				System.out.println("Tip money: $" + collectibles.getTipMoney());
 				System.out.println("Move: " + counter);
-				System.out.println("Strikes: " + map.getPlayer().getStrikeCount());
-				if(map.getPlayer().getPizzaDelivered()) {
+				System.out.println("Strikes: " + collectibles.getStrikeCount());
+				if(map.getPlayer().getPizzaDelivered()) 
+				{
 					map.generateCustomer();
 				}
 				displayMapToConsople();
