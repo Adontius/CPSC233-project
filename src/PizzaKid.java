@@ -1,9 +1,13 @@
 import com.sun.org.apache.xpath.internal.SourceTree;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
-public class PizzaKid {
+public class PizzaKid 
+{
 
 	public static Map map;
+	
+	public Collectibles collectibles = new Collectibles(0, 0); 
+	//intiates new player collectibles, sets tipmoney to 0 and strike count to 0
 
 
 	/**

@@ -1,21 +1,24 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Map {
+public class Map 
+{
 
-	private Avatar player;
-	private Tile tiles[][];
-	private int size;
+	public Avatar player; //initiates new Avatar object called player
+	public Tile tiles[][]; //creates new grid of tiles to play on
+	public int mapSize; //int of the length/width of the map
 
-	public Map(Avatar player, int size, Tile tiles[][]) {
+	public Map(Avatar player, int size, Tile tiles[][]) 
+	{
 		this.player = player;
-		setSize(size);
+		setSize(mapSize);
 		setTiles(tiles);
 	}
 
 	// getters
-	public int getSize() {
-		return size;
+	public int getSize() 
+	{
+		return mapSize;
 	}
 
 	public Tile[][] getTiles() //creates 2D array of tiles (i x j)
@@ -32,9 +35,9 @@ public class Map {
 	}
 
 	public Avatar getPlayer() {
-		Avatar player2 = new Avatar(player);
-		return player2;
+		return player;
 	}
+	
 
 	// setters
 	public void setSize(int size) {

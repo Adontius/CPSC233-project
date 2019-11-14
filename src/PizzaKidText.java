@@ -1,10 +1,12 @@
 import java.util.Scanner;
 
-public class PizzaKidText extends PizzaKid {
+public class PizzaKidText extends PizzaKid 
+{
 
 	private static Scanner input = new Scanner(System.in);
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		map = new Map(new Avatar(), 12, createTilesFor12());
 		play();
 //		map.generateCustomer();
@@ -17,23 +19,28 @@ public class PizzaKidText extends PizzaKid {
 	 * - Start Screen
 	 * - Play Screen
 	 */
-	public static void play() {
+	public static void play() 
+	{
 		showStartScreen();
 		showPlayScreen();
 	}
 
-	public static void showStartScreen() {
+	public static void showStartScreen() 
+	{
 		System.out.println("Welcome to PizzaKid!");
 		String num = "";
-		do {
+		do 
+		{
 			System.out.println("Enter 1 to Start Playing");
 			num = input.nextLine();
-		} while (!num.equals("1"));
+		} 
+		while (!num.equals("1"));
 	}
 	
 	public static void showPlayScreen() {
 		String num = "";
-		do {
+		do 
+		{
 			System.out.println();
 			System.out.println("You are ^. Houses are H. House with order is O. Obstacles are X");
 			System.out.println("Deliver a Pizza, earn tips!");
@@ -50,10 +57,14 @@ public class PizzaKidText extends PizzaKid {
 			System.out.println("Good luck!");
 			System.out.println();
 			int counter = 0;
+			
+			Collectibles.setTipMoney(0);///////
 			map.getPlayer().setTipMoney(0);
 			map.getPlayer().setStrikeCount(0);
 			map.generateCustomer();
-			do {
+			
+			do 
+			{
 				System.out.println("Tip money: $" + map.getPlayer().getTipMoney());
 				System.out.println("Move: " + counter);
 				System.out.println("Strikes: " + map.getPlayer().getStrikeCount());
