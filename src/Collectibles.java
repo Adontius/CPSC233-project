@@ -1,5 +1,5 @@
 /* Collectibles acts as a tracker for TipMoney and Strikes accumulated by the player.
- * It contains methods to add strikes and add tip money (setter methods), as well as getter methods for those.
+ * It contains setternmethods to add strikes and add tip money as well as their respective getter methods.
  */
 
 public class Collectibles
