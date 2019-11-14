@@ -92,8 +92,12 @@ public class Avatar {
 		this.pizzaDelivered = pizzaDelivered;
 	}
 
-	public boolean getPizzaDelivered()// getter method that returns whether the pizza has been delivered (true) or not
-										// (false)
+	
+	/*
+	 * getter method that returns Bool on whether the pizza has been delivered (true) 
+	 * or not (false)
+	 */
+	public boolean getPizzaDelivered()
 	{
 		return this.pizzaDelivered;
 	}
