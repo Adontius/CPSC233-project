@@ -6,8 +6,7 @@
 //important note: y-axis is flipped, so decreasing vertPos value means avatar moves up and vice versa
 
 public class Avatar {
-	private int tipMoney; // counter for amount of tip money the avatar has accumulated. Has setter and getter.
-	public int strikeCount; // counter for number of strikes the avatar has accummulated. Has setter and getter.
+	
 	public int col; // vertical position of avatar (y axis). Has setter and getter.
 	public int row; // horizontal position of avatar (x axis). Has setter and getter.
 	public boolean pizzaDelivered; // booelan to store whether pizza has been delivered (true) or not (false). Has setter and getter.
@@ -17,17 +16,14 @@ public class Avatar {
 	
 	public Avatar() {
 		// initializes avatar stats at zero
-		tipMoney = 0;
-		strikeCount = 0;
-		col = 1;
-		direction = 0;
-		row = 1; // sets initial position of avatar to (1, 1)
-		pizzaDelivered = false;
+		this.col = 1;
+		this.direction = 0;
+		this.row = 1; // sets initial position of avatar to (1, 1)
+		this.pizzaDelivered = false;
 	}
 
 	public Avatar(Avatar player) {
-		this.tipMoney = player.tipMoney;
-		this.strikeCount = player.strikeCount;
+		
 		this.col = player.col;
 		this.direction = player.direction;
 		this.row = player.row; // sets initial position of avatar to (0, 0)
@@ -96,37 +92,11 @@ public class Avatar {
 	{
 		return this.pizzaDelivered;
 	}
-
-	public void receiveTip(int tipAmount)// adds the customer's tip to the avatar's tip money balance
-	{
-		tipMoney += tipAmount;
-	}
-
-	public void setTipMoney(int tipMoney)// setter method for tipMoney
-	{
-		this.tipMoney = tipMoney;
-	}
-
-	public int getTipMoney() {
-		return this.tipMoney;
-	}
-
-	public void addStrike()// adds a strike to the avatar' strike count.
-	{
-		strikeCount += 1;
-	}
-
-	public void setStrikeCount(int strikeCount)// setter method to set the number of strikes the avatar has.
-	{
-		this.strikeCount = strikeCount;
-	}
-
-	public int getStrikeCount() {
-		return this.strikeCount;
-	}
 	
-	public void setDirection(int i) {
-		if (i >= 0 && i <= 4) {
+	public void setDirection(int i) //allows player's facing-direction to be set to either 0, 1, 2, 3, or 4 (stop, up, left, down, right)
+	{
+		if (i >= 0 && i <= 4) 
+		{
 			direction = i;
 		}
 	}
