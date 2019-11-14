@@ -21,7 +21,7 @@ public class Map
 		return mapSize;
 	}
 
-	public Tile[][] getTiles() //creates 2D array of tiles (i x j)
+	public Tile[][] getTiles() //
 	{
 		Tile[][] tiles2 = new Tile[tiles.length][tiles.length];
 		for (int i = 0; i < tiles.length; i++) 
@@ -41,7 +41,7 @@ public class Map
 
 	// setters
 	public void setSize(int size) {
-		this.size = size;
+		this.mapSize = size;
 	}
 
 	public void setTiles(Tile[][] tiles2) {
