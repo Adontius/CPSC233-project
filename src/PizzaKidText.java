@@ -13,9 +13,6 @@ public class PizzaKidText
 	{
 		game.map = new Map(new Avatar(), 12, createTilesFor12());
 		play();
-//		map.generateCustomer();
-//		map.displayMapToConsole();
-//		map.removeCustomer();
 	}
 
 	/**
