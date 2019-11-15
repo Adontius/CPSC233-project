@@ -3,14 +3,15 @@
  */
 import java.util.Scanner;
 
-public class PizzaKidText extends PizzaKid 
+public class PizzaKidText 
 {
 
+	private static PizzaKid game = new PizzaKid();
 	private static Scanner input = new Scanner(System.in);
 	
 	public static void main(String[] args) 
 	{
-		map = new Map(new Avatar(), 12, createTilesFor12());
+		game.map = new Map(new Avatar(), 12, createTilesFor12());
 		play();
 //		map.generateCustomer();
 //		map.displayMapToConsole();
@@ -72,28 +73,28 @@ public class PizzaKidText extends PizzaKid
 			int counter = 0;
 			
 			// generate initial customer and obstacles
-			map.generateCustomer();
-			map.generateObstacles();
+			game.map.generateCustomer();
+			game.map.generateObstacles();
 			
 			do 
 			{
-				System.out.println("Tip money: $" + collectibles.getTipMoney());//alice edited this to replace map reference with collectibles reference
+				System.out.println("Tip money: $" + game.collectibles.getTipMoney());//alice edited this to replace map reference with collectibles reference
 				System.out.println("Move: " + counter);
-				System.out.println("Strikes: " + collectibles.getStrikeCount());//'''
+				System.out.println("Strikes: " + game.collectibles.getStrikeCount());//'''
 				
-				if(map.getPlayer().getPizzaDelivered() == true) //alice edited this to add " == true"
+				if(game.map.getPlayer().getPizzaDelivered() == true) //alice edited this to add " == true"
 				{
-					map.generateCustomer();
-					map.getPlayer().setPizzaDelivered(false); //resets pizzaDelivered after player delivers pizza to a customer.
+					game.map.generateCustomer();
+					game.map.getPlayer().setPizzaDelivered(false); //resets pizzaDelivered after player delivers pizza to a customer.
 				}
 				
 				// when the player hits an obstacle, the obstacles are removed and regenerated and the player is put back to starting position
-				if(map.getPlayer().getHitObstacle() == true) {
-					map.removeObstacle();
-					map.getPlayer().setHitObstacle(false);
-					map.generateObstacles();
-					map.getPlayer().setCol(1);
-					map.getPlayer().setRow(1);
+				if(game.map.getPlayer().getHitObstacle() == true) {
+					game.map.removeObstacle();
+					game.map.getPlayer().setHitObstacle(false);
+					game.map.generateObstacles();
+					game.map.getPlayer().setCol(1);
+					game.map.getPlayer().setRow(1);
 				}
 				
 				displayMapToConsole();
@@ -103,47 +104,47 @@ public class PizzaKidText extends PizzaKid
 				
 				if(num.equals("w")) 
 				{
-					if(checkIfValidMove(1)) 
+					if(game.checkIfValidMove(1)) 
 					{
-						move(1);
+						game.move(1);
 					}
 				} 
 				else if(num.equals("a")) 
 				{
-					if(checkIfValidMove(2)) 
+					if(game.checkIfValidMove(2)) 
 					{
-						move(2);
+						game.move(2);
 					}
 				} 
 				else if(num.equals("s")) 
 				{
-					if(checkIfValidMove(3)) 
+					if(game.checkIfValidMove(3)) 
 					{
-						move(3);
+						game.move(3);
 					}
 				} 
 				else if(num.equals("d")) 
 				{
-					if(checkIfValidMove(4)) 
+					if(game.checkIfValidMove(4)) 
 					{
-						move(4);
+						game.move(4);
 					}
 				}
 				counter++;
 				
 			} 
-			while (!num.equals("0") && counter <= 100 && collectibles.getStrikeCount() < 3); //alice edited this to change map. to collectibles.
+			while (!num.equals("0") && counter <= 100 && game.collectibles.getStrikeCount() < 3); //alice edited this to change map. to collectibles.
 			System.out.println("Game Over");
 			
 			if (counter > 100) //if player has made more than 100 moves (i.e. on the 101th move), ends the game
 			{
 				System.out.println("Your moves have ended!");
 			} 
-			else if (collectibles.getStrikeCount() >= 3) //alice edited this to change map. to collectibles.
+			else if (game.collectibles.getStrikeCount() >= 3) //alice edited this to change map. to collectibles.
 			{
 				System.out.println("You got 3 strikes!");
 			}
-			System.out.println("Total tip: $" + collectibles.getTipMoney()); //alice edited this to change map. to collectibles.
+			System.out.println("Total tip: $" + game.collectibles.getTipMoney()); //alice edited this to change map. to collectibles.
 			System.out.println();
 			System.out.println("Enter 0 to quit");
 			System.out.println("Enter anything else to continue playing");
@@ -196,17 +197,17 @@ public class PizzaKidText extends PizzaKid
 			for (int j = 0; j < 12; j++) {
 				// trees
 
-				if (i == map.getPlayer().getRow() && j == map.getPlayer().getCol()) {
+				if (i == game.map.getPlayer().getRow() && j == game.map.getPlayer().getCol()) {
 					System.out.print("|^ |");
-				} else if (map.getTiles()[i][j] instanceof Trees) {
+				} else if (game.map.getTiles()[i][j] instanceof Trees) {
 					System.out.print("|T |");
-				} else if (map.getTiles()[i][j] instanceof Pothole) {
+				} else if (game.map.getTiles()[i][j] instanceof Pothole) {
 					System.out.print("|X |");
-				} else if (map.getTiles()[i][j] instanceof Customer) {
+				} else if (game.map.getTiles()[i][j] instanceof Customer) {
 					System.out.print("|**|");
-				} else if (map.getTiles()[i][j] instanceof House) {
+				} else if (game.map.getTiles()[i][j] instanceof House) {
 					System.out.print("|H |");
-				} else if (map.getTiles()[i][j] instanceof Road) {
+				} else if (game.map.getTiles()[i][j] instanceof Road) {
 					System.out.print("|  |");
 				}
 			}

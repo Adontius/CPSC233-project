@@ -4,9 +4,9 @@ import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 public class PizzaKid 
 {
 
-	public static Map map;
+	public Map map;
 	
-	public static Collectibles collectibles = new Collectibles(0, 0); 
+	public Collectibles collectibles = new Collectibles(0, 0); 
 	//intiates new player collectibles, sets tipmoney to 0 and strike count to 0
 
 
@@ -18,7 +18,7 @@ public class PizzaKid
 	 * @return Tile 
 	 *   - The object that is in the surroundings
 	 */
-	public static Tile checkSurroundings(int direction) {
+	public Tile checkSurroundings(int direction) {
 		// direction definitions: 0: Stop, 1: Up, 2: Left, 3: Down, 4: Right
 		
 		if (direction == 1)//checks tile above player
@@ -47,7 +47,7 @@ public class PizzaKid
 	 * cancelling timer
 	 * Note: should be overriden since text and gui are different
 	 */
-	public static void deliverPizza() {
+	public void deliverPizza() {
 		map.removeCustomer();
 		collectibles.setTipMoney(collectibles.getTipMoney() + 5);
 	}
@@ -59,7 +59,7 @@ public class PizzaKid
 	 *            - int value that represents the direction that the player is going
 	 * @return boolean - true if the move is valid, false if otherwise
 	 */
-	public static boolean checkIfValidMove(int direction) {
+	public boolean checkIfValidMove(int direction) {
 		// direction: 0 - stop, 1 - up, 2 - left, 3 - down, 4 - right
 		if (direction == 1) {
 			if (map.getPlayer().getRow() > 0) {
@@ -134,7 +134,7 @@ public class PizzaKid
 	}
 	
 	
-	public static void move(int direction) {
+	public void move(int direction) {
 		if(direction == 1) {
 			map.getPlayer().moveUp();
 		} else if(direction == 2) {
