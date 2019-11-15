@@ -59,26 +59,41 @@ public class Map {
 	 * turning the house on the original array as a customer
 	 */
 	public void generateCustomer() {
-		ArrayList<Integer> rowNumbers = new ArrayList<Integer>(0);
-		ArrayList<Integer> colNumbers = new ArrayList<Integer>(0);
+
+		boolean hasCustomer = false;
+
+		// loops through array and checks if there is an existing customer, if not, a
+		// customer is generated
 		for (int i = 0; i < 12; i++) {
 			for (int j = 0; j < 12; j++) {
-				if (tiles[i][j] instanceof House) {
-					if (!(tiles[i][j] instanceof Customer)) {
-						rowNumbers.add(i);
-						colNumbers.add(j);
-					}
+				if (tiles[i][j] instanceof Customer) {
+					hasCustomer = true;
 				}
 			}
 		}
-		Random rand = new Random();
-		int randInt = rand.nextInt(rowNumbers.size());
 
-		int randomHouseRowPosition = rowNumbers.get(randInt);
-		int randomHouseColPosition = colNumbers.get(randInt);
+		if (hasCustomer == false) {
+			ArrayList<Integer> rowNumbers = new ArrayList<Integer>(0);
+			ArrayList<Integer> colNumbers = new ArrayList<Integer>(0);
+			for (int i = 0; i < 12; i++) {
+				for (int j = 0; j < 12; j++) {
+					if (tiles[i][j] instanceof House) {
+						if (!(tiles[i][j] instanceof Customer)) {
+							rowNumbers.add(i);
+							colNumbers.add(j);
+						}
+					}
+				}
+			}
+			Random rand = new Random();
+			int randInt = rand.nextInt(rowNumbers.size());
 
-		tiles[randomHouseRowPosition][randomHouseColPosition] = new Customer();
-		player.setPizzaDelivered(false);
+			int randomHouseRowPosition = rowNumbers.get(randInt);
+			int randomHouseColPosition = colNumbers.get(randInt);
+
+			tiles[randomHouseRowPosition][randomHouseColPosition] = new Customer();
+			player.setPizzaDelivered(false);
+		}
 	}
 
 	/**
