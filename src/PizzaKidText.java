@@ -166,14 +166,6 @@ public class PizzaKidText extends PizzaKid
 
 		return tiles;
 	}
-	
-	/**
-	 * delivers pizza and gives tip money ($5 - standard since there is no timer)
-	 */
-	public static void deliverPizza() {
-		map.removeCustomer();
-		collectibles.setTipMoney(collectibles.getTipMoney() + 5);
-	}
 
 	/**
 	 * displays the map to the console

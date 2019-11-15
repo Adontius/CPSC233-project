@@ -48,7 +48,8 @@ public class PizzaKid
 	 * Note: should be overriden since text and gui are different
 	 */
 	public static void deliverPizza() {
-		
+		map.removeCustomer();
+		collectibles.setTipMoney(collectibles.getTipMoney() + 5);
 	}
 
 	/**
