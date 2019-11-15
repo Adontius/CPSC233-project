@@ -104,6 +104,7 @@ public class PizzaKid
 					deliverPizza();
 					return false;
 				} else if (checkSurroundings(direction) instanceof Obstacle) {
+					collectibles.addStrike();
 					map.getPlayer().setHitObstacle(true);
 					return false;
 				} else {
@@ -121,6 +122,7 @@ public class PizzaKid
 					deliverPizza();
 					return false;
 				} else if (checkSurroundings(direction) instanceof Obstacle) {
+					collectibles.addStrike();
 					map.getPlayer().setHitObstacle(true);
 					return false;
 				} else {
