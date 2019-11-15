@@ -28,6 +28,10 @@ public class PizzaKidText extends PizzaKid
 		showPlayScreen();
 	}
 
+	/**
+	 * Shows the start screen
+	 * User inputs 1 to end method (and move on to the play screen)
+	 */
 	public static void showStartScreen() 
 	{
 		System.out.println("Welcome to PizzaKid!");
@@ -40,12 +44,18 @@ public class PizzaKidText extends PizzaKid
 		while (!num.equals("1"));
 	}
 	
+	/**
+	 * Shows play screen
+	 * Inner loop = loops every time the user inputs a move - checks if move is valid, if pizza is delivered,
+	 * 		and if there are obstacles for each move
+	 * Outer loop = loops the whole game, starts the game all over again when done, until the player quits
+	 */
 	public static void showPlayScreen() {
 		String num = "";
 		do 
 		{
 			System.out.println();
-			System.out.println("You are ^. Houses are H. House with order is O. Obstacles are X");
+			System.out.println("You are ^. Houses are H. House with order is **. Obstacles are X. Trees are T");
 			System.out.println("Deliver a Pizza, earn tips!");
 			System.out.println("Earn the most tips in 100 moves!");
 			System.out.println("Hit an obstacle, earn a strike. 3 stirkes = Game Over!");

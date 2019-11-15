@@ -100,7 +100,6 @@ public class PizzaKid
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else if (checkSurroundings(direction) instanceof Customer) {
-					collectibles.addStrike();
 					deliverPizza();
 					return false;
 				} else if (checkSurroundings(direction) instanceof Obstacle) {
@@ -118,7 +117,6 @@ public class PizzaKid
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else if (checkSurroundings(direction) instanceof Customer) {
-					collectibles.addStrike();
 					deliverPizza();
 					return false;
 				} else if (checkSurroundings(direction) instanceof Obstacle) {
