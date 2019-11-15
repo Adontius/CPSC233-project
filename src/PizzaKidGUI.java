@@ -9,6 +9,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -155,14 +157,14 @@ public class PizzaKidGUI extends Application {
 		HBox footer = new HBox();
 		setFooter(footer);
 
-
 		playScreen.setTop(heading);
 		playScreen.setCenter(mapGUI);
 		playScreen.setBottom(footer);
 
+		playGame(playScreen);
+		
 	}
 
-	
 	/**
 	 * Sets the style of the play screen
 	 */
@@ -313,6 +315,50 @@ public class PizzaKidGUI extends Application {
 		}
 
 		return tiles;
+	}
+	
+	
+	
+	
+	public void playGame(BorderPane playScreen2) {
+		
+		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			
+			public void handle(KeyEvent ke) {
+				if(ke.getCode() == KeyCode.UP) 
+				{
+					if(game.checkIfValidMove(1)) 
+					{
+						game.move(1);
+					}
+				} 
+				else if(ke.getCode() == KeyCode.LEFT) 
+				{
+					if(game.checkIfValidMove(2)) 
+					{
+						game.move(2);
+					}
+				} 
+				else if(ke.getCode() == KeyCode.DOWN) 
+				{
+					System.out.println("down");
+					if(game.checkIfValidMove(3)) 
+					{
+						game.move(3);
+					}
+				} 
+				else if(ke.getCode() == KeyCode.RIGHT) 
+				{
+					if(game.checkIfValidMove(4)) 
+					{
+						game.move(4);
+					}
+				}
+			}
+			
+		});
+		
+		
 	}
 
 }
