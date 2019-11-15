@@ -80,7 +80,10 @@ public class PizzaKid
 				return false;
 			}
 		} else if (direction == 3) {
+			System.out.println("row: " + map.getPlayer().getRow());
+			System.out.println("bottom: " + (map.getSize() - 1));
 			if (map.getPlayer().getRow() < map.getSize() - 1) {
+				System.out.println("reached here");
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else {

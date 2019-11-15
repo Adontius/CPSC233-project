@@ -8,7 +8,7 @@ public class Map
 	public Tile tiles[][]; //creates new grid of tiles to play on
 	public int mapSize; //int of the length/width of the map
 
-	public Map(Avatar player, int size, Tile tiles[][]) 
+	public Map(Avatar player, int mapSize, Tile tiles[][]) 
 	{
 		this.player = player;
 		setSize(mapSize);

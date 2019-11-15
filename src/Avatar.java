@@ -56,22 +56,22 @@ public class Avatar {
 
 	public void moveUp() // moves avatar one unit up (y + 1)
 	{
-		col -= 1;
+		row -= 1;
 	}
 
 	public void moveDown() // moves avatar one unit down (y - 1)
 	{
-		col += 1;
+		row += 1;
 	}
 
 	public void moveRight()// moves avatar one unit right (x + 1)
 	{
-		row += 1;
+		col += 1;
 	}
 
 	public void moveLeft()// moves avatar one unit left (x - 1)
 	{
-		row -= 1;
+		col -= 1;
 	}
 
 	
