@@ -46,7 +46,7 @@ public class PizzaKid
 	 * delivers the pizza by removing customer order, receiving tip money, and
 	 * cancelling timer
 	 */
-	public void deliverPizza() {
+	public static void deliverPizza() {
 		map.removeCustomer();
 	}
 
@@ -63,7 +63,10 @@ public class PizzaKid
 			if (map.getPlayer().getRow() > 0) {
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
-				} else {
+				} else if (checkSurroundings(direction) instanceof Customer) {
+					deliverPizza();
+					return false;
+				}  else {
 					return false;
 				}
 			} else {
@@ -73,6 +76,9 @@ public class PizzaKid
 			if (map.getPlayer().getCol() > 0) {
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
+				} else if (checkSurroundings(direction) instanceof Customer) {
+					deliverPizza();
+					return false;
 				} else {
 					return false;
 				}
@@ -86,6 +92,9 @@ public class PizzaKid
 				System.out.println("reached here");
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
+				} else if (checkSurroundings(direction) instanceof Customer) {
+					deliverPizza();
+					return false;
 				} else {
 					return false;
 				}
@@ -96,6 +105,9 @@ public class PizzaKid
 			if (map.getPlayer().getCol() < map.getSize() - 1) {
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
+				} else if (checkSurroundings(direction) instanceof Customer) {
+					deliverPizza();
+					return false;
 				} else {
 					return false;
 				}
