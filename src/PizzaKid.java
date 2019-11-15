@@ -68,7 +68,11 @@ public class PizzaKid
 				} else if (checkSurroundings(direction) instanceof Customer) {
 					deliverPizza();
 					return false;
-				}  else {
+				} else if (checkSurroundings(direction) instanceof Obstacle) {
+					collectibles.addStrike();
+					map.getPlayer().setHitObstacle(true);
+					return false;
+				} else {
 					return false;
 				}
 			} else {
@@ -81,6 +85,10 @@ public class PizzaKid
 				} else if (checkSurroundings(direction) instanceof Customer) {
 					deliverPizza();
 					return false;
+				} else if (checkSurroundings(direction) instanceof Obstacle) {
+					collectibles.addStrike();
+					map.getPlayer().setHitObstacle(true);
+					return false;
 				} else {
 					return false;
 				}
@@ -92,7 +100,11 @@ public class PizzaKid
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else if (checkSurroundings(direction) instanceof Customer) {
+					collectibles.addStrike();
 					deliverPizza();
+					return false;
+				} else if (checkSurroundings(direction) instanceof Obstacle) {
+					map.getPlayer().setHitObstacle(true);
 					return false;
 				} else {
 					return false;
@@ -105,7 +117,11 @@ public class PizzaKid
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else if (checkSurroundings(direction) instanceof Customer) {
+					collectibles.addStrike();
 					deliverPizza();
+					return false;
+				} else if (checkSurroundings(direction) instanceof Obstacle) {
+					map.getPlayer().setHitObstacle(true);
 					return false;
 				} else {
 					return false;

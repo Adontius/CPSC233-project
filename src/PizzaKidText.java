@@ -61,7 +61,9 @@ public class PizzaKidText extends PizzaKid
 			System.out.println();
 			int counter = 0;
 			
+			// generate initial customer and obstacles
 			map.generateCustomer();
+			map.generateObstacles();
 			
 			do 
 			{
@@ -74,11 +76,20 @@ public class PizzaKidText extends PizzaKid
 					map.generateCustomer();
 					map.getPlayer().setPizzaDelivered(false); //resets pizzaDelivered after player delivers pizza to a customer.
 				}
+				
+				// when the player hits an obstacle, the obstacles are removed and regenerated and the player is put back to starting position
+				if(map.getPlayer().getHitObstacle() == true) {
+					map.removeObstacle();
+					map.getPlayer().setHitObstacle(false);
+					map.generateObstacles();
+					map.getPlayer().setCol(1);
+					map.getPlayer().setRow(1);
+				}
+				
 				displayMapToConsole();
 				
 				
 				num = input.nextLine().toLowerCase(); //direction that the player enters (W, A, S, or D)
-				System.out.println("input: " + num);
 				
 				if(num.equals("w")) 
 				{

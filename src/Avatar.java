@@ -10,6 +10,7 @@ public class Avatar {
 	public int col; // vertical position of avatar (y axis). Has setter and getter.
 	public int row; // horizontal position of avatar (x axis). Has setter and getter.
 	public boolean pizzaDelivered; // booelan to store whether pizza has been delivered (true) or not (false). Has setter and getter.
+	public boolean hitObstacle; // boolean to store whether the Avatar hit an obstacle or not
 	
 	// 0 - stop, 1 - up, 2 - left, 3 - down, 4 - right
 	int direction = 0;
@@ -20,6 +21,7 @@ public class Avatar {
 		this.direction = 0;
 		this.row = 1; // sets initial position of avatar to (1, 1)
 		this.pizzaDelivered = false;
+		this.hitObstacle = false;
 	}
 
 	public Avatar(Avatar player) {
@@ -28,6 +30,7 @@ public class Avatar {
 		this.direction = player.direction;
 		this.row = player.row; // sets initial position of avatar to (0, 0)
 		this.pizzaDelivered = player.pizzaDelivered;
+		this.hitObstacle = player.hitObstacle;
 	}
 
 	public void setCol(int i) // sets the avatar's vertical position
@@ -100,6 +103,23 @@ public class Avatar {
 	public boolean getPizzaDelivered()
 	{
 		return this.pizzaDelivered;
+	}
+	
+	/**
+	 * setter method for setting the hitObstacle variable
+	 */
+	public void setHitObstacle(boolean hitObstacle)
+	{
+		this.hitObstacle = hitObstacle;
+	}
+	
+	/**
+	 * getter method for hitObstacle
+	 * @return boolean value of hitObstacle
+	 */
+	public boolean getHitObstacle()
+	{
+		return this.hitObstacle;
 	}
 	
 	public void setDirection(int i) //allows player's facing-direction to be set to either 0, 1, 2, 3, or 4 (stop, up, left, down, right)

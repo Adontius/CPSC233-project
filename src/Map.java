@@ -1,44 +1,36 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Map 
-{
+public class Map {
 
-	public Avatar player; //initiates new Avatar object called player
-	public Tile tiles[][]; //creates new grid of tiles to play on
-	public int mapSize; //int of the length/width of the map
+	public Avatar player; // initiates new Avatar object called player
+	public Tile tiles[][]; // creates new grid of tiles to play on
+	public int mapSize; // int of the length/width of the map
 
-	public Map(Avatar player, int mapSize, Tile tiles[][]) 
-	{
+	public Map(Avatar player, int mapSize, Tile tiles[][]) {
 		this.player = player;
 		setSize(mapSize);
 		setTiles(tiles);
 	}
 
 	// getters
-	public int getSize() 
-	{
+	public int getSize() {
 		return mapSize;
 	}
 
-	public Tile[][] getTiles() 
-	{
+	public Tile[][] getTiles() {
 		Tile[][] tiles2 = new Tile[tiles.length][tiles.length];
-		for (int i = 0; i < tiles.length; i++) 
-		{
-			for (int j = 0; j < tiles.length; j++) 
-			{
+		for (int i = 0; i < tiles.length; i++) {
+			for (int j = 0; j < tiles.length; j++) {
 				tiles2[i][j] = tiles[i][j];
 			}
 		}
 		return tiles2;
 	}
 
-	public Avatar getPlayer() 
-	{
+	public Avatar getPlayer() {
 		return player;
 	}
-	
 
 	// setters
 	public void setSize(int size) {
@@ -60,11 +52,11 @@ public class Map
 	}
 
 	/**
-	 * generates a customer by doing the following:
-	 * - creating arraylists of row numbers and column numbers, with each index representing a house
-	 * - adding existing houses to the arraylists
-	 * - generating a random number representing a random index for the arraylist, and geting its row and column number
-	 * - turning the house on the original array as a customer
+	 * generates a customer by doing the following: - creating arraylists of row
+	 * numbers and column numbers, with each index representing a house - adding
+	 * existing houses to the arraylists - generating a random number representing a
+	 * random index for the arraylist, and geting its row and column number -
+	 * turning the house on the original array as a customer
 	 */
 	public void generateCustomer() {
 		ArrayList<Integer> rowNumbers = new ArrayList<Integer>(0);
@@ -81,14 +73,14 @@ public class Map
 		}
 		Random rand = new Random();
 		int randInt = rand.nextInt(rowNumbers.size());
-		
+
 		int randomHouseRowPosition = rowNumbers.get(randInt);
 		int randomHouseColPosition = colNumbers.get(randInt);
-		
+
 		tiles[randomHouseRowPosition][randomHouseColPosition] = new Customer();
 		player.setPizzaDelivered(false);
 	}
-	
+
 	/**
 	 * turns the customer back into a house - used after delivering pizza
 	 */
@@ -99,6 +91,48 @@ public class Map
 					if ((tiles[i][j] instanceof Customer)) {
 						tiles[i][j] = new House();
 					}
+				}
+			}
+		}
+		player.deliverPizza();
+	}
+
+	/**
+	 * 
+	 */
+	public void generateObstacles() {
+		ArrayList<Integer> rowNumbers = new ArrayList<Integer>(0);
+		ArrayList<Integer> colNumbers = new ArrayList<Integer>(0);
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 12; j++) {
+				if (tiles[i][j] instanceof Road) {
+					rowNumbers.add(i);
+					colNumbers.add(j);
+				}
+			}
+		}
+		Random rand = new Random();
+
+		int numOfObstacles = 3;
+
+		for (int i = 0; i < numOfObstacles; i++) {
+			int randInt = rand.nextInt(rowNumbers.size());
+
+			int randomHouseRowPosition = rowNumbers.get(randInt);
+			int randomHouseColPosition = colNumbers.get(randInt);
+
+			tiles[randomHouseRowPosition][randomHouseColPosition] = new Pothole();
+		}
+	}
+
+	/**
+	 * removes obstacles present in the map
+	 */
+	public void removeObstacle() {
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 12; j++) {
+				if ((tiles[i][j] instanceof Pothole)) {
+					tiles[i][j] = new Road();
 				}
 			}
 		}
