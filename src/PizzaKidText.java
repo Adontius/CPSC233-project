@@ -12,7 +12,7 @@ public class PizzaKidText extends PizzaKid
 	
 	public static void main(String[] args) 
 	{
-		Map map = new Map(new Avatar(), 12, createTilesFor12());
+		map = new Map(new Avatar(), 12, createTilesFor12());
 		play();
 //		map.generateCustomer();
 //		map.displayMapToConsole();
