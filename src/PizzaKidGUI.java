@@ -1,6 +1,7 @@
 
 import java.util.Scanner;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -156,10 +157,15 @@ public class PizzaKidGUI extends Application {
 		// setting footer containing quit button
 		HBox footer = new HBox();
 		setFooter(footer);
+		
+		// setting right panel containing strike counter
+		VBox right = new VBox();
+		setRight(right);
 
 		playScreen.setTop(heading);
 		playScreen.setCenter(mapGUI);
 		playScreen.setBottom(footer);
+		playScreen.setRight(right);
 
 		playGame(playScreen);
 		
@@ -255,23 +261,36 @@ public class PizzaKidGUI extends Application {
 	}
 	
 	/**
+	 * Sets style and elements on the right side (number of strikes)
+	 * @param right - VBox containing right elements
+	 */
+	public void setRight(VBox right) {
+		Label strike = new Label("Strike");
+		Label strikeNum = new Label(game.collectibles.getStrikeCount() + "");
+		
+		right.getChildren().add(strike);
+		right.getChildren().add(strikeNum);
+	}
+	
+	/**
 	 * Sets elements of the map on the graphical map
 	 * @param map - GridPane that represents the map graphically
 	 */
 	public void showGUIMap(GridPane map) {
+		map.getChildren().clear();
 		for (int i = 0; i < game.map.getSize(); i++) {
 			for (int j = 0; j < game.map.getSize(); j++) {
 				Label x;
 				if (i == game.map.getPlayer().getRow() && j == game.map.getPlayer().getCol()) {
-					x = new Label("Player");
+					x = new Label("^");
 				} else if (game.map.getTiles()[i][j] instanceof Customer) {
-					x = new Label("HouseOrder");
+					x = new Label("*");
 				} else if (game.map.getTiles()[i][j] instanceof House) {
-					x = new Label("House");
+					x = new Label("H");
 				} else if (game.map.getTiles()[i][j] instanceof Trees) {
-					x = new Label("Tree");
+					x = new Label("T");
 				} else if (game.map.getTiles()[i][j] instanceof Pothole) {
-					x = new Label("Pothole");
+					x = new Label("X");
 				} else {
 					x = new Label("");
 				}
@@ -320,11 +339,30 @@ public class PizzaKidGUI extends Application {
 	
 	
 	
-	public void playGame(BorderPane playScreen2) {
+	public void playGame(BorderPane playScreen) {
+		
+		game.map.generateCustomer();
+		game.map.generateObstacles();
 		
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			
 			public void handle(KeyEvent ke) {
+
+				if(game.map.getPlayer().getPizzaDelivered() == true) //alice edited this to add " == true"
+				{
+					game.map.generateCustomer();
+					game.map.getPlayer().setPizzaDelivered(false); //resets pizzaDelivered after player delivers pizza to a customer.
+				}
+				
+				// when the player hits an obstacle, the obstacles are removed and regenerated and the player is put back to starting position
+				if(game.map.getPlayer().getHitObstacle() == true) {
+					game.map.removeObstacle();
+					game.map.getPlayer().setHitObstacle(false);
+					game.map.generateObstacles();
+					game.map.getPlayer().setCol(1);
+					game.map.getPlayer().setRow(1);
+				}
+				
 				if(ke.getCode() == KeyCode.UP) 
 				{
 					if(game.checkIfValidMove(1)) 
@@ -341,7 +379,6 @@ public class PizzaKidGUI extends Application {
 				} 
 				else if(ke.getCode() == KeyCode.DOWN) 
 				{
-					System.out.println("down");
 					if(game.checkIfValidMove(3)) 
 					{
 						game.move(3);
@@ -354,10 +391,28 @@ public class PizzaKidGUI extends Application {
 						game.move(4);
 					}
 				}
+				
+				showGUIMap(mapGUI);
 			}
 			
 		});
 		
+//		AnimationTimer timer = new AnimationTimer() {
+//			
+//			long before = 0;
+//			
+//			@Override
+//			public void handle(long now) {
+//				// everything in nanoseconds
+//				long timeSince = now - before;
+//				if(timeSince >= 1000000000) {
+//					System.out.println("0.5!");
+//					before = now;
+//				}
+//			}
+//		};
+//		
+//		timer.start();
 		
 	}
 

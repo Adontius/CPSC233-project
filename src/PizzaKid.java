@@ -141,7 +141,6 @@ public class PizzaKid
 			map.getPlayer().moveLeft();
 		} else if(direction == 3) {
 			map.getPlayer().moveDown();
-			System.out.println("moved down");
 		} else if(direction == 4) {
 			map.getPlayer().moveRight();
 		} 
