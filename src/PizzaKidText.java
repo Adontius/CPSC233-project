@@ -13,7 +13,6 @@ public class PizzaKidText extends PizzaKid
 	public static void main(String[] args) 
 	{
 		Map map = new Map(new Avatar(), 12, createTilesFor12());
-		Collectibles collectibles = new Collectibles(0,0);
 		play();
 //		map.generateCustomer();
 //		map.displayMapToConsole();
@@ -75,48 +74,63 @@ public class PizzaKidText extends PizzaKid
 				if(map.getPlayer().getPizzaDelivered() == true) //alice edited this to add " == true"
 				{
 					map.generateCustomer();
-					map.getPlayer().setPizzaDelivered(false); //resets pizzaDelivered after player delivers pizza to a customer
+					map.getPlayer().setPizzaDelivered(false); //resets pizzaDelivered after player delivers pizza to a customer.
 				}
 				displayMapToConsole();
-				num = input.nextLine().toLowerCase();
 				
-
-				System.out.println("inout: " + num);
 				
-				if(num.equals("w")) {
-					if(checkIfValidMove(1)) {
+				num = input.nextLine().toLowerCase(); //direction that the player enters (W, A, S, or D)
+				System.out.println("input: " + num);
+				
+				if(num.equals("w")) 
+				{
+					if(checkIfValidMove(1)) 
+					{
 						move(1);
 					}
-				} else if(num.equals("a")) {
-					if(checkIfValidMove(2)) {
+				} 
+				else if(num.equals("a")) 
+				{
+					if(checkIfValidMove(2)) 
+					{
 						move(2);
 					}
-				} else if(num.equals("s")) {
-					if(checkIfValidMove(3)) {
+				} 
+				else if(num.equals("s")) 
+				{
+					if(checkIfValidMove(3)) 
+					{
 						move(3);
 					}
-				} else if(num.equals("d")) {
-					if(checkIfValidMove(4)) {
+				} 
+				else if(num.equals("d")) 
+				{
+					if(checkIfValidMove(4)) 
+					{
 						move(4);
 					}
 				}
-				
-//				checkIfDelivered();
-//				checkIfHit(num);
 				counter++;
-			} while (!num.equals("0") && counter <= 100 && map.getPlayer().getStrikeCount() < 3);
+				
+			} 
+			while (!num.equals("0") && counter <= 100 && collectibles.getStrikeCount() < 3); //alice edited this to change map. to collectibles.
 			System.out.println("Game Over");
-			if (counter > 100) {
+			
+			if (counter > 100) //if player has made more than 100 moves (i.e. on the 101th move), ends the game
+			{
 				System.out.println("Your moves have ended!");
-			} else if (map.getPlayer().getStrikeCount() >= 3) {
+			} 
+			else if (collectibles.getStrikeCount() >= 3) //alice edited this to change map. to collectibles.
+			{
 				System.out.println("You got 3 strikes!");
 			}
-			System.out.println("Total tip: $" + map.getPlayer().getTipMoney());
+			System.out.println("Total tip: $" + collectibles.getTipMoney()); //alice edited this to change map. to collectibles.
 			System.out.println();
 			System.out.println("Enter 0 to quit");
 			System.out.println("Enter anything else to continue playing");
 			num = input.nextLine().toLowerCase();
-		} while (!num.equals("0"));
+		} 
+		while (!num.equals("0"));
 	}
 
 
