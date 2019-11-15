@@ -6,7 +6,7 @@ public class PizzaKid
 
 	public static Map map;
 	
-	public Collectibles collectibles = new Collectibles(0, 0); 
+	public static Collectibles collectibles = new Collectibles(0, 0); 
 	//intiates new player collectibles, sets tipmoney to 0 and strike count to 0
 
 
@@ -45,9 +45,10 @@ public class PizzaKid
 	/**
 	 * delivers the pizza by removing customer order, receiving tip money, and
 	 * cancelling timer
+	 * Note: should be overriden since text and gui are different
 	 */
 	public static void deliverPizza() {
-		map.removeCustomer();
+		
 	}
 
 	/**
@@ -86,10 +87,7 @@ public class PizzaKid
 				return false;
 			}
 		} else if (direction == 3) {
-			System.out.println("row: " + map.getPlayer().getRow());
-			System.out.println("bottom: " + (map.getSize() - 1));
 			if (map.getPlayer().getRow() < map.getSize() - 1) {
-				System.out.println("reached here");
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else if (checkSurroundings(direction) instanceof Customer) {

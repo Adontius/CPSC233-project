@@ -6,8 +6,6 @@ import java.util.Scanner;
 public class PizzaKidText extends PizzaKid 
 {
 
-	public static Collectibles collectibles = new Collectibles(0,0);
-
 	private static Scanner input = new Scanner(System.in);
 	
 	public static void main(String[] args) 
@@ -169,7 +167,13 @@ public class PizzaKidText extends PizzaKid
 		return tiles;
 	}
 	
-
+	/**
+	 * delivers pizza and gives tip money ($5 - standard since there is no timer)
+	 */
+	public static void deliverPizza() {
+		map.removeCustomer();
+		collectibles.setTipMoney(collectibles.getTipMoney() + 5);
+	}
 
 	/**
 	 * displays the map to the console
