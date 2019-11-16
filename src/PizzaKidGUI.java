@@ -495,22 +495,35 @@ public class PizzaKidGUI extends Application {
 
 		});
 
-		// AnimationTimer timer = new AnimationTimer() {
-		//
-		// long before = 0;
-		//
-		// @Override
-		// public void handle(long now) {
-		// // everything in nanoseconds
-		// long timeSince = now - before;
-		// if(timeSince >= 1000000000) {
-		// System.out.println("0.5!");
-		// before = now;
-		// }
-		// }
-		// };
-		//
-		// timer.start();
+		
+		AnimationTimer timer = new AnimationTimer() {
+
+			int hectoseconds = 0;
+			int seconds = 0;
+			int minutes = 0;
+			long before = 0;
+
+			@Override
+			public void handle(long now) {
+				// everything in nanoseconds
+				long timeSince = now - before;
+				if (timeSince >= 10000000) {
+					hectoseconds++;
+					if(hectoseconds >= 99) {
+						hectoseconds = 0;
+						seconds++;
+					}
+					if(seconds >= 59) {
+						seconds = 0;
+						minutes++;
+					}
+					((Labeled) heading.getChildren().get(1)).setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
+					before = now;
+				}
+			}
+		};
+
+		timer.start();
 
 	}
 
