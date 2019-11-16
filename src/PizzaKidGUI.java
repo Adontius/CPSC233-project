@@ -148,6 +148,10 @@ public class PizzaKidGUI extends Application {
 	GridPane mapGUI = new GridPane();
 	HBox footer = new HBox();
 	VBox right = new VBox();
+	VBox left = new VBox();
+	
+	// state is a text that communicates the state of the game to the user
+	Label state;
 
 	public void initializePlayScreen() {
 
@@ -159,6 +163,8 @@ public class PizzaKidGUI extends Application {
 
 		// setting map
 		game.map = new Map(new Avatar(), 12, createTilesFor12());
+		game.map.generateCustomer();
+		game.map.generateObstacles();
 		setMap(mapGUI);
 
 		// setting footer containing quit button
@@ -166,11 +172,15 @@ public class PizzaKidGUI extends Application {
 
 		// setting right panel containing strike counter
 		setRight(right);
+		
+		// setting left panel containing instructions
+		setLeft(left);
 
 		playScreen.setTop(heading);
 		playScreen.setCenter(mapGUI);
 		playScreen.setBottom(footer);
 		playScreen.setRight(right);
+		playScreen.setLeft(left);
 
 		playGame(playScreen);
 
@@ -290,6 +300,41 @@ public class PizzaKidGUI extends Application {
 	}
 
 	/**
+	 * Sets style and elements on the left side (instructions)
+	 * 
+	 * @param right
+	 *            - VBox containing right elements
+	 */
+	public void setLeft(VBox left) {
+		Label instructions = new Label("Instructions:");
+		Label first = new Label("- Use the arrow keys to move");
+		Label second = new Label("- Deliver pizza on time to get tips");
+		Label third = new Label("- Earn the most tips in 1 minute!");
+		Label fourth = new Label("- Hit an obstacle earn a strike!");
+		Label fifth = new Label("- Run out of time earn a strike!");
+		Label sixth = new Label("- 3 strikes = Game Over!");
+		Label seventh = new Label("- Good luck!");
+		
+		state = new Label("Start Playing!");
+
+		left.getChildren().add(instructions);
+		left.getChildren().add(first);
+		left.getChildren().add(second);
+		left.getChildren().add(third);
+		left.getChildren().add(fourth);
+		left.getChildren().add(fifth);
+		left.getChildren().add(sixth);
+		left.getChildren().add(seventh);
+
+		// strike
+		instructions.setFont(Font.font("Arial", 15));
+		instructions.setTextFill(Color.BLACK);
+		instructions.setAlignment(Pos.CENTER);
+		instructions.setMinWidth(width / 4);
+
+	}
+
+	/**
 	 * Sets elements of the map on the graphical map
 	 * 
 	 * @param map
@@ -359,9 +404,6 @@ public class PizzaKidGUI extends Application {
 	public void playGame(BorderPane playScreen) {
 
 		boolean gameOver = false;
-
-		game.map.generateCustomer();
-		game.map.generateObstacles();
 
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
@@ -492,6 +534,7 @@ public class PizzaKidGUI extends Application {
 		heading.getChildren().clear();
 		footer.getChildren().clear();
 		right.getChildren().clear();
+		left.getChildren().clear();
 		
 		initializePlayScreen();
 		
