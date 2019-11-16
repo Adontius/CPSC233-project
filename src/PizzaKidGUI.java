@@ -149,7 +149,7 @@ public class PizzaKidGUI extends Application {
 	HBox footer = new HBox();
 	VBox right = new VBox();
 	VBox left = new VBox();
-	
+
 	// state is a text that communicates the state of the game to the user
 	Label state;
 
@@ -172,7 +172,7 @@ public class PizzaKidGUI extends Application {
 
 		// setting right panel containing strike counter
 		setRight(right);
-		
+
 		// setting left panel containing instructions
 		setLeft(left);
 
@@ -275,10 +275,24 @@ public class PizzaKidGUI extends Application {
 				startScreen.toFront();
 			}
 		});
+		
+		Button reset = new Button("Reset");
+		reset.setFont(Font.font("Arial Black", 15));
+		reset.setMinSize(buttonWidth / 2, buttonHeight / 2);
+		reset.setAlignment(Pos.CENTER);
+
+		// event in quit button
+		reset.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				resetMap();
+			}
+		});
 
 		footer.setAlignment(Pos.CENTER_RIGHT);
 		footer.setPadding(new Insets(10, 50, 20, 10));
 		footer.getChildren().add(quit);
+		footer.getChildren().add(reset);
 	}
 
 	/**
@@ -303,7 +317,7 @@ public class PizzaKidGUI extends Application {
 	 * Sets style and elements on the left side (instructions)
 	 * 
 	 * @param right
-	 *            - VBox containing right elements
+	 *            - VBox containing left elements
 	 */
 	public void setLeft(VBox left) {
 		Label instructions = new Label("Instructions:");
@@ -314,7 +328,7 @@ public class PizzaKidGUI extends Application {
 		Label fifth = new Label("- Run out of time earn a strike!");
 		Label sixth = new Label("- 3 strikes = Game Over!");
 		Label seventh = new Label("- Good luck!");
-		
+
 		state = new Label("Start Playing!");
 
 		left.getChildren().add(instructions);
@@ -325,12 +339,19 @@ public class PizzaKidGUI extends Application {
 		left.getChildren().add(fifth);
 		left.getChildren().add(sixth);
 		left.getChildren().add(seventh);
+		left.getChildren().add(state);
 
-		// strike
+		// instructions
 		instructions.setFont(Font.font("Arial", 15));
 		instructions.setTextFill(Color.BLACK);
 		instructions.setAlignment(Pos.CENTER);
 		instructions.setMinWidth(width / 4);
+
+		// state
+		state.setFont(Font.font("Arial", 15));
+		state.setTextFill(Color.BLACK);
+		state.setAlignment(Pos.CENTER);
+		state.setMinWidth(width / 4);
 
 	}
 
@@ -403,64 +424,71 @@ public class PizzaKidGUI extends Application {
 
 	public void playGame(BorderPane playScreen) {
 
-		boolean gameOver = false;
-
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			public void handle(KeyEvent ke) {
 
-				if (gameOver == true) {
+				if (game.map.getPlayer().getPizzaDelivered() == true && game.map.getPlayer().getHitObstacle() == false) // alice
+																														// edited
+																														// this
+																														// to
+																														// add
+																														// "
+																														// ==
+																														// true"
+				{
+					game.map.generateCustomer();
+					game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
+																	// pizza
+																	// to a customer.
+					state.setText("You delivered a pizza!");
+				}
 
-				} else {
-
-					if (game.map.getPlayer().getPizzaDelivered() == true
-							&& game.map.getPlayer().getHitObstacle() == false) // alice edited this to add " == true"
-					{
-						game.map.generateCustomer();
-						game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
-																		// pizza
-																		// to a customer.
+				// when the player hits an obstacle, the obstacles are removed and regenerated
+				// and the player is put back to starting position
+				if (game.map.getPlayer().getHitObstacle() == true) {
+					game.map.removeObstacle();
+					game.map.getPlayer().setHitObstacle(false);
+					game.map.generateObstacles();
+					game.map.getPlayer().setCol(1);
+					game.map.getPlayer().setRow(1);
+					showGUIMap(mapGUI);
+				} else if (ke.getCode() == KeyCode.UP) {
+					if (game.checkIfValidMove(1)) {
+						game.move(1);
+						state.setText("Keep going!");
+					} else {
+						checkIfStrikeOrTip(1);
 					}
-
-					// when the player hits an obstacle, the obstacles are removed and regenerated
-					// and the player is put back to starting position
-					if (game.map.getPlayer().getHitObstacle() == true) {
-						game.map.removeObstacle();
-						game.map.getPlayer().setHitObstacle(false);
-						game.map.generateObstacles();
-						game.map.getPlayer().setCol(1);
-						game.map.getPlayer().setRow(1);
-						showGUIMap(mapGUI);
-					} else if (ke.getCode() == KeyCode.UP) {
-						if (game.checkIfValidMove(1)) {
-							game.move(1);
-						} else {
-							checkIfStrikeOrTip(1);
-						}
-						update(1);
-					} else if (ke.getCode() == KeyCode.LEFT) {
-						if (game.checkIfValidMove(2)) {
-							game.move(2);
-						} else {
-							checkIfStrikeOrTip(2);
-						}
-						update(2);
-					} else if (ke.getCode() == KeyCode.DOWN) {
-						if (game.checkIfValidMove(3)) {
-							game.move(3);
-						} else {
-							checkIfStrikeOrTip(3);
-						}
-						update(3);
-					} else if (ke.getCode() == KeyCode.RIGHT) {
-						if (game.checkIfValidMove(4)) {
-							game.move(4);
-						} else {
-							checkIfStrikeOrTip(4);
-						}
-						update(4);
+				} else if (ke.getCode() == KeyCode.LEFT) {
+					if (game.checkIfValidMove(2)) {
+						state.setText("Keep going!");
+						game.move(2);
+					} else {
+						checkIfStrikeOrTip(2);
 					}
+				} else if (ke.getCode() == KeyCode.DOWN) {
+					if (game.checkIfValidMove(3)) {
+						state.setText("Keep going!");
+						game.move(3);
+					} else {
+						checkIfStrikeOrTip(3);
+					}
+				} else if (ke.getCode() == KeyCode.RIGHT) {
+					if (game.checkIfValidMove(4)) {
+						state.setText("Keep going!");
+						game.move(4);
+					} else {
+						checkIfStrikeOrTip(4);
+					}
+				}
 
+				showGUIMap(mapGUI);
+
+				// if strikes has reached 3, then game is over!
+				if (game.collectibles.getStrikeCount() >= 3) {
+					state.setText("Game Over!");
+					game.map = new Map(new Avatar(), 12, createTilesFor12());
 				}
 
 			}
@@ -487,18 +515,6 @@ public class PizzaKidGUI extends Application {
 	}
 
 	/**
-	 * Updates tipMoney, strikes, and map
-	 */
-	public void update(int direction) {
-
-		System.out.println("row: " + game.map.getPlayer().getRow() + " col: " + game.map.getPlayer().getCol());
-
-		// update map
-		showGUIMap(mapGUI);
-
-	}
-
-	/**
 	 * Check why the player can't move - either player has delivered or has hit an
 	 * obstacle If delivered - tips is updated If hit an obstacle - strikes is
 	 * updated
@@ -509,11 +525,11 @@ public class PizzaKidGUI extends Application {
 
 		// updates tips
 		((Labeled) heading.getChildren().get(2)).setText("Tips: " + game.collectibles.getTipMoney());
-		
+
 		if (game.checkSurroundings(direction) instanceof Obstacle) {
 			// updates strikes
-			game.collectibles.addStrike();
 			Label strike = new Label("Strike!!!!");
+			state.setText("You hit an obstacle! 1 strike!");
 			right.getChildren().add(strike);
 
 			strike.setFont(Font.font("Arial", 15));
@@ -530,14 +546,13 @@ public class PizzaKidGUI extends Application {
 
 		game.map.generateCustomer();
 		game.map.generateObstacles();
-		
+
 		heading.getChildren().clear();
 		footer.getChildren().clear();
 		right.getChildren().clear();
 		left.getChildren().clear();
-		
+
 		initializePlayScreen();
-		
 
 		showGUIMap(mapGUI);
 	}
