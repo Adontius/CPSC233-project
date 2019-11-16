@@ -4,7 +4,7 @@
  * 
  */
 
-public class Trees extends Obstacle 
-{
+public class Trees extends Obstacle {
+	
 
 }
