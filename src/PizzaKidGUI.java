@@ -532,7 +532,7 @@ public class PizzaKidGUI extends Application {
 	 * obstacle If delivered - tips is updated If hit an obstacle - strikes is
 	 * updated
 	 * 
-	 * @param direction
+	 * @param direction 
 	 */
 	public void checkIfStrikeOrTip(int direction) {
 
