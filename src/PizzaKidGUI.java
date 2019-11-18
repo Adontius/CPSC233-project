@@ -32,7 +32,7 @@ public class PizzaKidGUI extends Application {
 	Image house1 = new Image("/House1.png", 70.0, 35.0, true, true); //uses House1.png image from folder
 	Image customerHouse = new Image("/Customer.png", 76.0, 40.0, true, true);
 	Image pizzaCar = new Image("/PizzaCar (1).png", 50.0, 25.0, true, true);
-	Image tree = new Image("/TreeFlowers.png", 70.0, 35.0, true, true);
+	Image tree = new Image("/TreeFlowers.png", 75.0, 55.0, true, true);
 	
 	private static PizzaKid game = new PizzaKid();
 	private static Scanner input = new Scanner(System.in);
@@ -44,10 +44,9 @@ public class PizzaKidGUI extends Application {
 	int buttonHeight = 80;
 	int buttonWidth = 100;
 
-	int mapHeight = 400;
-	int mapWidth = 500;
+	int mapHeight = 540; //makes each tile size 45x45 pixels
+	int mapWidth = 540;
 
-	int gridSize = 10;
 
 	StackPane root = new StackPane();
 	VBox startScreen = new VBox();
@@ -411,7 +410,9 @@ public class PizzaKidGUI extends Application {
 				x.setMinWidth(mapWidth / game.map.getSize());
 				map.add(x, j, i);
 			}
+			map.setPadding(new Insets(0, 0, 0, 0));
 		}
+
 	}
 
 	// variables related to game
