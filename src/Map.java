@@ -162,7 +162,7 @@ public class Map {
 				}
 			}
 		}
-		return null;
+		return new Customer();
 	}
 
 }
