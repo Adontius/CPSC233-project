@@ -499,13 +499,8 @@ public class PizzaKidGUI extends Application {
 
 					showGUIMap(mapGUI);
 
-					// if strikes has reached 3, then game is over!
-					if (game.collectibles.getStrikeCount() >= 3) {
-						gameIsOver("You had 3 strikes!");
-					}
-
 				}
-				
+
 			}
 
 		});
@@ -531,12 +526,28 @@ public class PizzaKidGUI extends Application {
 							game.collectibles.setTime(game.collectibles.getTime() + 1);
 
 							// to handle time left for order
-							System.out.println("Time: " + game.collectibles.getTime());
-							System.out.println("BirthTime: " + game.map.getCustomer().birthTime);
 							int timeLeft = timeForEachDelivery
 									- (game.collectibles.getTime() - game.map.getCustomer().birthTime);
-							timeLeftForOrder.setText("Time left for order: " + timeLeft);
-							currentTip = timeLeft * tipDeduction;
+							if (timeLeft >= 0) {
+								timeLeftForOrder.setText("Time left for order: " + timeLeft);
+								currentTip = timeLeft * tipDeduction;
+							} else {
+								// strike if order is missed
+								game.map.removeCustomer();
+								game.map.generateCustomer();
+								game.collectibles.addStrike();
+								showGUIMap(mapGUI);
+								displayStrike();
+								state.setText("You missed an order!");
+								game.map.getCustomer().birthTime = game.collectibles.getTime();
+								currentTip = 5;
+							}
+							
+
+							// if strikes has reached 3, then game is over!
+							if (game.collectibles.getStrikeCount() >= 3) {
+								gameIsOver("You had 3 strikes!");
+							}
 						}
 						if (seconds >= 59) {
 							seconds = 0;
@@ -587,15 +598,19 @@ public class PizzaKidGUI extends Application {
 
 		if (game.checkSurroundings(direction) instanceof Obstacle) {
 			// updates strikes
-			Label strike = new Label("Strike!!!!");
-			state.setText("You hit an obstacle! 1 strike!");
-			right.getChildren().add(strike);
-
-			strike.setFont(Font.font("Arial", 15));
-			strike.setTextFill(Color.BLACK);
-			strike.setAlignment(Pos.CENTER);
-			strike.setMinWidth(width / 4);
+			displayStrike();
 		}
+	}
+
+	public void displayStrike() {
+		Label strike = new Label("Strike!!!!");
+		state.setText("You hit an obstacle! 1 strike!");
+		right.getChildren().add(strike);
+
+		strike.setFont(Font.font("Arial", 15));
+		strike.setTextFill(Color.BLACK);
+		strike.setAlignment(Pos.CENTER);
+		strike.setMinWidth(width / 4);
 	}
 
 	public void resetMap() {
