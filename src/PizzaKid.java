@@ -47,9 +47,9 @@ public class PizzaKid
 	 * cancelling timer
 	 * Note: should be overriden since text and gui are different
 	 */
-	public void deliverPizza() {
+	public void deliverPizza(double tipToAdd) {
 		map.removeCustomer();
-		collectibles.setTipMoney(collectibles.getTipMoney() + 5);
+		collectibles.setTipMoney(collectibles.getTipMoney() + tipToAdd);
 	}
 
 	/**
@@ -57,16 +57,18 @@ public class PizzaKid
 	 * 
 	 * @param direction
 	 *            - int value that represents the direction that the player is going
+	 *       tipToAdd
+	 *       	- tip to add if the tile in the direction is a customer and pizza is to be delivered
 	 * @return boolean - true if the move is valid, false if otherwise
 	 */
-	public boolean checkIfValidMove(int direction) {
+	public boolean checkIfValidMove(int direction, double tipToAdd) {
 		// direction: 0 - stop, 1 - up, 2 - left, 3 - down, 4 - right
 		if (direction == 1) {
 			if (map.getPlayer().getRow() > 0) {
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else if (checkSurroundings(direction) instanceof Customer) {
-					deliverPizza();
+					deliverPizza(tipToAdd);
 					return false;
 				} else if (checkSurroundings(direction) instanceof Obstacle) {
 					collectibles.addStrike();
@@ -83,7 +85,7 @@ public class PizzaKid
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else if (checkSurroundings(direction) instanceof Customer) {
-					deliverPizza();
+					deliverPizza(tipToAdd);
 					return false;
 				} else if (checkSurroundings(direction) instanceof Obstacle) {
 					collectibles.addStrike();
@@ -100,7 +102,7 @@ public class PizzaKid
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else if (checkSurroundings(direction) instanceof Customer) {
-					deliverPizza();
+					deliverPizza(tipToAdd);
 					return false;
 				} else if (checkSurroundings(direction) instanceof Obstacle) {
 					collectibles.addStrike();
@@ -117,7 +119,7 @@ public class PizzaKid
 				if (checkSurroundings(direction) instanceof Road) {
 					return true;
 				} else if (checkSurroundings(direction) instanceof Customer) {
-					deliverPizza();
+					deliverPizza(tipToAdd);
 					return false;
 				} else if (checkSurroundings(direction) instanceof Obstacle) {
 					collectibles.addStrike();

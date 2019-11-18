@@ -101,28 +101,28 @@ public class PizzaKidText
 				
 				if(num.equals("w")) 
 				{
-					if(game.checkIfValidMove(1)) 
+					if(game.checkIfValidMove(1, 5)) 
 					{
 						game.move(1);
 					}
 				} 
 				else if(num.equals("a")) 
 				{
-					if(game.checkIfValidMove(2)) 
+					if(game.checkIfValidMove(2, 5)) 
 					{
 						game.move(2);
 					}
 				} 
 				else if(num.equals("s")) 
 				{
-					if(game.checkIfValidMove(3)) 
+					if(game.checkIfValidMove(3, 5)) 
 					{
 						game.move(3);
 					}
 				} 
 				else if(num.equals("d")) 
 				{
-					if(game.checkIfValidMove(4)) 
+					if(game.checkIfValidMove(4, 5)) 
 					{
 						game.move(4);
 					}

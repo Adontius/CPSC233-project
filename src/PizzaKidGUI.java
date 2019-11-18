@@ -152,6 +152,9 @@ public class PizzaKidGUI extends Application {
 
 	// state is a text that communicates the state of the game to the user
 	Label state;
+	// timeLeftForOrder is continuously updated to let user know the time left to
+	// deliver the order
+	Label timeLeftForOrder;
 
 	public void initializePlayScreen() {
 
@@ -164,6 +167,7 @@ public class PizzaKidGUI extends Application {
 		// setting map
 		game.map = new Map(new Avatar(), 12, createTilesFor12());
 		game.map.generateCustomer();
+		game.map.getCustomer().birthTime = game.collectibles.getTime();
 		game.map.generateObstacles();
 		setMap(mapGUI);
 
@@ -275,7 +279,7 @@ public class PizzaKidGUI extends Application {
 				startScreen.toFront();
 			}
 		});
-		
+
 		Button reset = new Button("Reset");
 		reset.setFont(Font.font("Arial Black", 15));
 		reset.setMinSize(buttonWidth / 2, buttonHeight / 2);
@@ -327,9 +331,10 @@ public class PizzaKidGUI extends Application {
 		Label fourth = new Label("- Hit an obstacle earn a strike!");
 		Label fifth = new Label("- Run out of time earn a strike!");
 		Label sixth = new Label("- 3 strikes = Game Over!");
-		Label seventh = new Label("- Good luck!");
+		Label seventh = new Label("Good luck!");
 
 		state = new Label("Start Playing!");
+		timeLeftForOrder = new Label("");
 
 		left.getChildren().add(instructions);
 		left.getChildren().add(first);
@@ -340,6 +345,7 @@ public class PizzaKidGUI extends Application {
 		left.getChildren().add(sixth);
 		left.getChildren().add(seventh);
 		left.getChildren().add(state);
+		left.getChildren().add(timeLeftForOrder);
 
 		// instructions
 		instructions.setFont(Font.font("Arial", 15));
@@ -352,6 +358,12 @@ public class PizzaKidGUI extends Application {
 		state.setTextFill(Color.BLACK);
 		state.setAlignment(Pos.CENTER);
 		state.setMinWidth(width / 4);
+
+		// time left
+		timeLeftForOrder.setFont(Font.font("Arial", 15));
+		timeLeftForOrder.setTextFill(Color.BLACK);
+		timeLeftForOrder.setAlignment(Pos.CENTER);
+		timeLeftForOrder.setMinWidth(width / 4);
 
 	}
 
@@ -422,80 +434,82 @@ public class PizzaKidGUI extends Application {
 		return tiles;
 	}
 
+	// variables related to game
+	public static boolean gameOver = false;
+	public static int timeForEachDelivery = 10; // in seconds
+	public static double tipDeduction = 0.5; // tip deduction for each second that passed
+	public static double currentTip = 5;
+
 	public void playGame(BorderPane playScreen) {
 
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			public void handle(KeyEvent ke) {
 
-				if (game.map.getPlayer().getPizzaDelivered() == true && game.map.getPlayer().getHitObstacle() == false) // alice
-																														// edited
-																														// this
-																														// to
-																														// add
-																														// "
-																														// ==
-																														// true"
-				{
-					game.map.generateCustomer();
-					game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
-																	// pizza
-																	// to a customer.
-					state.setText("You delivered a pizza!");
-				}
+				if (gameOver == false) {
 
-				// when the player hits an obstacle, the obstacles are removed and regenerated
-				// and the player is put back to starting position
-				if (game.map.getPlayer().getHitObstacle() == true) {
-					game.map.removeObstacle();
-					game.map.getPlayer().setHitObstacle(false);
-					game.map.generateObstacles();
-					game.map.getPlayer().setCol(1);
-					game.map.getPlayer().setRow(1);
+					if (game.map.getPlayer().getPizzaDelivered() == true
+							&& game.map.getPlayer().getHitObstacle() == false) {
+						game.map.generateCustomer();
+						game.map.getCustomer().birthTime = game.collectibles.getTime();
+						game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
+																		// pizza
+																		// to a customer.
+						state.setText("You delivered a pizza!");
+					}
+
+					// when the player hits an obstacle, the obstacles are removed and regenerated
+					// and the player is put back to starting position
+					if (game.map.getPlayer().getHitObstacle() == true) {
+						game.map.removeObstacle();
+						game.map.getPlayer().setHitObstacle(false);
+						game.map.generateObstacles();
+						game.map.getPlayer().setCol(1);
+						game.map.getPlayer().setRow(1);
+						showGUIMap(mapGUI);
+					} else if (ke.getCode() == KeyCode.UP) {
+						if (game.checkIfValidMove(1, currentTip)) {
+							game.move(1);
+							state.setText("Keep going!");
+						} else {
+							checkIfStrikeOrTip(1);
+						}
+					} else if (ke.getCode() == KeyCode.LEFT) {
+						if (game.checkIfValidMove(2, currentTip)) {
+							state.setText("Keep going!");
+							game.move(2);
+						} else {
+							checkIfStrikeOrTip(2);
+						}
+					} else if (ke.getCode() == KeyCode.DOWN) {
+						if (game.checkIfValidMove(3, currentTip)) {
+							state.setText("Keep going!");
+							game.move(3);
+						} else {
+							checkIfStrikeOrTip(3);
+						}
+					} else if (ke.getCode() == KeyCode.RIGHT) {
+						if (game.checkIfValidMove(4, currentTip)) {
+							state.setText("Keep going!");
+							game.move(4);
+						} else {
+							checkIfStrikeOrTip(4);
+						}
+					}
+
 					showGUIMap(mapGUI);
-				} else if (ke.getCode() == KeyCode.UP) {
-					if (game.checkIfValidMove(1)) {
-						game.move(1);
-						state.setText("Keep going!");
-					} else {
-						checkIfStrikeOrTip(1);
+
+					// if strikes has reached 3, then game is over!
+					if (game.collectibles.getStrikeCount() >= 3) {
+						gameIsOver("You had 3 strikes!");
 					}
-				} else if (ke.getCode() == KeyCode.LEFT) {
-					if (game.checkIfValidMove(2)) {
-						state.setText("Keep going!");
-						game.move(2);
-					} else {
-						checkIfStrikeOrTip(2);
-					}
-				} else if (ke.getCode() == KeyCode.DOWN) {
-					if (game.checkIfValidMove(3)) {
-						state.setText("Keep going!");
-						game.move(3);
-					} else {
-						checkIfStrikeOrTip(3);
-					}
-				} else if (ke.getCode() == KeyCode.RIGHT) {
-					if (game.checkIfValidMove(4)) {
-						state.setText("Keep going!");
-						game.move(4);
-					} else {
-						checkIfStrikeOrTip(4);
-					}
+
 				}
-
-				showGUIMap(mapGUI);
-
-				// if strikes has reached 3, then game is over!
-				if (game.collectibles.getStrikeCount() >= 3) {
-					state.setText("Game Over!");
-					game.map = new Map(new Avatar(), 12, createTilesFor12());
-				}
-
+				
 			}
 
 		});
 
-		
 		AnimationTimer timer = new AnimationTimer() {
 
 			int hectoseconds = 0;
@@ -505,20 +519,36 @@ public class PizzaKidGUI extends Application {
 
 			@Override
 			public void handle(long now) {
-				// everything in nanoseconds
-				long timeSince = now - before;
-				if (timeSince >= 10000000) {
-					hectoseconds++;
-					if(hectoseconds >= 99) {
-						hectoseconds = 0;
-						seconds++;
+
+				if (gameOver == false) {
+					// everything in nanoseconds
+					long timeSince = now - before;
+					if (timeSince >= 10000000) {
+						hectoseconds++;
+						if (hectoseconds >= 99) {
+							hectoseconds = 0;
+							seconds++;
+							game.collectibles.setTime(game.collectibles.getTime() + 1);
+
+							// to handle time left for order
+							System.out.println("Time: " + game.collectibles.getTime());
+							System.out.println("BirthTime: " + game.map.getCustomer().birthTime);
+							int timeLeft = timeForEachDelivery
+									- (game.collectibles.getTime() - game.map.getCustomer().birthTime);
+							timeLeftForOrder.setText("Time left for order: " + timeLeft);
+							currentTip = timeLeft * tipDeduction;
+						}
+						if (seconds >= 59) {
+							seconds = 0;
+							minutes++;
+							gameIsOver("Your time is up!");
+						}
+						((Labeled) heading.getChildren().get(1))
+								.setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
+						before = now;
 					}
-					if(seconds >= 59) {
-						seconds = 0;
-						minutes++;
-					}
-					((Labeled) heading.getChildren().get(1)).setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
-					before = now;
+				} else {
+
 				}
 			}
 		};
@@ -528,11 +558,27 @@ public class PizzaKidGUI extends Application {
 	}
 
 	/**
+	 * Makes the gameOver variable true, shows results to user, and resets the map
+	 * 
+	 * @param statement
+	 *            - reason why the game is over (time is up or 3 strikes reached)
+	 */
+	public void gameIsOver(String statement) {
+		gameOver = true;
+		state.setText("Game Over! " + statement + "\n" + "Your total tip is: $" + game.collectibles.getTipMoney()
+				+ "\nPress reset to play again!");
+		timeLeftForOrder.setText("");
+		game = new PizzaKid();
+		game.map = new Map(new Avatar(), 12, createTilesFor12());
+		showGUIMap(mapGUI);
+	}
+
+	/**
 	 * Check why the player can't move - either player has delivered or has hit an
 	 * obstacle If delivered - tips is updated If hit an obstacle - strikes is
 	 * updated
 	 * 
-	 * @param direction 
+	 * @param direction
 	 */
 	public void checkIfStrikeOrTip(int direction) {
 
@@ -554,10 +600,14 @@ public class PizzaKidGUI extends Application {
 
 	public void resetMap() {
 
+		gameOver = false;
+
 		game = new PizzaKid();
 		game.map = new Map(new Avatar(), 12, createTilesFor12());
+		game.collectibles = new Collectibles(0, 0);
 
 		game.map.generateCustomer();
+		game.map.getCustomer().birthTime = game.collectibles.getTime();
 		game.map.generateObstacles();
 
 		heading.getChildren().clear();
