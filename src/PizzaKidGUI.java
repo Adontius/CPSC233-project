@@ -390,7 +390,8 @@ public class PizzaKidGUI extends Application {
 				if (i == game.map.getPlayer().getRow() && j == game.map.getPlayer().getCol()) {
 					x = new Label("^");
 				} else if (game.map.getTiles()[i][j] instanceof Customer) {
-					x = new Label("*");
+					x = new Label();////changed by alice
+					x.setGraphic(new ImageView(customerHouse)); 
 				} else if (game.map.getTiles()[i][j] instanceof House) {
 					x = new Label();////changed by alice
 					x.setGraphic(new ImageView(house1));
