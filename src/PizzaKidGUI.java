@@ -547,6 +547,7 @@ public class PizzaKidGUI extends Application {
 							// if strikes has reached 3, then game is over!
 							if (game.collectibles.getStrikeCount() >= 3) {
 								gameIsOver("You had 3 strikes!");
+								seconds = 0;
 							}
 						}
 						if (seconds >= 59) {
