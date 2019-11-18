@@ -228,7 +228,7 @@ public class PizzaKidGUI extends Application {
 		heading.setAlignment(Pos.CENTER);
 
 		// title
-		title.setFont(Font.font("Comfortaa", 30));
+		title.setFont(Font.font("Arial", 30));
 		title.setTextFill(Color.BLACK);
 		title.setAlignment(Pos.CENTER_LEFT);
 		title.setMinWidth(width / 2);
