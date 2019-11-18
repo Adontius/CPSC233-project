@@ -22,8 +22,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import javafx.scene.image.Image; //to use images
+import javafx.scene.image.ImageView;
+
 public class PizzaKidGUI extends Application {
 
+	Image house1 = new Image("/House1.png", 70.0, 35.0, true, true); //uses House1.png image from folder
+	Image house2 = new Image("/House2.png", true); //uses House2.png image from folder
+	
 	private static PizzaKid game = new PizzaKid();
 	private static Scanner input = new Scanner(System.in);
 
@@ -384,7 +390,8 @@ public class PizzaKidGUI extends Application {
 				} else if (game.map.getTiles()[i][j] instanceof Customer) {
 					x = new Label("*");
 				} else if (game.map.getTiles()[i][j] instanceof House) {
-					x = new Label("H");
+					x = new Label();////changed by alice
+					x.setGraphic(new ImageView(house1));
 				} else if (game.map.getTiles()[i][j] instanceof Trees) {
 					x = new Label("T");
 				} else if (game.map.getTiles()[i][j] instanceof Pothole) {
