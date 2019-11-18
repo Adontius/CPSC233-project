@@ -135,6 +135,41 @@ public class PizzaKid
 		return false;
 	}
 	
+
+	/**
+	 * hard coding : creates the tiles needed for the map layout of a 12x12 map
+	 * 
+	 * @return - a 2d array of tiles
+	 */
+	public static Tile[][] createTilesFor12() {
+		Tile[][] tiles = new Tile[12][12];
+
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 12; j++) {
+				// trees
+				if (i == 0 || j == 0 || i == 11 || j == 11) {
+					tiles[i][j] = new Trees();
+				} else if (j == 1 && i > 2 && i < 11) {
+					tiles[i][j] = new House();
+				} else if ((j == 4 || j == 5) && i > 6 && i < 11) {
+					tiles[i][j] = new House();
+				} else if ((j == 8 || j == 9) && i > 7 && i < 11) {
+					tiles[i][j] = new House();
+				} else if ((i == 4 || i == 5) && j > 3 && j < 8) {
+					tiles[i][j] = new House();
+				} else if (i == 1 && j > 3 && j < 11) {
+					tiles[i][j] = new House();
+				} else if (j == 10 && i > 3 && i < 6) {
+					tiles[i][j] = new House();
+				} else {
+					tiles[i][j] = new Road();
+				}
+			}
+		}
+
+		return tiles;
+	}
+	
 	
 	public void move(int direction) {
 		if(direction == 1) {
