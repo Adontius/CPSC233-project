@@ -32,6 +32,7 @@ public class PizzaKidGUI extends Application {
 	Image house1 = new Image("/House1.png", 70.0, 35.0, true, true); //uses House1.png image from folder
 	Image customerHouse = new Image("/Customer.png", 76.0, 40.0, true, true);
 	Image pizzaCar = new Image("/PizzaCar (1).png", 50.0, 25.0, true, true);
+	Image tree = new Image("/TreeFlowers.png", 70.0, 35.0, true, true);
 	
 	private static PizzaKid game = new PizzaKid();
 	private static Scanner input = new Scanner(System.in);
@@ -392,13 +393,14 @@ public class PizzaKidGUI extends Application {
 					x = new Label();
 					x.setGraphic(new ImageView(pizzaCar));
 				} else if (game.map.getTiles()[i][j] instanceof Customer) {
-					x = new Label();////changed by alice
+					x = new Label();
 					x.setGraphic(new ImageView(customerHouse)); 
 				} else if (game.map.getTiles()[i][j] instanceof House) {
-					x = new Label();////changed by alice
+					x = new Label();
 					x.setGraphic(new ImageView(house1));
 				} else if (game.map.getTiles()[i][j] instanceof Trees) {
-					x = new Label("T");
+					x = new Label();
+					x.setGraphic(new ImageView(tree));
 				} else if (game.map.getTiles()[i][j] instanceof Pothole) {
 					x = new Label("X");
 				} else {
