@@ -582,6 +582,7 @@ public class PizzaKidGUI extends Application {
 		timeLeftForOrder.setText("");
 		game = new PizzaKid();
 		game.map = new Map(new Avatar(), 12, createTilesFor12());
+		game.collectibles = new Collectibles(0, 0);
 		showGUIMap(mapGUI);
 	}
 
