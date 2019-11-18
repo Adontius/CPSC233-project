@@ -28,7 +28,7 @@ import javafx.scene.image.ImageView;
 public class PizzaKidGUI extends Application {
 
 	Image house1 = new Image("/House1.png", 70.0, 35.0, true, true); //uses House1.png image from folder
-	Image house2 = new Image("/House2.png", true); //uses House2.png image from folder
+	Image customerHouse = new Image("/Customer.png", 70.0, 35.0, true, true);
 	
 	private static PizzaKid game = new PizzaKid();
 	private static Scanner input = new Scanner(System.in);
