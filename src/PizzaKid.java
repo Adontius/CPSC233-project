@@ -151,7 +151,7 @@ public class PizzaKid
 					tiles[i][j] = new Trees();
 				} else if (j == 1 && i > 2 && i < 11) {
 					tiles[i][j] = new House();
-				} else if ((j == 4 || j == 5) && i > 6 && i < 11) {
+				} else if ((j == 4 || j == 5) && i > 7 && i < 11) {
 					tiles[i][j] = new House();
 				} else if ((j == 8 || j == 9) && i > 7 && i < 11) {
 					tiles[i][j] = new House();
