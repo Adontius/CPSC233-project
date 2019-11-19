@@ -494,11 +494,9 @@ public class PizzaKidGUI extends Application {
 
 				// everything in nanoseconds
 				long timeSince = now - before;
-				
 				if (gameOver == false) {
 					if (timeSince >= 10000000) {
 						hectoseconds++;
-						System.out.println(hectoseconds);
 						if (hectoseconds >= 99) {
 							hectoseconds = 0;
 							seconds++;
@@ -506,7 +504,7 @@ public class PizzaKidGUI extends Application {
 
 							// to handle time left for order
 							int timeLeft = timeForEachDelivery
-									- (game.collectibles.getTime() - game.map.getCustomer().birthTime);
+									- (seconds /*game.collectibles.getTime()*/ - game.map.getCustomer().birthTime);
 							if (timeLeft >= 0) {
 								timeLeftForOrder.setText("Time left for order: " + timeLeft);
 								System.out.println("Time left for order: " + timeLeft);
@@ -540,11 +538,13 @@ public class PizzaKidGUI extends Application {
 						}
 						((Labeled) heading.getChildren().get(1))
 								.setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
-						
+						before = now;
 					}
+				} else {
+					
+					System.out.println();
+					
 				}
-				
-				before = now;
 			}
 		};
 
