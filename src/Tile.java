@@ -5,7 +5,14 @@
  * House, Obstacle, and Road classes extend this abstract class.
  */
 
-public abstract class Tile {
+public abstract class Tile 
+{
+	boolean passable;
+	
+	public Tile(boolean passable)
+	{
+		this.passable = passable;
+	}
 	
 	
 }
