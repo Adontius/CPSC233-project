@@ -104,7 +104,7 @@ public class Map {
 			for (int j = 0; j < 12; j++) {
 				if (tiles[i][j] instanceof House) {
 					if ((tiles[i][j] instanceof Customer)) {
-						tiles[i][j] = new House();
+						tiles[i][j] = new House(false);
 					}
 				}
 			}
