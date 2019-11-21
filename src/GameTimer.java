@@ -1,6 +1,7 @@
 //This class contains the timer for the game play "day".
 //Will eventually contain the timers set for each new customer.
 //author @alice
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -16,7 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class GameTimer extends Application
+public class GameTimer extends AnimationTimer
 {
 	//constant to indicated how many seconds the timer counts down from
 	private final int START_TIME = 60;
@@ -39,6 +40,11 @@ public class GameTimer extends Application
 		//Details of the timer label
 		//timerLabel.setText();
 		timerLabel.setTextFill(Color.INDIANRED);
+		
+	}
+
+	@Override
+	public void handle(long now) {
 		
 	}
 	
