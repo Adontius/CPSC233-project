@@ -514,6 +514,7 @@ public class PizzaKidGUI extends Application {
 						if (hectoseconds >= 99) {
 							hectoseconds = 0;
 							seconds++;
+							System.out.println(seconds + " seconds");
 							game.collectibles.setTime(game.collectibles.getTime() + 1);
 
 							// to handle time left for order
@@ -521,9 +522,9 @@ public class PizzaKidGUI extends Application {
 									- (game.collectibles.getTime() - game.map.getCustomer().birthTime);
 							if (timeLeft >= 0) {
 								timeLeftForOrder.setText("Time left for order: " + timeLeft);
-								System.out.println("Time left for order: " + timeLeft);
-								System.out.println("Time in collectibles: " + game.collectibles.getTime());
-								System.out.println("Birth time: " + game.map.getCustomer().birthTime);
+//								System.out.println("Time left for order: " + timeLeft);
+//								System.out.println("Time in collectibles: " + game.collectibles.getTime());
+//								System.out.println("Birth time: " + game.map.getCustomer().birthTime);
 								currentTip = timeLeft * tipDeduction;
 							} else {
 								// strike if order is missed
@@ -554,13 +555,13 @@ public class PizzaKidGUI extends Application {
 						}
 						((Labeled) heading.getChildren().get(1))
 								.setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
-						before = now;
 					}
 				} else {
 					
 					System.out.println();
 					
 				}
+				before = now;
 			}
 		};
 
