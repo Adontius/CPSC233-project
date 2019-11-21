@@ -502,13 +502,16 @@ public class PizzaKidGUI extends Application {
 			int seconds = 0;
 			int minutes = 0;
 			long before = 0;
+			long timeSince;
 
 			@Override
 			public void handle(long now) {
 
+				// everything in nanoseconds
+				timeSince = now - before;
+				System.out.println(timeSince);
+				System.out.println(gameOver);
 				if (gameOver == false) {
-					// everything in nanoseconds
-					long timeSince = now - before;
 					if (timeSince >= 10000000) {
 						hectoseconds++;
 						if (hectoseconds >= 99) {
@@ -557,8 +560,6 @@ public class PizzaKidGUI extends Application {
 								.setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
 					}
 				} else {
-					
-					System.out.println();
 					
 				}
 				before = now;
