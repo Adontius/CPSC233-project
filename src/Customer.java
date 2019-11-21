@@ -16,4 +16,14 @@ public class Customer extends House
 	public Customer() {
 		super.hasOrder = true;
 	}
+	
+	public void setBirthTime(int birthTime)
+	{
+		this.birthTime = birthTime;
+	}
+	
+	public int getBirthTime()
+	{
+		return this.birthTime;
+	}
 }
