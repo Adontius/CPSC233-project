@@ -33,6 +33,7 @@ public class PizzaKidGUI extends Application {
 	Image customerHouse = new Image("/Customer.png", 76.0, 40.0, true, true);
 	Image pizzaCar = new Image("/PizzaCar (1).png", 50.0, 25.0, true, true);
 	Image tree = new Image("/TreeFlowers.png", 75.0, 55.0, true, true);
+	Image hole = new Image("/Hole.png", 55.0, 55.0, true, true);
 
 	private static PizzaKid game = new PizzaKid();
 	private static Scanner input = new Scanner(System.in);
@@ -397,7 +398,8 @@ public class PizzaKidGUI extends Application {
 					x = new Label();
 					x.setGraphic(new ImageView(tree));
 				} else if (game.map.getTiles()[i][j] instanceof Pothole) {
-					x = new Label("X");
+					x = new Label();
+					x.setGraphic(new ImageView(hole));
 				} else {
 					x = new Label("");
 				}
