@@ -11,9 +11,10 @@
 public class Customer extends House 
 {
 	
-	int birthTime = 0;
+	int birthTime = 0; //the time at which the customer is generated (birthed)
 	
-	public Customer() {
+	public Customer() 
+	{
 		super(true); //house has an order to be a customer
 	}
 	
