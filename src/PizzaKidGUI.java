@@ -506,9 +506,9 @@ public class PizzaKidGUI extends Application {
 			@Override
 			public void handle(long now) {
 
-				// everything in nanoseconds
-				long timeSince = now - before;
 				if (gameOver == false) {
+					// everything in nanoseconds
+					long timeSince = now - before;
 					if (timeSince >= 10000000) {
 						hectoseconds++;
 						if (hectoseconds >= 99) {
@@ -518,10 +518,12 @@ public class PizzaKidGUI extends Application {
 
 							// to handle time left for order
 							int timeLeft = timeForEachDelivery
-									- (seconds /*game.collectibles.getTime()*/ - game.map.getCustomer().birthTime);
+									- (game.collectibles.getTime() - game.map.getCustomer().birthTime);
 							if (timeLeft >= 0) {
 								timeLeftForOrder.setText("Time left for order: " + timeLeft);
 								System.out.println("Time left for order: " + timeLeft);
+								System.out.println("Time in collectibles: " + game.collectibles.getTime());
+								System.out.println("Birth time: " + game.map.getCustomer().birthTime);
 								currentTip = timeLeft * tipDeduction;
 							} else {
 								// strike if order is missed
