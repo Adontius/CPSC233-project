@@ -14,7 +14,7 @@ public class Customer extends House
 	int birthTime = 0;
 	
 	public Customer() {
-		super.hasOrder = true;
+		super(true); //house has an order to be a customer
 	}
 	
 	public void setBirthTime(int birthTime)

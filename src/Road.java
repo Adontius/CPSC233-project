@@ -4,5 +4,8 @@
 
 public class Road extends Tile
 {
- 
+	public Road()
+	{
+		super(true); //roads are passable
+	}
 }
