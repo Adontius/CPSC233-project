@@ -219,7 +219,7 @@ public class PizzaKidGUI extends Application {
 		playScreen.setMinWidth(width);
 		String style2 = "-fx-background-color: #ADD8E6;";
 		String style3 = "-fx-background-color: #576A75"; //same color as roads
-		playScreen.setStyle(style2);
+		playScreen.setStyle(style2); /// set play screen color to light blue
 		mapGUI.setStyle(style3); //set background of map to road color
 	}
 
