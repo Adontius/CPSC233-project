@@ -5,4 +5,12 @@
 public class House extends Tile
 {
 	boolean hasOrder = false;
+	
+	public House(boolean hasOrder)
+	{
+		super(false); //houses are not passable
+		this.hasOrder = hasOrder;
+		
+	}
+	
 }

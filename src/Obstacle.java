@@ -8,4 +8,8 @@
 public class Obstacle extends Tile 
 {
 	
+	public Obstacle()
+	{
+		super(false); //obstacles are not passable
+	}
 }

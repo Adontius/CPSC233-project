@@ -11,9 +11,20 @@
 public class Customer extends House 
 {
 	
-	int birthTime = 0; // temporary - needs getters and setters
+	int birthTime = 0; //the time at which the customer is generated (birthed)
 	
-	public Customer() {
-		super.hasOrder = true;
+	public Customer() 
+	{
+		super(true); //house has an order to be a customer
+	}
+	
+	public void setBirthTime(int birthTime)
+	{
+		this.birthTime = birthTime;
+	}
+	
+	public int getBirthTime()
+	{
+		return this.birthTime;
 	}
 }
