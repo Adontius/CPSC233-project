@@ -4,13 +4,15 @@
 
 public class Collectibles
 {
-	private int tipMoney; // counter for amount of tip money the avatar has accumulated. Has setter and getter.
+	private double tipMoney; // counter for amount of tip money the avatar has accumulated. Has setter and getter.
 	public int strikeCount; // counter for number of strikes the avatar has accummulated. Has setter and getter.
+	public int time; //counter for the amount of time (in seconds) - different from animation timer
 	
 	public Collectibles(int newTip, int newStrikes)
 	{
 		this.tipMoney = 0;
 		this.strikeCount = 0;
+		this.time = 0;
 	}
 	
 	public Collectibles(Collectibles toCopy)
@@ -24,12 +26,12 @@ public class Collectibles
 		this.tipMoney += tipAmount;
 	}
 
-	public void setTipMoney(int tipMoney)// setter method for tipMoney
+	public void setTipMoney(double tipMoney)// setter method for tipMoney
 	{
 		this.tipMoney = tipMoney;
 	}
 
-	public int getTipMoney() // getter method to return the player's current tip money total
+	public double getTipMoney() // getter method to return the player's current tip money total
 	{
 		return this.tipMoney;
 	}
@@ -48,5 +50,14 @@ public class Collectibles
 	{
 		return this.strikeCount;
 	}
-	
+
+	public void setTime(int time)// setter method to set the number of strikes the avatar has.
+	{
+		this.time = time;
+	}
+
+	public int getTime() //getter method to return the number of strikes the player has
+	{
+		return this.time;
+	}
 }

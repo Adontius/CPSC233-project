@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -24,6 +26,13 @@ import javafx.stage.Stage;
 
 public class PizzaKidGUI extends Application {
 
+	Image house1 = new Image("/HouseGrass.png", 75.0, 45.0, true, true); // uses House1.png image from folder
+	Image customerHouse = new Image("/CustomerGrass.png", 76.0, 40.0, true, true);
+	Image pizzaCar = new Image("/PizzaCar (1).png", 50.0, 25.0, true, true);
+	Image tree = new Image("/Trees.png", 75.0, 55.0, true, true);
+	Image hole = new Image("/Hole.png", 55.0, 55.0, true, true);
+	Image road = new Image("/Road.png", 55.0, 55.0, true, true);
+
 	private static PizzaKid game = new PizzaKid();
 	private static Scanner input = new Scanner(System.in);
 
@@ -34,10 +43,8 @@ public class PizzaKidGUI extends Application {
 	int buttonHeight = 80;
 	int buttonWidth = 100;
 
-	int mapHeight = 400;
-	int mapWidth = 500;
-
-	int gridSize = 10;
+	int mapHeight = 540; // makes each tile size 45x45 pixels
+	int mapWidth = 540;
 
 	StackPane root = new StackPane();
 	VBox startScreen = new VBox();
@@ -48,12 +55,14 @@ public class PizzaKidGUI extends Application {
 	int timeDisplayInSeconds = 0;
 
 	public static void main(String[] args) {
-		game.map = new Map(new Avatar(), 12, createTilesFor12());
+		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		
+		gameOver = true;
 
 		initializeStartScreen();
 		initializePlayScreen();
@@ -93,23 +102,22 @@ public class PizzaKidGUI extends Application {
 	 * Sets the style of the start screen
 	 */
 	public void setStartScreenStyle() {
-		String style = "-fx-background-color: rgba(0, 0, 0, 1);";
-		startScreen.setStyle(style);
+		String style1 = "-fx-background-color: #ffb240;";
+		startScreen.setStyle(style1);
 	}
 
 	/**
 	 * Sets the style of the title and adds it to top part of start screen
 	 * 
-	 * @param top
-	 *            - the top part of the start screen where the title is placed
+	 * @param top - the top part of the start screen where the title is placed
 	 */
 	public void setStartingTitle(HBox top) {
 		top.setAlignment(Pos.CENTER);
 		top.setMinHeight(height / 2);
 
-		Label opening = new Label("Welcome to PizzaKid");
-		opening.setFont(Font.font("Comfortaa", 40));
-		opening.setTextFill(Color.FLORALWHITE);
+		Label opening = new Label("PizzaKid");
+		opening.setFont(Font.font("Courier", 60));
+		opening.setTextFill(Color.WHITE);
 
 		top.getChildren().add(opening);
 	}
@@ -118,15 +126,15 @@ public class PizzaKidGUI extends Application {
 	 * Sets the style and the functionality of the button and adds it to bottom part
 	 * of start screen
 	 * 
-	 * @param bottom
-	 *            - the bottom part of the start screen where the button is placed
+	 * @param bottom - the bottom part of the start screen where the button is
+	 *               placed
 	 */
 	public void setStartButton(HBox bottom) {
 		bottom.setAlignment(Pos.CENTER);
 		bottom.setMinHeight(height / 2);
 
 		Button start = new Button("Start");
-		start.setFont(Font.font("Arial Black", 20));
+		start.setFont(Font.font("Courier", 20));
 		start.setMinSize(buttonWidth, buttonHeight);
 
 		// event in start button
@@ -137,12 +145,25 @@ public class PizzaKidGUI extends Application {
 				playScreen.setVisible(true);
 				isPlaying = true;
 				playScreen.toFront();
+				gameOver = false;
 			}
 		});
 
 		bottom.getChildren().add(start);
 	}
 
+	public void setHowToButton(HBox b)///alice attempt at making how to button on start screen plz help
+	{
+		b.setAlignment(Pos.BOTTOM_CENTER);
+		b.setMinHeight(height / 3);
+		
+		Button howTo = new Button("How to Play");
+		howTo.setFont(Font.font("Courier", 20));
+		howTo.setMinSize(buttonWidth, buttonHeight);
+		
+		
+	}
+	
 	// variables are outside since they need constant updating
 	HBox heading = new HBox();
 	GridPane mapGUI = new GridPane();
@@ -152,6 +173,9 @@ public class PizzaKidGUI extends Application {
 
 	// state is a text that communicates the state of the game to the user
 	Label state;
+	// timeLeftForOrder is continuously updated to let user know the time left to
+	// deliver the order
+	Label timeLeftForOrder;
 
 	public void initializePlayScreen() {
 
@@ -162,8 +186,9 @@ public class PizzaKidGUI extends Application {
 		setHeadings(heading);
 
 		// setting map
-		game.map = new Map(new Avatar(), 12, createTilesFor12());
+		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
 		game.map.generateCustomer();
+		game.map.getCustomer().birthTime = game.collectibles.getTime();
 		game.map.generateObstacles();
 		setMap(mapGUI);
 
@@ -192,15 +217,16 @@ public class PizzaKidGUI extends Application {
 	public void setPlayScreenStyle() {
 		playScreen.setMinHeight(height);
 		playScreen.setMinWidth(width);
-		String style2 = "-fx-background-color: rgba(245, 250, 250, 1);";
+		String style2 = "-fx-background-color: #ADD8E6;";
+		String style3 = "-fx-background-color: #576A75"; //same color as roads
 		playScreen.setStyle(style2);
+		mapGUI.setStyle(style3); //set background of map to road color
 	}
 
 	/**
 	 * Creates heading elements and sets their style
 	 * 
-	 * @param heading
-	 *            - HBox containing the elements of the heading
+	 * @param heading - HBox containing the elements of the heading
 	 */
 	public void setHeadings(HBox heading) {
 
@@ -215,7 +241,7 @@ public class PizzaKidGUI extends Application {
 		heading.setAlignment(Pos.CENTER);
 
 		// title
-		title.setFont(Font.font("Comfortaa", 30));
+		title.setFont(Font.font("Arial", 30));
 		title.setTextFill(Color.BLACK);
 		title.setAlignment(Pos.CENTER_LEFT);
 		title.setMinWidth(width / 2);
@@ -237,8 +263,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Sets the style of the map and calls showGUIMap to put in map elements
 	 * 
-	 * @param map
-	 *            - GridMap which contains the graphical map
+	 * @param map - GridMap which contains the graphical map
 	 */
 	public void setMap(GridPane map) {
 		map.setVgap(5);
@@ -253,8 +278,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Sets the style and functionality of the button and adds it to the footer
 	 * 
-	 * @param footer
-	 *            - HBox containing button
+	 * @param footer - HBox containing button
 	 */
 	public void setFooter(HBox footer) {
 
@@ -273,9 +297,10 @@ public class PizzaKidGUI extends Application {
 				playScreen.setVisible(false);
 				startScreen.setVisible(true);
 				startScreen.toFront();
+				gameOver = true;
 			}
 		});
-		
+
 		Button reset = new Button("Reset");
 		reset.setFont(Font.font("Arial Black", 15));
 		reset.setMinSize(buttonWidth / 2, buttonHeight / 2);
@@ -298,8 +323,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Sets style and elements on the right side (number of strikes)
 	 * 
-	 * @param right
-	 *            - VBox containing right elements
+	 * @param right - VBox containing right elements
 	 */
 	public void setRight(VBox right) {
 		Label strike = new Label("Strikes:");
@@ -316,8 +340,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Sets style and elements on the left side (instructions)
 	 * 
-	 * @param right
-	 *            - VBox containing left elements
+	 * @param right - VBox containing left elements
 	 */
 	public void setLeft(VBox left) {
 		Label instructions = new Label("Instructions:");
@@ -327,9 +350,10 @@ public class PizzaKidGUI extends Application {
 		Label fourth = new Label("- Hit an obstacle earn a strike!");
 		Label fifth = new Label("- Run out of time earn a strike!");
 		Label sixth = new Label("- 3 strikes = Game Over!");
-		Label seventh = new Label("- Good luck!");
+		Label seventh = new Label("Good luck!");
 
 		state = new Label("Start Playing!");
+		timeLeftForOrder = new Label("");
 
 		left.getChildren().add(instructions);
 		left.getChildren().add(first);
@@ -340,6 +364,7 @@ public class PizzaKidGUI extends Application {
 		left.getChildren().add(sixth);
 		left.getChildren().add(seventh);
 		left.getChildren().add(state);
+		left.getChildren().add(timeLeftForOrder);
 
 		// instructions
 		instructions.setFont(Font.font("Arial", 15));
@@ -353,13 +378,18 @@ public class PizzaKidGUI extends Application {
 		state.setAlignment(Pos.CENTER);
 		state.setMinWidth(width / 4);
 
+		// time left
+		timeLeftForOrder.setFont(Font.font("Arial", 15));
+		timeLeftForOrder.setTextFill(Color.BLACK);
+		timeLeftForOrder.setAlignment(Pos.CENTER);
+		timeLeftForOrder.setMinWidth(width / 4);
+
 	}
 
 	/**
 	 * Sets elements of the map on the graphical map
 	 * 
-	 * @param map
-	 *            - GridPane that represents the map graphically
+	 * @param map - GridPane that represents the map graphically
 	 */
 	public void showGUIMap(GridPane map) {
 		map.getChildren().clear();
@@ -368,59 +398,38 @@ public class PizzaKidGUI extends Application {
 			for (int j = 0; j < game.map.getSize(); j++) {
 				Label x;
 				if (i == game.map.getPlayer().getRow() && j == game.map.getPlayer().getCol()) {
-					x = new Label("^");
+					x = new Label();
+					x.setGraphic(new ImageView(pizzaCar));
 				} else if (game.map.getTiles()[i][j] instanceof Customer) {
-					x = new Label("*");
+					x = new Label();
+					x.setGraphic(new ImageView(customerHouse));
 				} else if (game.map.getTiles()[i][j] instanceof House) {
-					x = new Label("H");
+					x = new Label();
+					x.setGraphic(new ImageView(house1));
 				} else if (game.map.getTiles()[i][j] instanceof Trees) {
-					x = new Label("T");
+					x = new Label();
+					x.setGraphic(new ImageView(tree));
 				} else if (game.map.getTiles()[i][j] instanceof Pothole) {
-					x = new Label("X");
+					x = new Label();
+					x.setGraphic(new ImageView(hole));
 				} else {
-					x = new Label("");
+					x = new Label(""); //shows empty if nothing else in tile
 				}
 				x.setAlignment(Pos.CENTER);
 				x.setMinHeight(mapHeight / game.map.getSize());
 				x.setMinWidth(mapWidth / game.map.getSize());
 				map.add(x, j, i);
 			}
-		}
-	}
-
-	/**
-	 * hard coding : creates the tiles needed for the map layout of a 12x12 map
-	 * 
-	 * @return - a 2d array of tiles
-	 */
-	public static Tile[][] createTilesFor12() {
-		Tile[][] tiles = new Tile[12][12];
-
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 12; j++) {
-				// trees
-				if (i == 0 || j == 0 || i == 11 || j == 11) {
-					tiles[i][j] = new Trees();
-				} else if (j == 1 && i > 2 && i < 11) {
-					tiles[i][j] = new House();
-				} else if ((j == 4 || j == 5) && i > 6 && i < 11) {
-					tiles[i][j] = new House();
-				} else if ((j == 8 || j == 9) && i > 7 && i < 11) {
-					tiles[i][j] = new House();
-				} else if ((i == 4 || i == 5) && j > 3 && j < 8) {
-					tiles[i][j] = new House();
-				} else if (i == 1 && j > 3 && j < 11) {
-					tiles[i][j] = new House();
-				} else if (j == 10 && i > 3 && i < 6) {
-					tiles[i][j] = new House();
-				} else {
-					tiles[i][j] = new Road();
-				}
-			}
+			map.setPadding(new Insets(0, 0, 0, 0));
 		}
 
-		return tiles;
 	}
+
+	// variables related to game play
+	public static boolean gameOver = false;
+	public static int timeForEachDelivery = 10; // in seconds
+	public static double tipDeduction = 0.5; // tip deduction for each second that passed
+	public static double currentTip = 5;
 
 	public void playGame(BorderPane playScreen) {
 
@@ -428,74 +437,65 @@ public class PizzaKidGUI extends Application {
 
 			public void handle(KeyEvent ke) {
 
-				if (game.map.getPlayer().getPizzaDelivered() == true && game.map.getPlayer().getHitObstacle() == false) // alice
-																														// edited
-																														// this
-																														// to
-																														// add
-																														// "
-																														// ==
-																														// true"
-				{
-					game.map.generateCustomer();
-					game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
-																	// pizza
-																	// to a customer.
-					state.setText("You delivered a pizza!");
-				}
+				if (gameOver == false) {
 
-				// when the player hits an obstacle, the obstacles are removed and regenerated
-				// and the player is put back to starting position
-				if (game.map.getPlayer().getHitObstacle() == true) {
-					game.map.removeObstacle();
-					game.map.getPlayer().setHitObstacle(false);
-					game.map.generateObstacles();
-					game.map.getPlayer().setCol(1);
-					game.map.getPlayer().setRow(1);
+					if (game.map.getPlayer().getPizzaDelivered() == true
+							&& game.map.getPlayer().getHitObstacle() == false) {
+						game.map.generateCustomer();
+						game.map.getCustomer().birthTime = game.collectibles.getTime();
+						game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
+																		// pizza
+																		// to a customer.
+						state.setText("You delivered a pizza!");
+					}
+
+					// when the player hits an obstacle, the obstacles are removed and regenerated
+					// and the player is put back to starting position
+					if (game.map.getPlayer().getHitObstacle() == true) {
+						game.map.removeObstacle();
+						game.map.getPlayer().setHitObstacle(false);
+						game.map.generateObstacles();
+						game.map.getPlayer().setCol(1);
+						game.map.getPlayer().setRow(1);
+						showGUIMap(mapGUI);
+					} else if (ke.getCode() == KeyCode.UP) {
+						if (game.checkIfValidMove(1, currentTip)) {
+							game.move(1);
+							state.setText("Keep going!");
+						} else {
+							checkIfStrikeOrTip(1);
+						}
+					} else if (ke.getCode() == KeyCode.LEFT) {
+						if (game.checkIfValidMove(2, currentTip)) {
+							state.setText("Keep going!");
+							game.move(2);
+						} else {
+							checkIfStrikeOrTip(2);
+						}
+					} else if (ke.getCode() == KeyCode.DOWN) {
+						if (game.checkIfValidMove(3, currentTip)) {
+							state.setText("Keep going!");
+							game.move(3);
+						} else {
+							checkIfStrikeOrTip(3);
+						}
+					} else if (ke.getCode() == KeyCode.RIGHT) {
+						if (game.checkIfValidMove(4, currentTip)) {
+							state.setText("Keep going!");
+							game.move(4);
+						} else {
+							checkIfStrikeOrTip(4);
+						}
+					}
+
 					showGUIMap(mapGUI);
-				} else if (ke.getCode() == KeyCode.UP) {
-					if (game.checkIfValidMove(1)) {
-						game.move(1);
-						state.setText("Keep going!");
-					} else {
-						checkIfStrikeOrTip(1);
-					}
-				} else if (ke.getCode() == KeyCode.LEFT) {
-					if (game.checkIfValidMove(2)) {
-						state.setText("Keep going!");
-						game.move(2);
-					} else {
-						checkIfStrikeOrTip(2);
-					}
-				} else if (ke.getCode() == KeyCode.DOWN) {
-					if (game.checkIfValidMove(3)) {
-						state.setText("Keep going!");
-						game.move(3);
-					} else {
-						checkIfStrikeOrTip(3);
-					}
-				} else if (ke.getCode() == KeyCode.RIGHT) {
-					if (game.checkIfValidMove(4)) {
-						state.setText("Keep going!");
-						game.move(4);
-					} else {
-						checkIfStrikeOrTip(4);
-					}
-				}
 
-				showGUIMap(mapGUI);
-
-				// if strikes has reached 3, then game is over!
-				if (game.collectibles.getStrikeCount() >= 3) {
-					state.setText("Game Over!");
-					game.map = new Map(new Avatar(), 12, createTilesFor12());
 				}
 
 			}
 
 		});
 
-		
 		AnimationTimer timer = new AnimationTimer() {
 
 			int hectoseconds = 0;
@@ -505,26 +505,82 @@ public class PizzaKidGUI extends Application {
 
 			@Override
 			public void handle(long now) {
+
 				// everything in nanoseconds
 				long timeSince = now - before;
-				if (timeSince >= 10000000) {
-					hectoseconds++;
-					if(hectoseconds >= 99) {
-						hectoseconds = 0;
-						seconds++;
+				if (gameOver == false) {
+					if (timeSince >= 10000000) {
+						hectoseconds++;
+						if (hectoseconds >= 99) {
+							hectoseconds = 0;
+							seconds++;
+							game.collectibles.setTime(game.collectibles.getTime() + 1);
+
+							// to handle time left for order
+							int timeLeft = timeForEachDelivery
+									- (seconds /*game.collectibles.getTime()*/ - game.map.getCustomer().birthTime);
+							if (timeLeft >= 0) {
+								timeLeftForOrder.setText("Time left for order: " + timeLeft);
+								System.out.println("Time left for order: " + timeLeft);
+								currentTip = timeLeft * tipDeduction;
+							} else {
+								// strike if order is missed
+								game.map.removeCustomer();
+								game.map.generateCustomer();
+								game.collectibles.addStrike();
+								showGUIMap(mapGUI);
+								displayStrike();
+								state.setText("You missed an order!");
+								game.map.getCustomer().birthTime = game.collectibles.getTime();
+								currentTip = 5;
+							}
+						}
+						
+						// if strikes has reached 3, then game is over!
+						if (game.collectibles.getStrikeCount() >= 3) {
+							gameIsOver("You had 3 strikes!");
+							hectoseconds = 0;
+							seconds = 0;
+							minutes = 0;
+						}
+						
+						
+						if (seconds >= 59) {
+							seconds = 0;
+							minutes++;
+							gameIsOver("Your time is up!");
+						}
+						((Labeled) heading.getChildren().get(1))
+								.setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
+						before = now;
 					}
-					if(seconds >= 59) {
-						seconds = 0;
-						minutes++;
-					}
-					((Labeled) heading.getChildren().get(1)).setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
-					before = now;
+				} else {
+					
+					System.out.println();
+					
 				}
 			}
 		};
 
 		timer.start();
 
+	}
+
+	/**
+	 * Makes the gameOver variable true, shows results to user, and resets the map
+	 * 
+	 * @param statement - reason why the game is over (time is up or 3 strikes
+	 *                  reached)
+	 */
+	public void gameIsOver(String statement) {
+		gameOver = true;
+		state.setText("Game Over! " + statement + "\n" + "Your total tip is: $" + game.collectibles.getTipMoney()
+				+ "\nPress reset to play again!");
+		timeLeftForOrder.setText("");
+		game = new PizzaKid();
+		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.collectibles = new Collectibles(0, 0);
+		showGUIMap(mapGUI);
 	}
 
 	/**
@@ -541,23 +597,31 @@ public class PizzaKidGUI extends Application {
 
 		if (game.checkSurroundings(direction) instanceof Obstacle) {
 			// updates strikes
-			Label strike = new Label("Strike!!!!");
-			state.setText("You hit an obstacle! 1 strike!");
-			right.getChildren().add(strike);
-
-			strike.setFont(Font.font("Arial", 15));
-			strike.setTextFill(Color.BLACK);
-			strike.setAlignment(Pos.CENTER);
-			strike.setMinWidth(width / 4);
+			displayStrike();
 		}
+	}
+
+	public void displayStrike() {
+		Label strike = new Label("Strike!!");
+		state.setText("You hit an obstacle! 1 strike!");
+		right.getChildren().add(strike);
+
+		strike.setFont(Font.font("Arial", 15));
+		strike.setTextFill(Color.BLACK);
+		strike.setAlignment(Pos.CENTER);
+		strike.setMinWidth(width / 4);
 	}
 
 	public void resetMap() {
 
+		gameOver = false;
+
 		game = new PizzaKid();
-		game.map = new Map(new Avatar(), 12, createTilesFor12());
+		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.collectibles = new Collectibles(0, 0);
 
 		game.map.generateCustomer();
+		game.map.getCustomer().birthTime = game.collectibles.getTime();
 		game.map.generateObstacles();
 
 		heading.getChildren().clear();

@@ -153,5 +153,16 @@ public class Map {
 		}
 		player.deliverPizza();
 	}
+	
+	public Customer getCustomer() {
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 12; j++) {
+				if ((tiles[i][j] instanceof Customer)) {
+					return (Customer) tiles[i][j];
+				}
+			}
+		}
+		return new Customer();
+	}
 
 }

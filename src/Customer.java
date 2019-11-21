@@ -10,6 +10,9 @@
 
 public class Customer extends House 
 {
+	
+	int birthTime = 0; // temporary - needs getters and setters
+	
 	public Customer() {
 		super.hasOrder = true;
 	}
