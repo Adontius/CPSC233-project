@@ -5,28 +5,28 @@ import org.junit.Test;
 public class PizzaKidTextTest {
 
 	@Test
-	public void testMain() {
+	public final void testMain() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	public void testPlay() {
+	public final void testPlay() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	public void testShowStartScreen() {
+	public final void testShowStartScreen() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	public void testShowPlayScreen() {
+	public final void testShowPlayScreen() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	public void testDisplayMapToConsole() {
-		fail("Not yet implemented"); // TODO 
+	public final void testDisplayMapToConsole() {
+		fail("Not yet implemented"); // TODO
 	}
 
 }
