@@ -24,9 +24,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import javafx.scene.image.Image; //to use images
-import javafx.scene.image.ImageView;
-
 public class PizzaKidGUI extends Application {
 
 	Image house1 = new Image("/HouseGrass.png", 75.0, 45.0, true, true); // uses House1.png image from folder
@@ -105,8 +102,8 @@ public class PizzaKidGUI extends Application {
 	 * Sets the style of the start screen
 	 */
 	public void setStartScreenStyle() {
-		String style = "-fx-background-color: rgba(0, 0, 0, 1);";
-		startScreen.setStyle(style);
+		String style1 = "-fx-background-color: #ffb240;";
+		startScreen.setStyle(style1);
 	}
 
 	/**
@@ -118,9 +115,9 @@ public class PizzaKidGUI extends Application {
 		top.setAlignment(Pos.CENTER);
 		top.setMinHeight(height / 2);
 
-		Label opening = new Label("Welcome to PizzaKid");
-		opening.setFont(Font.font("Comfortaa", 40));
-		opening.setTextFill(Color.FLORALWHITE);
+		Label opening = new Label("PizzaKid");
+		opening.setFont(Font.font("Courier", 60));
+		opening.setTextFill(Color.WHITE);
 
 		top.getChildren().add(opening);
 	}
@@ -137,7 +134,7 @@ public class PizzaKidGUI extends Application {
 		bottom.setMinHeight(height / 2);
 
 		Button start = new Button("Start");
-		start.setFont(Font.font("Arial Black", 20));
+		start.setFont(Font.font("Courier", 20));
 		start.setMinSize(buttonWidth, buttonHeight);
 
 		// event in start button
@@ -155,6 +152,18 @@ public class PizzaKidGUI extends Application {
 		bottom.getChildren().add(start);
 	}
 
+	public void setHowToButton(HBox b)///alice attempt at making how to button on start screen plz help
+	{
+		b.setAlignment(Pos.BOTTOM_CENTER);
+		b.setMinHeight(height / 3);
+		
+		Button howTo = new Button("How to Play");
+		howTo.setFont(Font.font("Courier", 20));
+		howTo.setMinSize(buttonWidth, buttonHeight);
+		
+		
+	}
+	
 	// variables are outside since they need constant updating
 	HBox heading = new HBox();
 	GridPane mapGUI = new GridPane();
@@ -416,7 +425,7 @@ public class PizzaKidGUI extends Application {
 
 	}
 
-	// variables related to game
+	// variables related to game play
 	public static boolean gameOver = false;
 	public static int timeForEachDelivery = 10; // in seconds
 	public static double tipDeduction = 0.5; // tip deduction for each second that passed
@@ -593,7 +602,7 @@ public class PizzaKidGUI extends Application {
 	}
 
 	public void displayStrike() {
-		Label strike = new Label("Strike!!!!");
+		Label strike = new Label("Strike!!");
 		state.setText("You hit an obstacle! 1 strike!");
 		right.getChildren().add(strike);
 
