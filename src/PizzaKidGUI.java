@@ -29,10 +29,10 @@ import javafx.scene.image.ImageView;
 
 public class PizzaKidGUI extends Application {
 
-	Image house1 = new Image("/House1.png", 70.0, 35.0, true, true); // uses House1.png image from folder
-	Image customerHouse = new Image("/Customer.png", 76.0, 40.0, true, true);
+	Image house1 = new Image("/HouseGrass.png", 75.0, 45.0, true, true); // uses House1.png image from folder
+	Image customerHouse = new Image("/CustomerGrass.png", 76.0, 40.0, true, true);
 	Image pizzaCar = new Image("/PizzaCar (1).png", 50.0, 25.0, true, true);
-	Image tree = new Image("/TreeFlowers.png", 75.0, 55.0, true, true);
+	Image tree = new Image("/Trees.png", 75.0, 55.0, true, true);
 	Image hole = new Image("/Hole.png", 55.0, 55.0, true, true);
 	Image road = new Image("/Road.png", 55.0, 55.0, true, true);
 
@@ -208,8 +208,10 @@ public class PizzaKidGUI extends Application {
 	public void setPlayScreenStyle() {
 		playScreen.setMinHeight(height);
 		playScreen.setMinWidth(width);
-		String style2 = "-fx-background-color: rgba(245, 250, 250, 1);";
+		String style2 = "-fx-background-color: #ADD8E6;";
+		String style3 = "-fx-background-color: #576A75"; //same color as roads
 		playScreen.setStyle(style2);
+		mapGUI.setStyle(style3); //set background of map to road color
 	}
 
 	/**
@@ -402,8 +404,7 @@ public class PizzaKidGUI extends Application {
 					x = new Label();
 					x.setGraphic(new ImageView(hole));
 				} else {
-					x = new Label(); //shows road if nothing else in tile
-					x.setGraphic(new ImageView(road));
+					x = new Label(""); //shows empty if nothing else in tile
 				}
 				x.setAlignment(Pos.CENTER);
 				x.setMinHeight(mapHeight / game.map.getSize());
