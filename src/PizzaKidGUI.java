@@ -102,7 +102,7 @@ public class PizzaKidGUI extends Application {
 	 * Sets the style of the start screen
 	 */
 	public void setStartScreenStyle() {
-		String style1 = "-fx-background-color: #ffb240;";
+		String style1 = "-fx-background-color: #ffb240;"; //sets start screen to orange
 		startScreen.setStyle(style1);
 	}
 
