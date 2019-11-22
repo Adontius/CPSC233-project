@@ -49,6 +49,7 @@ public class PizzaKidGUI extends Application {
 	StackPane root = new StackPane();
 	VBox startScreen = new VBox();
 	BorderPane playScreen = new BorderPane();
+	VBox instructionScreen = new VBox();
 
 	boolean isPlaying = false;
 
@@ -66,7 +67,9 @@ public class PizzaKidGUI extends Application {
 
 		initializeStartScreen();
 		initializePlayScreen();
+		initializeInstructionScreen();
 
+		root.getChildren().add(instructionScreen);
 		root.getChildren().add(playScreen);
 		root.getChildren().add(startScreen);
 
@@ -78,7 +81,7 @@ public class PizzaKidGUI extends Application {
 	}
 
 	/**
-	 * Puts in and defines the elements in the start screen (title and button)
+	 * Puts in and defines the elements in the start screen (title, start button, instructions button)
 	 */
 	public void initializeStartScreen() {
 
@@ -92,9 +95,14 @@ public class PizzaKidGUI extends Application {
 		// start button
 		HBox bottom = new HBox();
 		setStartButton(bottom);
+		
+		// instructions button
+		HBox feet = new HBox();
+		setInstructionsButton(feet);
 
 		startScreen.getChildren().add(top);
 		startScreen.getChildren().add(bottom);
+		startScreen.getChildren().add(feet);
 
 	}
 
@@ -113,7 +121,7 @@ public class PizzaKidGUI extends Application {
 	 */
 	public void setStartingTitle(HBox top) {
 		top.setAlignment(Pos.CENTER);
-		top.setMinHeight(height / 2);
+		top.setMinHeight(height / 3);
 
 		Label opening = new Label("PizzaKid");
 		opening.setFont(Font.font("Courier", 60));
@@ -131,7 +139,7 @@ public class PizzaKidGUI extends Application {
 	 */
 	public void setStartButton(HBox bottom) {
 		bottom.setAlignment(Pos.CENTER);
-		bottom.setMinHeight(height / 2);
+		bottom.setMinHeight(height / 3);
 
 		Button start = new Button("Start");
 		start.setFont(Font.font("Courier", 20));
@@ -150,6 +158,35 @@ public class PizzaKidGUI extends Application {
 		});
 
 		bottom.getChildren().add(start);
+	}
+	
+
+	/**
+	 * Sets the instructions button's functionalities
+	 * @param feet - the most bottom part of the start screen
+	 */
+	public void setInstructionsButton(HBox feet) {
+		feet.setAlignment(Pos.CENTER);
+		feet.setMinHeight(height / 3);
+
+		Button instructions = new Button("Instructions");
+		instructions.setFont(Font.font("Courier", 20));
+		instructions.setMinSize(buttonWidth, buttonHeight);
+
+		// event in start button
+		instructions.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				startScreen.setVisible(false);
+				playScreen.setVisible(false);
+				instructionScreen.setVisible(true);
+				isPlaying = false;
+				instructionScreen.toFront();
+				gameOver = true;
+			}
+		});
+
+		feet.getChildren().add(instructions);
 	}
 
 	public void setHowToButton(HBox b)///alice attempt at making how to button on start screen plz help
@@ -336,41 +373,18 @@ public class PizzaKidGUI extends Application {
 
 		right.getChildren().add(strike);
 	}
-
+	
 	/**
 	 * Sets style and elements on the left side (instructions)
 	 * 
 	 * @param right - VBox containing left elements
 	 */
 	public void setLeft(VBox left) {
-		Label instructions = new Label("Instructions:");
-		Label first = new Label("- Use the arrow keys to move");
-		Label second = new Label("- Deliver pizza on time to get tips");
-		Label third = new Label("- Earn the most tips in 1 minute!");
-		Label fourth = new Label("- Hit an obstacle earn a strike!");
-		Label fifth = new Label("- Run out of time earn a strike!");
-		Label sixth = new Label("- 3 strikes = Game Over!");
-		Label seventh = new Label("Good luck!");
 
 		state = new Label("Start Playing!");
 		timeLeftForOrder = new Label("");
-
-		left.getChildren().add(instructions);
-		left.getChildren().add(first);
-		left.getChildren().add(second);
-		left.getChildren().add(third);
-		left.getChildren().add(fourth);
-		left.getChildren().add(fifth);
-		left.getChildren().add(sixth);
-		left.getChildren().add(seventh);
 		left.getChildren().add(state);
 		left.getChildren().add(timeLeftForOrder);
-
-		// instructions
-		instructions.setFont(Font.font("Arial", 15));
-		instructions.setTextFill(Color.BLACK);
-		instructions.setAlignment(Pos.CENTER);
-		instructions.setMinWidth(width / 4);
 
 		// state
 		state.setFont(Font.font("Arial", 15));
@@ -384,6 +398,54 @@ public class PizzaKidGUI extends Application {
 		timeLeftForOrder.setAlignment(Pos.CENTER);
 		timeLeftForOrder.setMinWidth(width / 4);
 
+	}
+
+	/**
+	 * Initializes the Instruction Screen by putting in the instructions to the instruction VBox
+	 */
+	public void initializeInstructionScreen() {
+		Label instructions = new Label("Instructions:");
+		Label first = new Label("- Use the arrow keys to move");
+		Label second = new Label("- Deliver pizza on time to get tips");
+		Label third = new Label("- Earn the most tips in 1 minute!");
+		Label fourth = new Label("- Hit an obstacle earn a strike!");
+		Label fifth = new Label("- Run out of time earn a strike!");
+		Label sixth = new Label("- 3 strikes = Game Over!");
+		Label seventh = new Label("Good luck!");
+		
+		Button quit = new Button("Quit");
+		setQuitInstructionsButton(quit);
+
+		instructionScreen.getChildren().add(instructions);
+		instructionScreen.getChildren().add(first);
+		instructionScreen.getChildren().add(second);
+		instructionScreen.getChildren().add(third);
+		instructionScreen.getChildren().add(fourth);
+		instructionScreen.getChildren().add(fifth);
+		instructionScreen.getChildren().add(sixth);
+		instructionScreen.getChildren().add(seventh);
+		instructionScreen.getChildren().add(quit);
+
+		instructions.setFont(Font.font("Arial", 15));
+		instructions.setTextFill(Color.BLACK);
+		instructions.setAlignment(Pos.CENTER);
+		instructions.setMinWidth(width / 4);
+	}
+	
+	/**
+	 * Sets the quit button in the instructions screen
+	 * @param button - quit button object
+	 */
+	public void setQuitInstructionsButton(Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				startScreen.setVisible(true);
+				playScreen.setVisible(false);
+				instructionScreen.setVisible(false);
+				startScreen.toFront();
+			}
+		});
 	}
 
 	/**
