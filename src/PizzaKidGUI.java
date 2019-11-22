@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 
 public class PizzaKidGUI extends Application {
 
+	//Images used in the game play:
 	Image house1 = new Image("/HouseGrass.png", 75.0, 45.0, true, true); // uses House1.png image from folder
 	Image customerHouse = new Image("/CustomerGrass.png", 76.0, 40.0, true, true);
 	Image pizzaCar = new Image("/PizzaCar (1).png", 50.0, 25.0, true, true);
@@ -120,7 +121,7 @@ public class PizzaKidGUI extends Application {
 		top.setAlignment(Pos.CENTER);
 		top.setMinHeight(height / 2);
 
-		Label opening = new Label("PizzaKid");
+		Label opening = new Label("");
 		opening.setFont(Font.font("Courier", 60));
 		opening.setTextFill(Color.WHITE);
 
@@ -138,8 +139,8 @@ public class PizzaKidGUI extends Application {
 		bottom.setAlignment(Pos.CENTER);
 		bottom.setMinHeight(height / 2);
 
-		Button start = new Button("Start");
-		start.setFont(Font.font("Courier", 20));
+		Button start = new Button("START");
+		start.setFont(Font.font("Courier New", 30));
 		start.setMinSize(buttonWidth, buttonHeight);
 
 		// event in start button
