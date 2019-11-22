@@ -15,6 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -102,8 +104,11 @@ public class PizzaKidGUI extends Application {
 	 * Sets the style of the start screen
 	 */
 	public void setStartScreenStyle() {
-		String style1 = "-fx-background-color: #ffb240;"; //sets background to orange
-		startScreen.setStyle(style1);
+		//String style1 = "-fx-background-color: #ffb240;"; //sets background to orange
+		Image pizzaBack = new Image("/background.png");
+		BackgroundImage backgroundImage = new BackgroundImage(pizzaBack, null, null, null, null);
+		Background background = new Background(backgroundImage);
+		startScreen.setBackground(background);
 	}
 
 	/**
