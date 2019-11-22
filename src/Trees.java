@@ -6,6 +6,13 @@
 
 public class Trees extends Obstacle 
 {
+	private boolean boundary;
 	
+	public boolean GetBoundary() {
+		return boundary;
+	}
 
+	public void SetBoundary() {
+		return;
+	}
 }
