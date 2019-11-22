@@ -438,27 +438,8 @@ public class PizzaKidGUI extends Application {
 			public void handle(KeyEvent ke) {
 
 				if (gameOver == false) {
-
-					if (game.map.getPlayer().getPizzaDelivered() == true
-							&& game.map.getPlayer().getHitObstacle() == false) {
-						game.map.generateCustomer();
-						game.map.getCustomer().birthTime = game.collectibles.getTime();
-						game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
-																		// pizza
-																		// to a customer.
-						state.setText("You delivered a pizza!");
-					}
-
-					// when the player hits an obstacle, the obstacles are removed and regenerated
-					// and the player is put back to starting position
-					if (game.map.getPlayer().getHitObstacle() == true) {
-						game.map.removeObstacle();
-						game.map.getPlayer().setHitObstacle(false);
-						game.map.generateObstacles();
-						game.map.getPlayer().setCol(1);
-						game.map.getPlayer().setRow(1);
-						showGUIMap(mapGUI);
-					} else if (ke.getCode() == KeyCode.UP) {
+					
+					if (ke.getCode() == KeyCode.UP) {
 						if (game.checkIfValidMove(1, currentTip)) {
 							game.move(1);
 							state.setText("Keep going!");
@@ -509,15 +490,12 @@ public class PizzaKidGUI extends Application {
 
 				// everything in nanoseconds
 				timeSince = now - before;
-				System.out.println(timeSince);
-				System.out.println(gameOver);
 				if (gameOver == false) {
 					if (timeSince >= 10000000) {
 						hectoseconds++;
 						if (hectoseconds >= 99) {
 							hectoseconds = 0;
 							seconds++;
-							System.out.println(seconds + " seconds");
 							game.collectibles.setTime(game.collectibles.getTime() + 1);
 
 							// to handle time left for order
@@ -525,9 +503,6 @@ public class PizzaKidGUI extends Application {
 									- (game.collectibles.getTime() - game.map.getCustomer().birthTime);
 							if (timeLeft >= 0) {
 								timeLeftForOrder.setText("Time left for order: " + timeLeft);
-//								System.out.println("Time left for order: " + timeLeft);
-//								System.out.println("Time in collectibles: " + game.collectibles.getTime());
-//								System.out.println("Birth time: " + game.map.getCustomer().birthTime);
 								currentTip = timeLeft * tipDeduction;
 							} else {
 								// strike if order is missed
@@ -541,6 +516,28 @@ public class PizzaKidGUI extends Application {
 								currentTip = 5;
 							}
 						}
+					
+						if (game.map.getPlayer().getPizzaDelivered() == true
+								&& game.map.getPlayer().getHitObstacle() == false) {
+							game.map.generateCustomer();
+							game.map.getCustomer().birthTime = game.collectibles.getTime();
+							game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
+																			// pizza
+																			// to a customer.
+							state.setText("You delivered a pizza!");
+							showGUIMap(mapGUI);
+						}
+
+						// when the player hits an obstacle, the obstacles are removed and regenerated
+						// and the player is put back to starting position
+						if (game.map.getPlayer().getHitObstacle() == true) {
+							game.map.removeObstacle();
+							game.map.getPlayer().setHitObstacle(false);
+							game.map.generateObstacles();
+							game.map.getPlayer().setCol(1);
+							game.map.getPlayer().setRow(1);
+							showGUIMap(mapGUI);
+						} else
 						
 						// if strikes has reached 3, then game is over!
 						if (game.collectibles.getStrikeCount() >= 3) {
@@ -598,6 +595,10 @@ public class PizzaKidGUI extends Application {
 
 		// updates tips
 		((Labeled) heading.getChildren().get(2)).setText("Tips: " + game.collectibles.getTipMoney());
+		
+		if(game.checkSurroundings(direction) instanceof Customer) {
+			game.map.getPlayer().setPizzaDelivered(true);
+		}
 
 		if (game.checkSurroundings(direction) instanceof Obstacle) {
 			// updates strikes
