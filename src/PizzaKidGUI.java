@@ -516,7 +516,6 @@ public class PizzaKidGUI extends Application {
 						if (hectoseconds >= 99) {
 							hectoseconds = 0;
 							seconds++;
-							System.out.println(seconds + " seconds");
 							game.collectibles.setTime(game.collectibles.getTime() + 1);
 
 							// to handle time left for order
