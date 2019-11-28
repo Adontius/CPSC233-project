@@ -24,31 +24,5 @@ public class Pothole extends Obstacle
 	{
 		this.npothole = n;
 	}
-//	/**
-//	 * 
-//	 */
-//	public void generateObstacles() {
-//		ArrayList<Integer> rowNumbers = new ArrayList<Integer>(0);
-//		ArrayList<Integer> colNumbers = new ArrayList<Integer>(0);
-//		for (int i = 0; i < 12; i++) {
-//			for (int j = 0; j < 12; j++) {
-//				if (tiles[i][j] instanceof Road) {
-//					rowNumbers.add(i);
-//					colNumbers.add(j);
-//				}
-//			}
-//		}
-//		Random rand = new Random();
-//
-//		int numOfObstacles = 3;
-//
-//		for (int i = 0; i < numOfObstacles; i++) {
-//			int randInt = rand.nextInt(rowNumbers.size());
-//
-//			int randomHouseRowPosition = rowNumbers.get(randInt);
-//			int randomHouseColPosition = colNumbers.get(randInt);
-//
-//			tiles[randomHouseRowPosition][randomHouseColPosition] = new Pothole();
-//		}
-//	}
+
 }
