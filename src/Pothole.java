@@ -9,16 +9,22 @@ public class Pothole extends Obstacle
 {
 	private int npothole = 3;
 	
-	public Pothole(){
-		super();
+	//potholes are impassable 
+	public Pothole()
+	{
+		super(); 
 	}
 	
-	public int GetNpothole() {
+	//returns number of potholes set to spawn
+	public int GetNpothole()
+	{
 		return npothole;
 	}
 	
-	public void SetNpothole() {
-		return;
+	//sets the numbers of potholes that spawn
+	public void SetNpothole(int n)
+	{
+		this.npothole = n;
 	}
 //	/**
 //	 * 
