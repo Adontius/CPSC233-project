@@ -1,4 +1,4 @@
-//This class contains the timer for the game play "day".
+//This class contains the timer for the game play "day", as well as the timer for each customer order.
 
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
