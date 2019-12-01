@@ -152,6 +152,7 @@ public class PizzaKidGUI extends Application {
 				isPlaying = true;
 				playScreen.toFront();
 				gameOver = false;
+				timer.start();
 			}
 		});
 
@@ -317,6 +318,7 @@ public class PizzaKidGUI extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				resetMap();
+				timer.start();
 			}
 		});
 
@@ -437,6 +439,8 @@ public class PizzaKidGUI extends Application {
 	public static double tipDeduction = 0.5; // tip deduction for each second that passed
 	public static double currentTip = 5;
 
+	public static GameTimer timer = new GameTimer();
+
 	public void playGame(BorderPane playScreen) {
 
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -482,8 +486,6 @@ public class PizzaKidGUI extends Application {
 			}
 
 		});
-
-		GameTimer timer = new GameTimer();
 		
 		
 //		AnimationTimer timer = new AnimationTimer() {
@@ -571,8 +573,6 @@ public class PizzaKidGUI extends Application {
 //				before = now;
 //			}
 //		};
-
-		timer.start();
 
 	}
 

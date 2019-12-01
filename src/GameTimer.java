@@ -38,13 +38,14 @@ public class GameTimer extends AnimationTimer
 		// everything in nanoseconds
 		timeSince = now - before;
 		if (PizzaKidGUI.gameOver == false) {
+			System.out.println(timeSince);
 			if (timeSince >= 10000000) {
 				hectoseconds++;
 				if (hectoseconds >= 99) {
 					hectoseconds = 0;
 					seconds++;
 					PizzaKidGUI.game.collectibles.setTime(PizzaKidGUI.game.collectibles.getTime() + 1);
-
+					
 					// to handle time left for order
 					int timeLeft = PizzaKidGUI.timeForEachDelivery
 							- (PizzaKidGUI.game.collectibles.getTime() - PizzaKidGUI.game.map.getCustomer().birthTime);
@@ -104,7 +105,7 @@ public class GameTimer extends AnimationTimer
 						.setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
 			}
 		} else {
-			
+			this.stop();
 		}
 		before = now;
 	}
