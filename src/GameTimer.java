@@ -38,7 +38,6 @@ public class GameTimer extends AnimationTimer
 		// everything in nanoseconds
 		timeSince = now - before;
 		if (PizzaKidGUI.gameOver == false) {
-			System.out.println(timeSince);
 			if (timeSince >= 10000000) {
 				hectoseconds++;
 				if (hectoseconds >= 99) {

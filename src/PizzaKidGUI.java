@@ -184,6 +184,9 @@ public class PizzaKidGUI extends Application {
 	// deliver the order
 	static Label timeLeftForOrder;
 
+	/**
+	 * Initializes the physical parts of the play screen (creates a map, setting header, footer, left side and right side)
+	 */
 	public void initializePlayScreen() {
 
 		// playScreen
@@ -441,8 +444,12 @@ public class PizzaKidGUI extends Application {
 
 	public static GameTimer timer = new GameTimer();
 
+	/**
+	 * Sets the controls needed for the game
+	 */
 	public void playGame(BorderPane playScreen) {
 
+		// controls - actions to be done when a key is pressed
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			public void handle(KeyEvent ke) {
@@ -486,93 +493,6 @@ public class PizzaKidGUI extends Application {
 			}
 
 		});
-		
-		
-//		AnimationTimer timer = new AnimationTimer() {
-//
-//			int hectoseconds = 0;
-//			int seconds = 0;
-//			int minutes = 0;
-//			long before = 0;
-//			long timeSince;
-//
-//			@Override
-//			public void handle(long now) {
-//
-//				// everything in nanoseconds
-//				timeSince = now - before;
-//				if (gameOver == false) {
-//					if (timeSince >= 10000000) {
-//						hectoseconds++;
-//						if (hectoseconds >= 99) {
-//							hectoseconds = 0;
-//							seconds++;
-//							game.collectibles.setTime(game.collectibles.getTime() + 1);
-//
-//							// to handle time left for order
-//							int timeLeft = timeForEachDelivery
-//									- (game.collectibles.getTime() - game.map.getCustomer().birthTime);
-//							if (timeLeft >= 0) {
-//								timeLeftForOrder.setText("Time left for order: " + timeLeft);
-//								currentTip = timeLeft * tipDeduction;
-//							} else {
-//								// strike if order is missed
-//								game.map.removeCustomer();
-//								game.map.generateCustomer();
-//								game.collectibles.addStrike();
-//								showGUIMap(mapGUI);
-//								displayStrike();
-//								state.setText("You missed an order!");
-//								game.map.getCustomer().birthTime = game.collectibles.getTime();
-//								currentTip = 5;
-//							}
-//						}
-//					
-//						if (game.map.getPlayer().getPizzaDelivered() == true
-//								&& game.map.getPlayer().getHitObstacle() == false) {
-//							game.map.generateCustomer();
-//							game.map.getCustomer().birthTime = game.collectibles.getTime();
-//							game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
-//																			// pizza
-//																			// to a customer.
-//							state.setText("You delivered a pizza!");
-//							showGUIMap(mapGUI);
-//						}
-//
-//						// when the player hits an obstacle, the obstacles are removed and regenerated
-//						// and the player is put back to starting position
-//						if (game.map.getPlayer().getHitObstacle() == true) {
-//							game.map.removeObstacle();
-//							game.map.getPlayer().setHitObstacle(false);
-//							game.map.generateObstacles();
-//							game.map.getPlayer().setCol(1);
-//							game.map.getPlayer().setRow(1);
-//							showGUIMap(mapGUI);
-//						} else
-//						
-//						// if strikes has reached 3, then game is over!
-//						if (game.collectibles.getStrikeCount() >= 3) {
-//							gameIsOver("You had 3 strikes!");
-//							hectoseconds = 0;
-//							seconds = 0;
-//							minutes = 0;
-//						}
-//						
-//						
-//						if (seconds >= 59) {
-//							seconds = 0;
-//							minutes++;
-//							gameIsOver("Your time is up!");
-//						}
-//						((Labeled) heading.getChildren().get(1))
-//								.setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
-//					}
-//				} else {
-//					
-//				}
-//				before = now;
-//			}
-//		};
 
 	}
 
@@ -615,6 +535,9 @@ public class PizzaKidGUI extends Application {
 		}
 	}
 
+	/**
+	 * Displays a strike warning on the right side of the screen
+	 */
 	public static void displayStrike() {
 		Label strike = new Label("Strike!!");
 		state.setText("You hit an obstacle! 1 strike!");
@@ -626,6 +549,9 @@ public class PizzaKidGUI extends Application {
 		strike.setMinWidth(width / 4);
 	}
 
+	/**
+	 * Resets the physical map by clearing each pane and making a new map
+	 */
 	public void resetMap() {
 
 		gameOver = false;
