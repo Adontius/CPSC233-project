@@ -28,7 +28,6 @@ public class GameTimer extends AnimationTimer
 
 	int hectoseconds = 0;
 	int seconds = 0;
-	int minutes = 0;
 	long before = 0;
 	long timeSince;
 
@@ -88,20 +87,18 @@ public class GameTimer extends AnimationTimer
 				
 				// if strikes has reached 3, then game is over!
 				if (PizzaKidGUI.game.collectibles.getStrikeCount() >= 3) {
-					PizzaKidGUI.gameIsOver("You had 3 strikes!");
 					hectoseconds = 0;
 					seconds = 0;
-					minutes = 0;
+					PizzaKidGUI.gameIsOver("You had 3 strikes!");
 				}
 				
 				
 				if (seconds >= 59) {
 					seconds = 0;
-					minutes++;
 					PizzaKidGUI.gameIsOver("Your time is up!");
 				}
 				((Labeled) PizzaKidGUI.heading.getChildren().get(1))
-						.setText("Timer: " + minutes + ":" + seconds + ":" + hectoseconds);
+						.setText("Timer: " + 0 + ":" + seconds + ":" + hectoseconds);
 			}
 		} else {
 			this.stop();

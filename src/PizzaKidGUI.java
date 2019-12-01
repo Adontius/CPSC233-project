@@ -242,7 +242,7 @@ public class PizzaKidGUI extends Application {
 
 		Label title = new Label("PizzaKid");
 		Label time = new Label("Time left: " + timeDisplayInSeconds);
-		Label tips = new Label("Tips: " + game.collectibles.getTipMoney());
+		Label tips = new Label("Tips: $" + game.collectibles.getTipMoney());
 
 		heading.getChildren().add(title);
 		heading.getChildren().add(time);
@@ -523,7 +523,7 @@ public class PizzaKidGUI extends Application {
 	public void checkIfStrikeOrTip(int direction) {
 
 		// updates tips
-		((Labeled) heading.getChildren().get(2)).setText("Tips: " + game.collectibles.getTipMoney());
+		((Labeled) heading.getChildren().get(2)).setText("Tips: $" + game.collectibles.getTipMoney());
 		
 		if(game.checkSurroundings(direction) instanceof Customer) {
 			game.map.getPlayer().setPizzaDelivered(true);
