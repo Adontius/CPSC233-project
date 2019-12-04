@@ -58,7 +58,7 @@ public class PizzaKidGUI extends Application {
 	int timeDisplayInSeconds = 0;
 
 	public static void main(String[] args) {
-		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
 		launch(args);
 	}
 
@@ -196,7 +196,7 @@ public class PizzaKidGUI extends Application {
 		setHeadings(heading);
 
 		// setting map
-		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
 		game.map.generateCustomer();
 		game.map.getCustomer().birthTime = game.collectibles.getTime();
 		game.map.generateObstacles();
@@ -508,7 +508,7 @@ public class PizzaKidGUI extends Application {
 				+ "\nPress reset to play again!");
 		timeLeftForOrder.setText("");
 		game = new PizzaKid();
-		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
 		game.collectibles = new Collectibles(0, 0);
 		showGUIMap(mapGUI);
 	}
@@ -558,7 +558,7 @@ public class PizzaKidGUI extends Application {
 		gameOver = false;
 
 		game = new PizzaKid();
-		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
 		game.collectibles = new Collectibles(0, 0);
 
 		game.map.generateCustomer();
