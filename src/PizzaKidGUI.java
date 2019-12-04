@@ -539,7 +539,8 @@ public class PizzaKidGUI extends Application {
 	 * Displays a strike warning on the right side of the screen
 	 */
 	public static void displayStrike() {
-		Label strike = new Label("Strike!!");
+		Label strike = new Label("X");
+		//strike.setForeground(Color.RED);
 		state.setText("You hit an obstacle! 1 strike!");
 		right.getChildren().add(strike);
 
