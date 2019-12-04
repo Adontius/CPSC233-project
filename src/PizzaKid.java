@@ -1,12 +1,20 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class PizzaKid 
 {
 
 	public Map map;
+	public static String scoresFile = "scores.txt";
 	
 	public Collectibles collectibles = new Collectibles(0, 0); 
 	//intiates new player collectibles, sets tipmoney to 0 and strike count to 0
-
 
 	/* checks the direction that the player is going and returns the object that is
 	 * in that direction.
@@ -168,7 +176,10 @@ public class PizzaKid
 		return tiles;
 	}
 	
-	
+	/**
+	 * Moves the player based on the direction passed
+	 * @param direction - direction of the movement: 1 - up, 2 - left, 3 - down, 4 - right
+	 */
 	public void move(int direction) {
 		if(direction == 1) {
 			map.getPlayer().moveUp();
@@ -179,6 +190,36 @@ public class PizzaKid
 		} else if(direction == 4) {
 			map.getPlayer().moveRight();
 		} 
+	}
+	
+	public static void addScore(String initials, int score) {
+		try {
+			PrintWriter out = new PrintWriter(new FileWriter(scoresFile, true));
+			out.println(initials + ": " + score);
+			out.close();
+		} catch (IOException ioe) {
+			System.out.println("IO Exception!");
+		}
+	}
+	
+//	public static int readNextScore() {
+//		try {
+//			Scanner in = new Scanner(new FileInputStream(scoresFile));
+//			int nextInt = in.readInt();
+//			in.close();
+//			return nextInt;
+//		} catch (IOException ioe) {
+//			System.out.println("IO Exception!");
+//			return 0;
+//		}
+//	}
+	
+	public static void main(String[] args) {
+		addScore("AD", 5);
+		addScore("FD", 6);
+		addScore("DD", 9);
+		addScore("VD", 7);
+//		System.out.println(readNextScore());
 	}
 	
 }
