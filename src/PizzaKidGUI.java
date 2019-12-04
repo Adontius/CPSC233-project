@@ -573,5 +573,26 @@ public class PizzaKidGUI extends Application {
 
 		showGUIMap(mapGUI);
 	}
+	
+	public static void getInitials()
+	{
+		VBox vbox = new VBox();
+		Stage stage = new Stage();
+		stage.setTitle("Game Over");
+		Label enterInitials = new Label("Enter your initials: ");
+		
+
+		enterInitials.setFont(Font.font("Arial", 15));
+		enterInitials.setTextFill(Color.BLACK);
+		enterInitials.setAlignment(Pos.CENTER);
+		enterInitials.setMinWidth(width / 4);
+		
+		vbox.getChildren().add(enterInitials);
+
+		Scene sceneI = new Scene(vbox, 300, 300); 
+		stage.setScene(sceneI); 
+		stage.show();
+		
+	}
 
 }

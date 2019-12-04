@@ -36,10 +36,13 @@ public class GameTimer extends AnimationTimer
 
 		// everything in nanoseconds
 		timeSince = now - before;
-		if (PizzaKidGUI.gameOver == false) {
-			if (timeSince >= 10000000) {
+		if (PizzaKidGUI.gameOver == false) 
+		{
+			if (timeSince >= 10000000) 
+			{
 				hectoseconds++;
-				if (hectoseconds >= 99) {
+				if (hectoseconds >= 99) 
+				{
 					hectoseconds = 0;
 					seconds++;
 					PizzaKidGUI.game.collectibles.setTime(PizzaKidGUI.game.collectibles.getTime() + 1);
@@ -47,10 +50,13 @@ public class GameTimer extends AnimationTimer
 					// to handle time left for order
 					int timeLeft = PizzaKidGUI.timeForEachDelivery
 							- (PizzaKidGUI.game.collectibles.getTime() - PizzaKidGUI.game.map.getCustomer().birthTime);
-					if (timeLeft >= 0) {
+					if (timeLeft >= 0) 
+					{
 						PizzaKidGUI.timeLeftForOrder.setText("Time left for order: " + timeLeft);
 						PizzaKidGUI.currentTip = timeLeft * PizzaKidGUI.tipDeduction;
-					} else {
+					} 
+					else 
+					{
 						// strike if order is missed
 						PizzaKidGUI.game.map.removeCustomer();
 						PizzaKidGUI.game.map.generateCustomer();
@@ -64,7 +70,8 @@ public class GameTimer extends AnimationTimer
 				}
 			
 				if (PizzaKidGUI.game.map.getPlayer().getPizzaDelivered() == true
-						&& PizzaKidGUI.game.map.getPlayer().getHitObstacle() == false) {
+						&& PizzaKidGUI.game.map.getPlayer().getHitObstacle() == false) 
+				{
 					PizzaKidGUI.game.map.generateCustomer();
 					PizzaKidGUI.game.map.getCustomer().birthTime = PizzaKidGUI.game.collectibles.getTime();
 					PizzaKidGUI.game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
@@ -76,31 +83,40 @@ public class GameTimer extends AnimationTimer
 
 				// when the player hits an obstacle, the obstacles are removed and regenerated
 				// and the player is put back to starting position
-				if (PizzaKidGUI.game.map.getPlayer().getHitObstacle() == true) {
+				if (PizzaKidGUI.game.map.getPlayer().getHitObstacle() == true) 
+				{
 					PizzaKidGUI.game.map.removeObstacle();
 					PizzaKidGUI.game.map.getPlayer().setHitObstacle(false);
 					PizzaKidGUI.game.map.generateObstacles();
 					PizzaKidGUI.game.map.getPlayer().setCol(1);
 					PizzaKidGUI.game.map.getPlayer().setRow(1);
 					PizzaKidGUI.showGUIMap(PizzaKidGUI.mapGUI);
-				} else
+				}
 				
 				// if strikes has reached 3, then game is over!
-				if (PizzaKidGUI.game.collectibles.getStrikeCount() >= 3) {
+				if (PizzaKidGUI.game.collectibles.getStrikeCount() >= 3) 
+				{
 					hectoseconds = 0;
 					seconds = 0;
 					PizzaKidGUI.gameIsOver("You had 3 strikes!");
+					PizzaKidGUI.getInitials();
 				}
 				
 				
-				if (seconds >= 59) {
+				if (seconds >= 59) 
+				{
+					hectoseconds = 0;
 					seconds = 0;
 					PizzaKidGUI.gameIsOver("Your time is up!");
+					PizzaKidGUI.getInitials();
 				}
 				((Labeled) PizzaKidGUI.heading.getChildren().get(1))
-						.setText("Timer: " + 0 + ":" + seconds + ":" + hectoseconds);
+						.setText("Time Left: " + 0 + ":" + seconds + ":" + hectoseconds);
+				
 			}
-		} else {
+		} 
+		else 
+		{
 			this.stop();
 		}
 		before = now;
