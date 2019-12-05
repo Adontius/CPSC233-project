@@ -43,22 +43,22 @@ public class PizzaKidGUI extends Application {
 	public static Scanner input = new Scanner(System.in);
 
 	// GUI related variables
-	int height = 700;
+	static int height = 700;
 	static int width = 1000;
 
-	int buttonHeight = 80;
-	int buttonWidth = 100;
+	static int buttonHeight = 80;
+	static int buttonWidth = 100;
 
 	static int mapHeight = 540; // makes each tile size 45x45 pixels
 	static int mapWidth = 540;
 
 	StackPane root = new StackPane();
-	VBox startScreen = new VBox();
-	BorderPane playScreen = new BorderPane();
+	static VBox startScreen = new VBox();
+	static BorderPane playScreen = new BorderPane();
 
 	boolean isPlaying = false;
 
-	int timeDisplayInSeconds = 0;
+	static int timeDisplayInSeconds = 0;
 
 	public static void main(String[] args) {
 		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
@@ -178,7 +178,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Initializes the physical parts of the play screen (creates a map, setting header, footer, left side and right side)
 	 */
-	public void initializePlayScreen() {
+	public static void initializePlayScreen() {
 
 		// playScreen
 		setPlayScreenStyle();
@@ -215,7 +215,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Sets the style of the play screen
 	 */
-	public void setPlayScreenStyle() {
+	public static void setPlayScreenStyle() {
 		playScreen.setMinHeight(height);
 		playScreen.setMinWidth(width);
 		String style2 = "-fx-background-color: #ADD8E6;"; //light blue bkgrd
@@ -229,7 +229,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param heading - HBox containing the elements of the heading
 	 */
-	public void setHeadings(HBox heading) {
+	public static void setHeadings(HBox heading) {
 
 		Label title = new Label("PizzaKid");
 		Label time = new Label("Time left: " + timeDisplayInSeconds);
@@ -266,7 +266,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param map - GridMap which contains the graphical map
 	 */
-	public void setMap(GridPane map) {
+	public static void setMap(GridPane map) {
 		map.setVgap(5);
 		map.setHgap(5);
 		map.setPadding(new Insets(10, 10, 10, 10));
@@ -281,7 +281,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param footer - HBox containing button
 	 */
-	public void setFooter(HBox footer) {
+	public static void setFooter(HBox footer) {
 
 		footer.setMinWidth(width);
 
@@ -327,7 +327,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param right - VBox containing right elements
 	 */
-	public void setRight(VBox right) {
+	public static void setRight(VBox right) {
 		Label strike = new Label("Strikes:");
 
 		// strike
@@ -344,7 +344,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param right - VBox containing left elements
 	 */
-	public void setLeft(VBox left) {
+	public static void setLeft(VBox left) {
 		Label instructions = new Label("Instructions:");
 		Label first = new Label("- Use the arrow keys to move");
 		Label second = new Label("- Deliver pizza on time to get tips");
@@ -438,7 +438,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Sets the controls needed for the game
 	 */
-	public void playGame(BorderPane playScreen) {
+	public static void playGame(BorderPane playScreen) {
 
 		// controls - actions to be done when a key is pressed
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -496,7 +496,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param direction
 	 */
-	public void checkIfStrikeOrTip(int direction) {
+	public static void checkIfStrikeOrTip(int direction) {
 
 		// updates tips
 		((Labeled) heading.getChildren().get(2)).setText("Tips: $" + game.collectibles.getTipMoney());
@@ -530,7 +530,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Resets the physical map by clearing each pane and making a new map
 	 */
-	public void resetMap() {
+	public static void resetMap() {
 
 		gameOver = false;
 
@@ -612,6 +612,12 @@ public class PizzaKidGUI extends Application {
             	PizzaKid.addScore(initials.toUpperCase().substring(0, 3), game.collectibles.getTipMoney());
             	
             	stage.close();
+            	resetMap();
+				playScreen.setVisible(false);
+				startScreen.setVisible(true);
+				startScreen.toFront();
+				gameOver = true;
+            	
             } 
         }; 
         
