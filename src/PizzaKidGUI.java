@@ -593,13 +593,14 @@ public static void getInitials()
         { 
             public void handle(ActionEvent e) 
             { 
-            	while(enterText.getText().length() < 3)
-            		{
-            			
-            		}
-            		PizzaKid.addScore(enterText.getText().toUpperCase() + "", game.collectibles.getTipMoney());
+            	String initials = enterText.getText();
+            	
+            	while(initials.length() < 3)
+            	{
+            		initials += "_";
+            	}
 
-            		PizzaKid.addScore(enterText.getText().toUpperCase().substring(0, 3), game.collectibles.getTipMoney());
+            	PizzaKid.addScore(initials.toUpperCase().substring(0, 3), game.collectibles.getTipMoney());
             	
             	stage.close();
             } 
