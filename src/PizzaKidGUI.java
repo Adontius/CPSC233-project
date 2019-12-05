@@ -577,8 +577,13 @@ public static void getInitials()
 		Label enterInitials = new Label("Enter your intials below: ");
 		
 
-		enterInitials.setFont(Font.font("Consolas", 25));
+		enterInitials.setFont(Font.font("Consolas", 15));
 		enterInitials.setTextFill(Color.BLACK);
+		enterInitials.setAlignment(Pos.CENTER);
+		enterInitials.setMinWidth(width / 2);
+		
+		gameOverLabel.setFont(Font.font("Consolas", 25));
+		gameOverLabel.setTextFill(Color.BLACK);
 		enterInitials.setAlignment(Pos.CENTER);
 		enterInitials.setMinWidth(width / 2);
 		
