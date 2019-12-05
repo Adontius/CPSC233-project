@@ -563,7 +563,7 @@ public static void getInitials()
 		Stage stage = new Stage();
 		stage.setTitle("Game Over");
 		Label gameOverLabel = new Label("Game's Over!");
-		Label enterInitials = new Label("Enter your intials below: ");
+		Label enterInitials = new Label("Enter your 3 intials below: ");
 		
 
 		enterInitials.setFont(Font.font("Consolas", 15));
@@ -593,7 +593,14 @@ public static void getInitials()
         { 
             public void handle(ActionEvent e) 
             { 
-            	PizzaKid.addScore(enterText.getText().toUpperCase().substring(0, 3), game.collectibles.getTipMoney());
+            	while(enterText.getText().length() < 3)
+            		{
+            			
+            		}
+            		PizzaKid.addScore(enterText.getText().toUpperCase() + "", game.collectibles.getTipMoney());
+
+            		PizzaKid.addScore(enterText.getText().toUpperCase().substring(0, 3), game.collectibles.getTipMoney());
+            	
             	stage.close();
             } 
         }; 
