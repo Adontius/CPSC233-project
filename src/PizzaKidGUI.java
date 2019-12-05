@@ -585,10 +585,10 @@ public static void getInitials()
 		Label enterInitials = new Label("Game's Over!");
 		
 
-		enterInitials.setFont(Font.font("Arial", 15));
+		enterInitials.setFont(Font.font("Consolas", 25));
 		enterInitials.setTextFill(Color.BLACK);
 		enterInitials.setAlignment(Pos.CENTER);
-		enterInitials.setMinWidth(width / 4);
+		enterInitials.setMinWidth(width / 2);
 		
 //		
 		TextField enterText = new TextField();
@@ -596,8 +596,8 @@ public static void getInitials()
 //		
 		PizzaKid.addScore(initials, game.collectibles.getTipMoney());
 //		
-		vbox.getChildren().add(enterText);
-		vbox.getChildren().add(enterInitials);
+		vbox.getChildren().add(enterInitials); //adds label "Game's Over" onto screen
+		vbox.getChildren().add(enterText); //adds textfield onto screen
 
 		Scene sceneI = new Scene(vbox, 300, 300); 
 		stage.setScene(sceneI); 
