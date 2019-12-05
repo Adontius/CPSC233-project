@@ -100,8 +100,8 @@ public class Map {
 	 * turns the customer back into a house - used after delivering pizza
 	 */
 	public void removeCustomer() {
-		for (int i = 0; i < 17; i++) {
-			for (int j = 0; j < 17; j++) {
+		for (int i = 0; i < mapSize; i++) {
+			for (int j = 0; j < mapSize; j++) {
 				if (tiles[i][j] instanceof House) {
 					if ((tiles[i][j] instanceof Customer)) {
 						tiles[i][j] = new House(false);
