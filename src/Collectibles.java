@@ -73,9 +73,17 @@ public class Collectibles
 		int numberOfScores = PizzaKid.scoresFile.length();
 		
 		ArrayList<Double> allScores = new ArrayList<Double>(); //creates an arraylist to hold the scores from the scores.txt file
+		ArrayList<String> allInitials = new ArrayList<String>(); //creates an arraylist to hold all the initials
+		
 		Scanner reader = new Scanner(readScores);
 		
-		allScores.add(reader.nextLine().split(": "));
+		// loop through the file and separate ...
+		
+		
+		for(int i = 0; i < allScores.size(); i++) {
+			
+		}
+		
 		
 	}
 }
