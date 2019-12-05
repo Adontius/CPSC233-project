@@ -11,7 +11,7 @@ public class PizzaKidText
 	
 	public static void main(String[] args) 
 	{
-		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
 		play();
 	}
 
@@ -154,8 +154,8 @@ public class PizzaKidText
 	 * displays the map to the console
 	 */
 	public static void displayMapToConsole() {
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 12; j++) {
+		for (int i = 0; i < 17; i++) {
+			for (int j = 0; j < 17; j++) {
 				// trees
 
 				if (i == game.map.getPlayer().getRow() && j == game.map.getPlayer().getCol()) {

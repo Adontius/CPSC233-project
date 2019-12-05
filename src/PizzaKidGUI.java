@@ -30,12 +30,12 @@ import javafx.stage.Stage;
 public class PizzaKidGUI extends Application {
 
 	//Images used in the game play:
-	static Image house1 = new Image("/HouseGrass.png", 75.0, 45.0, true, true); // uses House1.png image from folder
-	static Image customerHouse = new Image("/CustomerGrass.png", 76.0, 40.0, true, true);
+	static Image house1 = new Image("/HouseGrass.png", 90.0, 32.0, true, true); // uses House1.png image from folder
+	static Image customerHouse = new Image("/CustomerGrass.png", 90.0, 32.0, true, true);
 	static Image pizzaCar = new Image("/PizzaCar (1).png", 50.0, 25.0, true, true);
-	static Image tree = new Image("/Trees.png", 75.0, 55.0, true, true);
-	static Image hole = new Image("/Hole.png", 55.0, 55.0, true, true);
-	static Image road = new Image("/Road.png", 55.0, 55.0, true, true);
+	static Image tree = new Image("/Trees.png", 90.0, 45.0, true, true);
+	static Image hole = new Image("/Hole.png", 30.0, 32.0, true, true);
+	static Image road = new Image("/Road.png", 30.0, 32.0, true, true);
 
 	public static PizzaKid game = new PizzaKid();
 	public static Scanner input = new Scanner(System.in);
@@ -59,7 +59,7 @@ public class PizzaKidGUI extends Application {
 	int timeDisplayInSeconds = 0;
 
 	public static void main(String[] args) {
-		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
 		launch(args);
 	}
 
@@ -197,7 +197,7 @@ public class PizzaKidGUI extends Application {
 		setHeadings(heading);
 
 		// setting map
-		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
 		game.map.generateCustomer();
 		game.map.getCustomer().birthTime = game.collectibles.getTime();
 		game.map.generateObstacles();
@@ -509,7 +509,7 @@ public class PizzaKidGUI extends Application {
 				+ "\nPress reset to play again!");
 		timeLeftForOrder.setText("");
 		game = new PizzaKid();
-		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
 		game.collectibles = new Collectibles(0, 0);
 		showGUIMap(mapGUI);
 	}
@@ -559,7 +559,7 @@ public class PizzaKidGUI extends Application {
 		gameOver = false;
 
 		game = new PizzaKid();
-		game.map = new Map(new Avatar(), 12, PizzaKid.createTilesFor12());
+		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
 		game.collectibles = new Collectibles(0, 0);
 
 		game.map.generateCustomer();
