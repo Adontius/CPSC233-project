@@ -604,6 +604,18 @@ public static void getInitials()
 		stage.setScene(sceneI); 
 		stage.show();
 		
+		// action event 
+        EventHandler<ActionEvent> initialsEvent = new EventHandler<ActionEvent>() 
+        { 
+            public void handle(ActionEvent e) 
+            { 
+                enterInitials.setText(enterText.getText()); 
+            } 
+        }; 
+  
+        // when enter is pressed 
+        enterText.setOnAction(initialsEvent);
+		
 }
 
 }
