@@ -592,7 +592,6 @@ public static void getInitials()
 		
 //		
 		TextField enterText = new TextField();
-//		Scanner scanInitials = new Scanner(System.in);
 		String initials = enterText.getText();
 //		
 		PizzaKid.addScore(initials, game.collectibles.getTipMoney());
