@@ -552,28 +552,37 @@ public class PizzaKidGUI extends Application {
 		showGUIMap(mapGUI);
 	}
 	
-public static void getInitials() 
-//this method makes a window pop-up after the game is over, which asks for the player's initials so that the player's score can be recorded
-{
-//		gameOver = true;
-//		timeLeftForOrder.setText("");
+	public static void getInitials() 
+	//this method makes a window pop-up after the game is over, which asks for the player's initials so that the player's score can be recorded
+	{
+
 		
 		VBox vbox = new VBox();
 		Stage stage = new Stage();
 		stage.setTitle("Game Over");
+		
+		//labels that show on the screen
 		Label gameOverLabel = new Label("Game's Over!");
+		String scoreText = "You earned " + game.collectibles.getTipMoney();
+		Label showScore = new Label(scoreText);
 		Label enterInitials = new Label("Enter your 3 initials below: ");
 		
-
+		
+		
+		//style of the labels
 		enterInitials.setFont(Font.font("Consolas", 15));
 		enterInitials.setTextFill(Color.BLACK);
 		enterInitials.setAlignment(Pos.CENTER);
-		enterInitials.setMinWidth(width / 2);
+
 		
-		gameOverLabel.setFont(Font.font("Consolas", 25));
+		gameOverLabel.setFont(Font.font("Consolas", 20));
 		gameOverLabel.setTextFill(Color.BLACK);
 		enterInitials.setAlignment(Pos.CENTER);
-		enterInitials.setMinWidth(width / 2);
+
+		
+		showScore.setFont(Font.font("Consolas", 15));
+		showScore.setTextFill(Color.BLACK);
+		showScore.setAlignment(Pos.CENTER);
 		
 //		
 		TextField enterText = new TextField();
@@ -607,6 +616,7 @@ public static void getInitials()
         Button saveInfo = new Button("Save");
 
         vbox.getChildren().add(gameOverLabel);  //adds label "Game's Over" onto screen
+        vbox.getChildren().add(showScore);
 		vbox.getChildren().add(enterInitials); //adds instructions to enter player's intials
 		vbox.getChildren().add(enterText); //adds textfield onto screen
 		vbox.getChildren().add(saveInfo);//adds Save button to screen
@@ -615,19 +625,18 @@ public static void getInitials()
         saveInfo.setOnAction(saveInitials);
         
 		
-}
+	}
 
-/**
- * Makes the gameOver variable true, shows results to user, and resets the map
- * 
- * @param statement - reason why the game is over (time is up or 3 strikes
- *                  reached)
- */
+	/**
+	 * Makes the gameOver variable true, shows results to user, and resets the map
+	 * 
+	 * @param statement - reason why the game is over (time is up or 3 strikes
+	 *                  reached)
+	 */
 	public static void gameIsOver(String statement) 
 	{
 		gameOver = true;
-		state.setText("Game Over! " + statement + "\n" + "Your total tip is: $" + game.collectibles.getTipMoney()
-				+ "\nPress reset to play again!");
+		state.setText("Game Over! ");
 		timeLeftForOrder.setText("");
 
 	}
