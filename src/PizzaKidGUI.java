@@ -592,7 +592,7 @@ public static void getInitials()
 		
 		vbox.getChildren().add(enterInitials);
 //		
-		TextField enterText = new TextField("");
+		TextField enterText = new TextField();
 //		Scanner scanInitials = new Scanner(System.in);
 		String initials = enterText.getText();
 //		
