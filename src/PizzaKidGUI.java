@@ -516,7 +516,7 @@ public class PizzaKidGUI extends Application {
 	 */
 	public static void displayStrike() {
 		Label strike = new Label("X");
-		//strike.setForeground(Color.RED);
+		strike.setTextFill(Color.RED);
 		state.setText("You hit an obstacle! 1 strike!");
 		right.getChildren().add(strike);
 
