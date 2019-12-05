@@ -559,7 +559,6 @@ public static void getInitials()
 //		timeLeftForOrder.setText("");
 		
 		VBox vbox = new VBox();
-		HBox hbox = new HBox();
 		Stage stage = new Stage();
 		stage.setTitle("Game Over");
 		Label gameOverLabel = new Label("Game's Over!");
@@ -606,12 +605,13 @@ public static void getInitials()
         
   
         Button saveInfo = new Button("Save");
-        vbox.getChildren().add(saveInfo); //adds Save button to screen
+
         vbox.getChildren().add(gameOverLabel);  //adds label "Game's Over" onto screen
 		vbox.getChildren().add(enterInitials); //adds instructions to enter player's intials
 		vbox.getChildren().add(enterText); //adds textfield onto screen
+		vbox.getChildren().add(saveInfo);//adds Save button to screen
         
-        // when enter is pressed, sends player's score and initials to the scores.txt file
+        // when enter is pressed, sends player's score and initials to the scores.txt file, and closes the little window.
         saveInfo.setOnAction(saveInitials);
         
 		
