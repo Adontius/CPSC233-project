@@ -608,11 +608,11 @@ public static void getInitials()
         { 
             public void handle(ActionEvent e) 
             { 
-                enterInitials.setText(enterText.getText()); 
+            	PizzaKid.addScore(initials, game.collectibles.getTipMoney());
             } 
         }; 
   
-        // when enter is pressed 
+        // when enter is pressed, sends player's score and initials to the scores.txt file
         enterText.setOnAction(initialsEvent);
 		
 }
