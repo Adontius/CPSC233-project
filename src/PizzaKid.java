@@ -192,7 +192,7 @@ public class PizzaKid
 		} 
 	}
 	
-	public static void addScore(String initials, int score) {
+	public static void addScore(String initials, double score) {
 		try {
 			PrintWriter out = new PrintWriter(new FileWriter(scoresFile, true));
 			out.println(initials + ": " + score);
@@ -215,10 +215,7 @@ public class PizzaKid
 //	}
 	
 	public static void main(String[] args) {
-		addScore("AD", 5);
-		addScore("FD", 6);
-		addScore("DD", 9);
-		addScore("VD", 7);
+
 //		System.out.println(readNextScore());
 	}
 	

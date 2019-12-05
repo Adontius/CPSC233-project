@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -575,12 +576,13 @@ public class PizzaKidGUI extends Application {
 		showGUIMap(mapGUI);
 	}
 	
-	public static void getInitials()
-	{
+public static void getInitials() 
+//this method makes a window pop-up after the game is over, which asks for the player's initials so that the player's score can be recorded
+{
 		VBox vbox = new VBox();
 		Stage stage = new Stage();
 		stage.setTitle("Game Over");
-		Label enterInitials = new Label("Enter your initials: ");
+		Label enterInitials = new Label("Game's Over!");
 		
 
 		enterInitials.setFont(Font.font("Arial", 15));
@@ -589,11 +591,19 @@ public class PizzaKidGUI extends Application {
 		enterInitials.setMinWidth(width / 4);
 		
 		vbox.getChildren().add(enterInitials);
+//		
+		TextField enterText = new TextField("");
+//		Scanner scanInitials = new Scanner(System.in);
+		String initials = enterText.getText();
+//		
+		PizzaKid.addScore(initials, game.collectibles.getTipMoney());
+//		
+		vbox.getChildren().add(enterText);
 
 		Scene sceneI = new Scene(vbox, 300, 300); 
 		stage.setScene(sceneI); 
 		stage.show();
 		
-	}
+}
 
 }
