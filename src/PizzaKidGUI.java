@@ -161,18 +161,6 @@ public class PizzaKidGUI extends Application {
 
 		bottom.getChildren().add(start);
 	}
-
-	public void setHowToButton(HBox b)///alice attempt at making how to button on start screen plz help
-	{
-		b.setAlignment(Pos.BOTTOM_CENTER);
-		b.setMinHeight(height / 3);
-		
-		Button howTo = new Button("How to Play");
-		howTo.setFont(Font.font("Courier", 20));
-		howTo.setMinSize(buttonWidth, buttonHeight);
-		
-		
-	}
 	
 	// variables are outside since they need constant updating
 	static HBox heading = new HBox();
@@ -608,7 +596,6 @@ public static void getInitials()
             	stage.close();
             } 
         }; 
-        
         
   
         Button saveInfo = new Button("Save");
