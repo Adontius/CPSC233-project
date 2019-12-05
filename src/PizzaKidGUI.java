@@ -590,7 +590,6 @@ public static void getInitials()
 		enterInitials.setAlignment(Pos.CENTER);
 		enterInitials.setMinWidth(width / 4);
 		
-		vbox.getChildren().add(enterInitials);
 //		
 		TextField enterText = new TextField();
 //		Scanner scanInitials = new Scanner(System.in);
@@ -599,6 +598,7 @@ public static void getInitials()
 		PizzaKid.addScore(initials, game.collectibles.getTipMoney());
 //		
 		vbox.getChildren().add(enterText);
+		vbox.getChildren().add(enterInitials);
 
 		Scene sceneI = new Scene(vbox, 300, 300); 
 		stage.setScene(sceneI); 
