@@ -29,12 +29,12 @@ import javafx.stage.Stage;
 public class PizzaKidGUI extends Application {
 
 	//Images used in the game play:
-	static Image house1 = new Image("/HouseGrass.png", 75.0, 45.0, true, true); // uses House1.png image from folder
-	static Image customerHouse = new Image("/CustomerGrass.png", 76.0, 40.0, true, true);
+	static Image house1 = new Image("/HouseGrass.png", 90.0, 32.0, true, true); // uses House1.png image from folder
+	static Image customerHouse = new Image("/CustomerGrass.png", 90.0, 32.0, true, true);
 	static Image pizzaCar = new Image("/PizzaCar (1).png", 50.0, 25.0, true, true);
-	static Image tree = new Image("/Trees.png", 75.0, 55.0, true, true);
-	static Image hole = new Image("/Hole.png", 55.0, 55.0, true, true);
-	static Image road = new Image("/Road.png", 55.0, 55.0, true, true);
+	static Image tree = new Image("/Trees.png", 90.0, 45.0, true, true);
+	static Image hole = new Image("/Hole.png", 30.0, 32.0, true, true);
+	static Image road = new Image("/Road.png", 30.0, 32.0, true, true);
 
 	public static PizzaKid game = new PizzaKid();
 	public static Scanner input = new Scanner(System.in);

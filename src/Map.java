@@ -64,8 +64,8 @@ public class Map {
 
 		// loops through array and checks if there is an existing customer, if not, a
 		// customer is generated
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 12; j++) {
+		for (int i = 0; i < 17; i++) {
+			for (int j = 0; j < 17; j++) {
 				if (tiles[i][j] instanceof Customer) {
 					hasCustomer = true;
 				}
@@ -75,8 +75,8 @@ public class Map {
 		if (hasCustomer == false) {
 			ArrayList<Integer> rowNumbers = new ArrayList<Integer>(0);
 			ArrayList<Integer> colNumbers = new ArrayList<Integer>(0);
-			for (int i = 0; i < 12; i++) {
-				for (int j = 0; j < 12; j++) {
+			for (int i = 0; i < 17; i++) {
+				for (int j = 0; j < 17; j++) {
 					if (tiles[i][j] instanceof House) {
 						if (!(tiles[i][j] instanceof Customer)) {
 							rowNumbers.add(i);
@@ -100,8 +100,8 @@ public class Map {
 	 * turns the customer back into a house - used after delivering pizza
 	 */
 	public void removeCustomer() {
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 12; j++) {
+		for (int i = 0; i < 17; i++) {
+			for (int j = 0; j < 17; j++) {
 				if (tiles[i][j] instanceof House) {
 					if ((tiles[i][j] instanceof Customer)) {
 						tiles[i][j] = new House(false);
@@ -118,8 +118,8 @@ public class Map {
 	public void generateObstacles() {
 		ArrayList<Integer> rowNumbers = new ArrayList<Integer>(0);
 		ArrayList<Integer> colNumbers = new ArrayList<Integer>(0);
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 12; j++) {
+		for (int i = 0; i < 17; i++) {
+			for (int j = 0; j < 17; j++) {
 				if (tiles[i][j] instanceof Road) {
 					rowNumbers.add(i);
 					colNumbers.add(j);
@@ -144,8 +144,8 @@ public class Map {
 	 * removes obstacles present in the map
 	 */
 	public void removeObstacle() {
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 12; j++) {
+		for (int i = 0; i < 17; i++) {
+			for (int j = 0; j < 17; j++) {
 				if ((tiles[i][j] instanceof Pothole)) {
 					tiles[i][j] = new Road();
 				}
@@ -155,8 +155,8 @@ public class Map {
 	}
 	
 	public Customer getCustomer() {
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 12; j++) {
+		for (int i = 0; i < 17; i++) {
+			for (int j = 0; j < 17; j++) {
 				if ((tiles[i][j] instanceof Customer)) {
 					return (Customer) tiles[i][j];
 				}
