@@ -1,3 +1,9 @@
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /* Collectibles acts as a tracker for TipMoney and Strikes accumulated by the player.
  * It contains setternmethods to add strikes and add tip money as well as their respective getter methods.
  */
@@ -59,5 +65,17 @@ public class Collectibles
 	public int getTime() //getter method to return the number of strikes the player has
 	{
 		return this.time;
+	}
+	
+	public static void showHighScores() throws IOException
+	{
+		DataInputStream readScores = new DataInputStream(new FileInputStream(PizzaKid.scoresFile));
+		int numberOfScores = PizzaKid.scoresFile.length();
+		
+		ArrayList<Double> allScores = new ArrayList<Double>(); //creates an arraylist to hold the scores from the scores.txt file
+		Scanner reader = new Scanner(readScores);
+		
+		allScores.add(reader.nextLine().split(": "));
+		
 	}
 }

@@ -593,10 +593,10 @@ public class PizzaKidGUI extends Application {
 		stage.setScene(sceneI); 
 		stage.show();
 		
-		// action event for pressing Save button
-		//creates new 'initials' variable which is just what the player enters.
-		//adds underscores to player's initials if they entered less than 3 chars.
-		//only saves the first 3 chars if player enters more than 3 chars. Also sets to upper case.
+		//Action event for pressing Save button
+		//Creates new 'initials' variable which is just what the player enters.
+		//Adds underscores to player's initials if they entered less than 3 chars.
+		//Only saves the first 3 chars if player enters more than 3 chars. Also sets to upper case.
 		//Also closes the Game Over screen and returns player to start screen.
         EventHandler<ActionEvent> saveInitials = new EventHandler<ActionEvent>() 
         { 
@@ -623,6 +623,7 @@ public class PizzaKidGUI extends Application {
         
   
         Button saveInfo = new Button("Save");
+        saveInfo.setFont(Font.font("Consolas", 18));
 
         vbox.getChildren().add(gameOverLabel);  //adds label "Game's Over" onto screen
         vbox.getChildren().add(showScore);
