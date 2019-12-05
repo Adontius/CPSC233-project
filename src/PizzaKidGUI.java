@@ -563,7 +563,7 @@ public static void getInitials()
 		Stage stage = new Stage();
 		stage.setTitle("Game Over");
 		Label gameOverLabel = new Label("Game's Over!");
-		Label enterInitials = new Label("Enter your 3 intials below: ");
+		Label enterInitials = new Label("Enter your 3 initials below: ");
 		
 
 		enterInitials.setFont(Font.font("Consolas", 15));
