@@ -1,5 +1,9 @@
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -85,7 +89,7 @@ public class PizzaKidTest {
 		pk.collectibles = new Collectibles(0, 0);
 		pk.deliverPizza(0);
 		
-		assertEquals("Checked if the customer is removed after pizza is delivered.", true, !(tile[2][3] instanceof Customer));
+		assertEquals("Checked if the customer is removed after pizza is delivered.", true, (tile[2][3] instanceof House));
 	}
 
 	
@@ -186,22 +190,87 @@ public class PizzaKidTest {
 	}
 	
 	@Test
-	public final void checkMove_up() 
+	public final void checkMove_down() 
 	{
 		Avatar p = new Avatar();
 		p.setCol(0);
-		p.setRow(1);
+		p.setRow(0);
 		Tile[][] tile = new Tile[5][5];
 		
 		PizzaKid pk = new PizzaKid();
 		pk.map = new Map(p, 5, tile);
 		pk.collectibles = new Collectibles(0, 0);
 		
-		pk.move(1);
+		pk.move(3);
 		
-		assertEquals("Check if the player has moved up", true, (p.getRow() == 0 && p.getCol() == 0));
+		assertEquals("Check if the player has moved down", true, (p.getRow() == 1 && p.getCol() == 0));
 	}
 	
+	
+	@Test
+	public final void checkMove_left() 
+	{
+		Avatar p = new Avatar();
+		p.setCol(1);
+		p.setRow(0);
+		Tile[][] tile = new Tile[5][5];
+		
+		PizzaKid pk = new PizzaKid();
+		pk.map = new Map(p, 5, tile);
+		pk.collectibles = new Collectibles(0, 0);
+		
+		pk.move(2);
+		
+		assertEquals("Check if the player has moved left", true, (p.getRow() == 0 && p.getCol() == 0));
+	}
+
+	
+	@Test
+	public final void checkMove_right() 
+	{
+		Avatar p = new Avatar();
+		p.setCol(0);
+		p.setRow(0);
+		Tile[][] tile = new Tile[5][5];
+		
+		PizzaKid pk = new PizzaKid();
+		pk.map = new Map(p, 5, tile);
+		pk.collectibles = new Collectibles(0, 0);
+		
+		pk.move(4);
+		
+		assertEquals("Check if the player has moved right", true, (p.getRow() == 0 && p.getCol() == 1));
+	}
+
+	
+	@Test
+	public final void checkAddScore() 
+	{
+		Avatar p = new Avatar();
+		p.setCol(0);
+		p.setRow(0);
+		Tile[][] tile = new Tile[5][5];
+		
+		PizzaKid pk = new PizzaKid();
+		pk.map = new Map(p, 5, tile);
+		pk.collectibles = new Collectibles(0, 0);
+		
+		pk.scoresFile = "scoresTest.txt";
+		
+		pk.addScore("Tst", 5.0);
+		
+		String in = "";
+		
+		try {
+			BufferedReader input = new BufferedReader(new FileReader(pk.scoresFile));
+			in = input.readLine();
+			input.close();
+		} catch (Exception e) {
+			System.out.println("Exception caught");
+		}
+		
+		assertEquals("Check if the player has moved down", "Tst: 5.0", in);
+	}
 	
 	// help 
 
