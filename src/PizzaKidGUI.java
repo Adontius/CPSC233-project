@@ -580,6 +580,7 @@ public static void getInitials()
 //this method makes a window pop-up after the game is over, which asks for the player's initials so that the player's score can be recorded
 {
 		VBox vbox = new VBox();
+		HBox hbox = new HBox();
 		Stage stage = new Stage();
 		stage.setTitle("Game Over");
 		Label enterInitials = new Label("Game's Over!");
@@ -592,9 +593,7 @@ public static void getInitials()
 		
 //		
 		TextField enterText = new TextField();
-		String initials = enterText.getText();
-//		
-		PizzaKid.addScore(initials, game.collectibles.getTipMoney());
+		//String initials = enterText.getText();
 //		
 		vbox.getChildren().add(enterInitials); //adds label "Game's Over" onto screen
 		vbox.getChildren().add(enterText); //adds textfield onto screen
@@ -604,16 +603,20 @@ public static void getInitials()
 		stage.show();
 		
 		// action event 
-        EventHandler<ActionEvent> initialsEvent = new EventHandler<ActionEvent>() 
+        EventHandler<ActionEvent> saveInitials = new EventHandler<ActionEvent>() 
         { 
             public void handle(ActionEvent e) 
             { 
-            	PizzaKid.addScore(initials, game.collectibles.getTipMoney());
+            	PizzaKid.addScore(enterText.getText(), game.collectibles.getTipMoney());
             } 
         }; 
   
+        Button saveInfo = new Button("Save");
+        vbox.getChildren().add(saveInfo);
+        
         // when enter is pressed, sends player's score and initials to the scores.txt file
-        enterText.setOnAction(initialsEvent);
+        saveInfo.setOnAction(saveInitials);
+        
 		
 }
 
