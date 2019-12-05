@@ -563,7 +563,7 @@ public class PizzaKidGUI extends Application {
 		
 		//labels that show on the screen
 		Label gameOverLabel = new Label("Game's Over!");
-		String scoreText = "You earned " + game.collectibles.getTipMoney();
+		String scoreText = "You earned $" + game.collectibles.getTipMoney() + ".";
 		Label showScore = new Label(scoreText);
 		Label enterInitials = new Label("Enter your 3 initials below: ");
 		
@@ -577,7 +577,7 @@ public class PizzaKidGUI extends Application {
 		
 		gameOverLabel.setFont(Font.font("Consolas", 20));
 		gameOverLabel.setTextFill(Color.BLACK);
-		enterInitials.setAlignment(Pos.CENTER);
+		gameOverLabel.setAlignment(Pos.CENTER);
 
 		
 		showScore.setFont(Font.font("Consolas", 15));
