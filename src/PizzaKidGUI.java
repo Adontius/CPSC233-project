@@ -4,7 +4,9 @@ import java.util.Scanner;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -497,22 +499,7 @@ public class PizzaKidGUI extends Application {
 
 	}
 
-	/**
-	 * Makes the gameOver variable true, shows results to user, and resets the map
-	 * 
-	 * @param statement - reason why the game is over (time is up or 3 strikes
-	 *                  reached)
-	 */
-	public static void gameIsOver(String statement) {
-		gameOver = true;
-		state.setText("Game Over! " + statement + "\n" + "Your total tip is: $" + game.collectibles.getTipMoney()
-				+ "\nPress reset to play again!");
-		timeLeftForOrder.setText("");
-		game = new PizzaKid();
-		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
-		game.collectibles = new Collectibles(0, 0);
-		showGUIMap(mapGUI);
-	}
+
 
 	/**
 	 * Check why the player can't move - either player has delivered or has hit an
@@ -579,11 +566,15 @@ public class PizzaKidGUI extends Application {
 public static void getInitials() 
 //this method makes a window pop-up after the game is over, which asks for the player's initials so that the player's score can be recorded
 {
+//		gameOver = true;
+//		timeLeftForOrder.setText("");
+		
 		VBox vbox = new VBox();
 		HBox hbox = new HBox();
 		Stage stage = new Stage();
 		stage.setTitle("Game Over");
-		Label enterInitials = new Label("Game's Over!");
+		Label gameOverLabel = new Label("Game's Over!");
+		Label enterInitials = new Label("Enter your intials below: ");
 		
 
 		enterInitials.setFont(Font.font("Consolas", 25));
@@ -595,7 +586,8 @@ public static void getInitials()
 		TextField enterText = new TextField();
 		//String initials = enterText.getText();
 //		
-		vbox.getChildren().add(enterInitials); //adds label "Game's Over" onto screen
+		vbox.getChildren().add(gameOverLabel);  //adds label "Game's Over" onto screen
+		vbox.getChildren().add(enterInitials); //adds instructions to enter player's intials
 		vbox.getChildren().add(enterText); //adds textfield onto screen
 
 		Scene sceneI = new Scene(vbox, 300, 300); 
@@ -607,9 +599,12 @@ public static void getInitials()
         { 
             public void handle(ActionEvent e) 
             { 
-            	PizzaKid.addScore(enterText.getText(), game.collectibles.getTipMoney());
+            	PizzaKid.addScore(enterText.getText().toUpperCase().substring(0, 3), game.collectibles.getTipMoney());
+            	stage.close();
             } 
         }; 
+        
+        
   
         Button saveInfo = new Button("Save");
         vbox.getChildren().add(saveInfo);
@@ -618,6 +613,23 @@ public static void getInitials()
         saveInfo.setOnAction(saveInitials);
         
 		
+}
+
+/**
+ * Makes the gameOver variable true, shows results to user, and resets the map
+ * 
+ * @param statement - reason why the game is over (time is up or 3 strikes
+ *                  reached)
+ */
+public static void gameIsOver(String statement) {
+	gameOver = true;
+	state.setText("Game Over! " + statement + "\n" + "Your total tip is: $" + game.collectibles.getTipMoney()
+			+ "\nPress reset to play again!");
+	timeLeftForOrder.setText("");
+//	game = new PizzaKid();
+//	game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
+//	game.collectibles = new Collectibles(0, 0);
+	//showGUIMap(mapGUI);
 }
 
 }
