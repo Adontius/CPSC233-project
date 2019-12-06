@@ -45,7 +45,7 @@ public class PizzaKidGUI extends Application {
 	static int buttonHeight = 80;
 	static int buttonWidth = 100;
 
-	static int mapHeight = 540; // makes each tile size 45x45 pixels
+	static int mapHeight = 400; // makes each tile size 45x45 pixels
 	static int mapWidth = 540;
 
 	StackPane root = new StackPane();
@@ -312,13 +312,13 @@ public class PizzaKidGUI extends Application {
 		title.setPadding(new Insets(10, 0, 0, 50));
 
 		// time
-		time.setFont(Font.font("Arial", 15));
+		time.setFont(Font.font("Lucida Console", 15));
 		time.setTextFill(Color.BLACK);
 		time.setAlignment(Pos.CENTER);
 		time.setMinWidth(width / 4);
 
 		// tips
-		tips.setFont(Font.font("Arial", 20));
+		tips.setFont(Font.font("Lucida Console", 20));
 		tips.setTextFill(Color.DARKGREEN);
 		tips.setAlignment(Pos.CENTER);
 		tips.setMinWidth(width / 4);
@@ -394,12 +394,14 @@ public class PizzaKidGUI extends Application {
 		Label strike = new Label("Strikes:");
 
 		// strike
-		strike.setFont(Font.font("Arial", 15));
+		strike.setFont(Font.font("Lucida Console", 15));
 		strike.setTextFill(Color.BLACK);
 		strike.setAlignment(Pos.CENTER);
 		strike.setMinWidth(width / 4);
 
 		right.getChildren().add(strike);
+
+		strike.setPadding(new Insets(50, 0, 0, 0));
 	}
 
 	/**
@@ -411,7 +413,7 @@ public class PizzaKidGUI extends Application {
 		Label instructions = new Label("");
 		Label first = new Label("");
 		Label second = new Label("");
-		Label third = new Label("                                 ");
+		Label third = new Label("");
 		Label fourth = new Label("");
 		Label fifth = new Label("");
 		Label sixth = new Label("");
@@ -438,16 +440,19 @@ public class PizzaKidGUI extends Application {
 		instructions.setMinWidth(width / 4);
 
 		// state
-		state.setFont(Font.font("Arial", 15));
+		state.setFont(Font.font("Lucida Console", 15));
 		state.setTextFill(Color.BLACK);
 		state.setAlignment(Pos.CENTER);
 		state.setMinWidth(width / 4);
 
 		// time left
-		timeLeftForOrder.setFont(Font.font("Arial", 15));
+		timeLeftForOrder.setFont(Font.font("Lucida Console", 13));
 		timeLeftForOrder.setTextFill(Color.INDIANRED);
 		timeLeftForOrder.setAlignment(Pos.CENTER);
 		timeLeftForOrder.setMinWidth(width / 4);
+		
+		state.setPadding(new Insets(0, 50, 50, 0));
+		timeLeftForOrder.setPadding(new Insets(0, 50, 0, 0));
 
 	}
 
@@ -577,11 +582,21 @@ public class PizzaKidGUI extends Application {
 	 */
 	public static void displayStrike() {
 		Label strike = new Label("X");
+<<<<<<< HEAD
+		strike.setPadding(new Insets(10, 0, 0, 0));
+		strike.setFont(Font.font("Lucida Console", 30));
+		strike.setTextFill(Color.RED);
+		state.setText("You hit\n an obstacle!");
+=======
 		strike.setTextFill(Color.INDIANRED);
 		state.setText("You hit an obstacle! 1 strike!");
+>>>>>>> branch 'master' of https://github.com/Adontius/CPSC233-project
 		right.getChildren().add(strike);
 
+<<<<<<< HEAD
+=======
 		strike.setFont(Font.font("Arial", 25));
+>>>>>>> branch 'master' of https://github.com/Adontius/CPSC233-project
 		strike.setAlignment(Pos.CENTER);
 		strike.setMinWidth(width / 4);
 	}
