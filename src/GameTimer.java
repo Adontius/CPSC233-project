@@ -52,7 +52,7 @@ public class GameTimer extends AnimationTimer
 							- (PizzaKidGUI.game.collectibles.getTime() - PizzaKidGUI.game.map.getCustomer().birthTime);
 					if (timeLeft >= 0) 
 					{
-						PizzaKidGUI.timeLeftForOrder.setText("Time left for order: " + timeLeft);
+						PizzaKidGUI.timeLeftForOrder.setText("Time left for order: \n     " + timeLeft + " seconds");
 						PizzaKidGUI.currentTip = timeLeft * PizzaKidGUI.tipDeduction;
 					} 
 					else 
@@ -63,7 +63,7 @@ public class GameTimer extends AnimationTimer
 						PizzaKidGUI.game.collectibles.addStrike();
 						PizzaKidGUI.showGUIMap(PizzaKidGUI.mapGUI);
 						PizzaKidGUI.displayStrike();
-						PizzaKidGUI.state.setText("You missed an order!");
+						PizzaKidGUI.state.setText("You missed\n  an order!");
 						PizzaKidGUI.game.map.getCustomer().birthTime = PizzaKidGUI.game.collectibles.getTime();
 						PizzaKidGUI.currentTip = 5;
 					}
@@ -77,19 +77,20 @@ public class GameTimer extends AnimationTimer
 					PizzaKidGUI.game.map.getPlayer().setPizzaDelivered(false); // resets pizzaDelivered after player delivers
 																	// pizza
 																	// to a customer.
-					PizzaKidGUI.state.setText("You delivered a pizza!");
+					PizzaKidGUI.state.setText("You delivered\n  a pizza!");
 					PizzaKidGUI.showGUIMap(PizzaKidGUI.mapGUI);
-				}
+				} else
 
 				// when the player hits an obstacle, the obstacles are removed and regenerated
 				// and the player is put back to starting position
 				if (PizzaKidGUI.game.map.getPlayer().getHitObstacle() == true) 
 				{
 					PizzaKidGUI.game.map.removeObstacle();
-					PizzaKidGUI.game.map.getPlayer().setHitObstacle(false);
+					PizzaKidGUI.game.map.getPlayer().setHitObstacle(false);PizzaKidGUI.game.map.getPlayer().setPizzaDelivered(false);
 					PizzaKidGUI.game.map.generateObstacles();
 					PizzaKidGUI.game.map.getPlayer().setCol(1);
 					PizzaKidGUI.game.map.getPlayer().setRow(1);
+					PizzaKidGUI.state.setText("You hit\n  an obstacle!");
 					PizzaKidGUI.showGUIMap(PizzaKidGUI.mapGUI);
 				}
 				
