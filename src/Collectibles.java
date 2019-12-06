@@ -77,12 +77,24 @@ public class Collectibles
 		
 		Scanner reader = new Scanner(readScores);
 		
-		// loop through the file and separate ...
-		
-		
-		for(int i = 0; i < allScores.size(); i++) {
+		// loop through the file and separates initials from scores (into two separate arraylists)
+		while(reader.hasNextLine())
+		{
+			String[] everything = reader.nextLine().split(": ", 1); //creates array of split up initials and scores, from the scores.txt file
+			
+			allInitials.add(everything[1]);
+			allScores.add(Double.parseDouble(everything[2]));
 			
 		}
+		
+		System.out.println(allScores);
+		
+		for(int i = 0; i < allScores.size(); i++) 
+		{
+			
+		}
+		
+		reader.close();
 		
 		
 	}

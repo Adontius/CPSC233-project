@@ -174,27 +174,6 @@ public class PizzaKidGUI extends Application {
 		bottom.getChildren().add(howTo);
 	}
 
-	// public void setHowToButton(HBox b)///alice attempt at making how to button on
-	// start screen plz help
-//	{
-//		b.setAlignment(Pos.BOTTOM_CENTER);
-//		b.setMinHeight(height / 3);
-//		
-//		Button howTo = new Button("How to Play");
-//		howTo.setFont(Font.font("Courier", 20));
-//		howTo.setMinSize(buttonWidth, buttonHeight);
-//		
-//		howTo.setOnAction(new EventHandler<ActionEvent>() {
-//
-//			@Override
-//			public void handle(ActionEvent event) {
-//				
-//				howTo.setVisible(false);
-//			}
-//			
-//		});
-//		
-//	}
 
 	public static void setHowToPlayScreen()
 	// this method makes a window pop-up when button for how to play is clicked
@@ -339,8 +318,8 @@ public class PizzaKidGUI extends Application {
 		time.setMinWidth(width / 4);
 
 		// tips
-		tips.setFont(Font.font("Arial", 15));
-		tips.setTextFill(Color.BLACK);
+		tips.setFont(Font.font("Arial", 20));
+		tips.setTextFill(Color.DARKGREEN);
 		tips.setAlignment(Pos.CENTER);
 		tips.setMinWidth(width / 4);
 	}
@@ -429,14 +408,14 @@ public class PizzaKidGUI extends Application {
 	 * @param right - VBox containing left elements
 	 */
 	public static void setLeft(VBox left) {
-		Label instructions = new Label("Instructions:");
-		Label first = new Label("- Use the arrow keys to move");
-		Label second = new Label("- Deliver pizza on time to get tips");
-		Label third = new Label("- Earn the most tips in 1 minute!");
-		Label fourth = new Label("- Hit an obstacle earn a strike!");
-		Label fifth = new Label("- Run out of time earn a strike!");
-		Label sixth = new Label("- 3 strikes = Game Over!");
-		Label seventh = new Label("Good luck!");
+		Label instructions = new Label("");
+		Label first = new Label("");
+		Label second = new Label("");
+		Label third = new Label("                                 ");
+		Label fourth = new Label("");
+		Label fifth = new Label("");
+		Label sixth = new Label("");
+		Label seventh = new Label("");
 
 		state = new Label("Start Playing!");
 		timeLeftForOrder = new Label("");
@@ -466,7 +445,7 @@ public class PizzaKidGUI extends Application {
 
 		// time left
 		timeLeftForOrder.setFont(Font.font("Arial", 15));
-		timeLeftForOrder.setTextFill(Color.BLACK);
+		timeLeftForOrder.setTextFill(Color.INDIANRED);
 		timeLeftForOrder.setAlignment(Pos.CENTER);
 		timeLeftForOrder.setMinWidth(width / 4);
 
@@ -725,13 +704,7 @@ public class PizzaKidGUI extends Application {
 	 */
 	public static void gameIsOver(String statement) {
 		gameOver = true;
-		state.setText("Game Over! " + statement + "\n" + "Your total tip is: $" + game.collectibles.getTipMoney()
-				+ "\nPress reset to play again!");
 		timeLeftForOrder.setText("");
-//	game = new PizzaKid();
-//	game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
-//	game.collectibles = new Collectibles(0, 0);
-		// showGUIMap(mapGUI);
 	}
 
 }
