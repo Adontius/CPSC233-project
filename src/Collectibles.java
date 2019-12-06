@@ -69,13 +69,12 @@ public class Collectibles
 		return this.time;
 	}
 	
-	public static void showHighScores() throws IOException
+	public static void getHighScores() throws IOException
 	{
 		DataInputStream readScores = new DataInputStream(new FileInputStream(PizzaKid.scoresFile));
 		int numberOfScores = PizzaKid.scoresFile.length();
 		
 		ArrayList<Double> allScores= new ArrayList<Double>(); //creates an arraylist to hold the scores from the scores.txt file
-		//ArrayList<String> allInitials = new ArrayList<String>(); //creates an arraylist to hold all the initials
 		
 		Scanner reader = new Scanner(readScores);
 		
@@ -83,9 +82,7 @@ public class Collectibles
 		while(reader.hasNextLine())
 		{
 			String everything = reader.nextLine(); //creates array of split up initials and scores, from the scores.txt file .split(": ", 1)
-			
-			//everything.Double.parseDouble();
-			//allInitials.add(everything[1]);
+
 			allScores.add(Double.parseDouble(everything));
 			
 		}

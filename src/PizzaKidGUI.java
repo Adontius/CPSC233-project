@@ -695,6 +695,9 @@ public class PizzaKidGUI extends Application {
         
 		
 	}
+	
+	
+	
 	/**
 	 * Makes the gameOver variable true, shows results to user, and resets the map
 	 * 
