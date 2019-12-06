@@ -112,7 +112,7 @@ public class GameTimer extends AnimationTimer
 					PizzaKidGUI.getInitials();
 				}
 				((Labeled) PizzaKidGUI.heading.getChildren().get(1))
-						.setText("Time Left: " + 0 + ":" + seconds + ":" + hectoseconds);
+						.setText("Time: " + 0 + ":" + seconds + ":" + hectoseconds);
 				
 			}
 		} 
