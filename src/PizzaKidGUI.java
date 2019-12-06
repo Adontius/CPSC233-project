@@ -582,21 +582,17 @@ public class PizzaKidGUI extends Application {
 	 */
 	public static void displayStrike() {
 		Label strike = new Label("X");
-<<<<<<< HEAD
+
 		strike.setPadding(new Insets(10, 0, 0, 0));
 		strike.setFont(Font.font("Lucida Console", 30));
 		strike.setTextFill(Color.RED);
 		state.setText("You hit\n an obstacle!");
-=======
+
 		strike.setTextFill(Color.INDIANRED);
 		state.setText("You hit an obstacle! 1 strike!");
->>>>>>> branch 'master' of https://github.com/Adontius/CPSC233-project
 		right.getChildren().add(strike);
 
-<<<<<<< HEAD
-=======
 		strike.setFont(Font.font("Arial", 25));
->>>>>>> branch 'master' of https://github.com/Adontius/CPSC233-project
 		strike.setAlignment(Pos.CENTER);
 		strike.setMinWidth(width / 4);
 	}
