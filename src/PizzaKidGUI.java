@@ -577,12 +577,11 @@ public class PizzaKidGUI extends Application {
 	 */
 	public static void displayStrike() {
 		Label strike = new Label("X");
-		// strike.setForeground(Color.RED);
+		strike.setTextFill(Color.INDIANRED);
 		state.setText("You hit an obstacle! 1 strike!");
 		right.getChildren().add(strike);
 
-		strike.setFont(Font.font("Arial", 15));
-		strike.setTextFill(Color.BLACK);
+		strike.setFont(Font.font("Arial", 25));
 		strike.setAlignment(Pos.CENTER);
 		strike.setMinWidth(width / 4);
 	}
