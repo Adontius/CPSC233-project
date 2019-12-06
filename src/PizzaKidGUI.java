@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 import javafx.animation.AnimationTimer;
@@ -31,7 +30,7 @@ import javafx.stage.Stage;
 
 public class PizzaKidGUI extends Application {
 
-	//Images used in the game play:
+	// Images used in the game play:
 	static Image house1 = new Image("/HouseGrass.png", 90.0, 32.0, true, true); // uses House1.png image from folder
 	static Image customerHouse = new Image("/CustomerGrass.png", 90.0, 32.0, true, true);
 	static Image pizzaCar = new Image("/PizzaCar (1).png", 50.0, 25.0, true, true);
@@ -43,22 +42,22 @@ public class PizzaKidGUI extends Application {
 	public static Scanner input = new Scanner(System.in);
 
 	// GUI related variables
-	static int height = 700;
+	int height = 700;
 	static int width = 1000;
 
-	static int buttonHeight = 80;
-	static int buttonWidth = 100;
+	int buttonHeight = 80;
+	int buttonWidth = 100;
 
 	static int mapHeight = 540; // makes each tile size 45x45 pixels
 	static int mapWidth = 540;
 
 	StackPane root = new StackPane();
 	static VBox startScreen = new VBox();
-	static BorderPane playScreen = new BorderPane();
+	BorderPane playScreen = new BorderPane();
 
 	boolean isPlaying = false;
 
-	static int timeDisplayInSeconds = 0;
+	int timeDisplayInSeconds = 0;
 
 	public static void main(String[] args) {
 		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
@@ -67,7 +66,7 @@ public class PizzaKidGUI extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		
+
 		gameOver = true;
 
 		initializeStartScreen();
@@ -95,9 +94,13 @@ public class PizzaKidGUI extends Application {
 		HBox top = new HBox();
 		setStartingTitle(top);
 
+		VBox bottom = new VBox();
+
 		// start button
-		HBox bottom = new HBox();
-		setStartButton(bottom);
+		HBox button = new HBox();
+		setButtons(button);
+
+		bottom.getChildren().add(button);
 
 		startScreen.getChildren().add(top);
 		startScreen.getChildren().add(bottom);
@@ -108,7 +111,7 @@ public class PizzaKidGUI extends Application {
 	 * Sets the style of the start screen
 	 */
 	public void setStartScreenStyle() {
-		//String style1 = "-fx-background-color: #ffb240;"; //sets background to orange
+		// String style1 = "-fx-background-color: #ffb240;"; //sets background to orange
 		Image pizzaBack = new Image("/backgroundP.png");
 		BackgroundImage backgroundImage = new BackgroundImage(pizzaBack, null, null, null, null);
 		Background background = new Background(backgroundImage);
@@ -138,13 +141,17 @@ public class PizzaKidGUI extends Application {
 	 * @param bottom - the bottom part of the start screen where the button is
 	 *               placed
 	 */
-	public void setStartButton(HBox bottom) {
+	public void setButtons(HBox bottom) {
 		bottom.setAlignment(Pos.CENTER);
 		bottom.setMinHeight(height / 2);
 
 		Button start = new Button("START");
 		start.setFont(Font.font("Courier New", 30));
 		start.setMinSize(buttonWidth, buttonHeight);
+
+		Button howTo = new Button("HOW TO PLAY");
+		howTo.setFont(Font.font("Courier New", 30));
+		howTo.setMinSize(buttonWidth, buttonHeight);
 
 		// event in start button
 		start.setOnAction(new EventHandler<ActionEvent>() {
@@ -159,9 +166,88 @@ public class PizzaKidGUI extends Application {
 			}
 		});
 
+		howTo.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				setHowToPlayScreen();
+			}
+		});
+
 		bottom.getChildren().add(start);
+		bottom.getChildren().add(howTo);
 	}
-	
+
+	// public void setHowToButton(HBox b)///alice attempt at making how to button on
+	// start screen plz help
+//	{
+//		b.setAlignment(Pos.BOTTOM_CENTER);
+//		b.setMinHeight(height / 3);
+//		
+//		Button howTo = new Button("How to Play");
+//		howTo.setFont(Font.font("Courier", 20));
+//		howTo.setMinSize(buttonWidth, buttonHeight);
+//		
+//		howTo.setOnAction(new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent event) {
+//				
+//				howTo.setVisible(false);
+//			}
+//			
+//		});
+//		
+//	}
+
+	public static void setHowToPlayScreen()
+	// this method makes a window pop-up when button for how to play is clicked
+	{
+		Stage stage = new Stage();
+		stage.setTitle("How To Play");
+		
+		VBox howToPlayScreen = new VBox();
+		
+		Label instructions = new Label("Instructions:");
+		Label first = new Label("- Use the arrow keys to move");
+		Label second = new Label("- Deliver pizza on time to get tips");
+		Label third = new Label("- Earn the most tips in 1 minute!");
+		Label fourth = new Label("- Hit an obstacle earn a strike!");
+		Label fifth = new Label("- Run out of time earn a strike!");
+		Label sixth = new Label("- 3 strikes = Game Over!");
+		Label seventh = new Label("Good luck!");
+
+		Button quitButton = new Button("Close");
+
+		quitButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				stage.close();
+			}
+		});
+
+		howToPlayScreen.getChildren().add(instructions);
+		howToPlayScreen.getChildren().add(first);
+		howToPlayScreen.getChildren().add(second);
+		howToPlayScreen.getChildren().add(third);
+		howToPlayScreen.getChildren().add(fourth);
+		howToPlayScreen.getChildren().add(fifth);
+		howToPlayScreen.getChildren().add(sixth);
+		howToPlayScreen.getChildren().add(seventh);
+		howToPlayScreen.getChildren().add(state);
+		howToPlayScreen.getChildren().add(timeLeftForOrder);
+		howToPlayScreen.getChildren().add(quitButton);
+
+		// instructions
+		instructions.setFont(Font.font("Arial", 15));
+		instructions.setTextFill(Color.BLACK);
+		instructions.setAlignment(Pos.CENTER);
+		instructions.setMinWidth(width / 4);
+		
+		Scene sceneII = new Scene(howToPlayScreen, 300, 300);
+		stage.setScene(sceneII);
+		stage.show();
+	}
+
 	// variables are outside since they need constant updating
 	static HBox heading = new HBox();
 	static GridPane mapGUI = new GridPane();
@@ -176,9 +262,10 @@ public class PizzaKidGUI extends Application {
 	static Label timeLeftForOrder;
 
 	/**
-	 * Initializes the physical parts of the play screen (creates a map, setting header, footer, left side and right side)
+	 * Initializes the physical parts of the play screen (creates a map, setting
+	 * header, footer, left side and right side)
 	 */
-	public static void initializePlayScreen() {
+	public void initializePlayScreen() {
 
 		// playScreen
 		setPlayScreenStyle();
@@ -215,13 +302,13 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Sets the style of the play screen
 	 */
-	public static void setPlayScreenStyle() {
+	public void setPlayScreenStyle() {
 		playScreen.setMinHeight(height);
 		playScreen.setMinWidth(width);
-		String style2 = "-fx-background-color: #ADD8E6;"; //light blue bkgrd
-		String style3 = "-fx-background-color: #576A75"; //same color as roads
-		playScreen.setStyle(style2); //sets play screen to blue
-		mapGUI.setStyle(style3); //set background of map to road color
+		String style2 = "-fx-background-color: #ADD8E6;"; // light blue bkgrd
+		String style3 = "-fx-background-color: #576A75"; // same color as roads
+		playScreen.setStyle(style2); // sets play screen to blue
+		mapGUI.setStyle(style3); // set background of map to road color
 	}
 
 	/**
@@ -229,7 +316,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param heading - HBox containing the elements of the heading
 	 */
-	public static void setHeadings(HBox heading) {
+	public void setHeadings(HBox heading) {
 
 		Label title = new Label("PizzaKid");
 		Label time = new Label("Time left: " + timeDisplayInSeconds);
@@ -266,7 +353,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param map - GridMap which contains the graphical map
 	 */
-	public static void setMap(GridPane map) {
+	public void setMap(GridPane map) {
 		map.setVgap(5);
 		map.setHgap(5);
 		map.setPadding(new Insets(10, 10, 10, 10));
@@ -281,7 +368,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param footer - HBox containing button
 	 */
-	public static void setFooter(HBox footer) {
+	public void setFooter(HBox footer) {
 
 		footer.setMinWidth(width);
 
@@ -327,7 +414,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param right - VBox containing right elements
 	 */
-	public static void setRight(VBox right) {
+	public void setRight(VBox right) {
 		Label strike = new Label("Strikes:");
 
 		// strike
@@ -344,7 +431,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param right - VBox containing left elements
 	 */
-	public static void setLeft(VBox left) {
+	public void setLeft(VBox left) {
 		Label instructions = new Label("Instructions:");
 		Label first = new Label("- Use the arrow keys to move");
 		Label second = new Label("- Deliver pizza on time to get tips");
@@ -415,7 +502,7 @@ public class PizzaKidGUI extends Application {
 					x = new Label();
 					x.setGraphic(new ImageView(hole));
 				} else {
-					x = new Label(""); //shows empty if nothing else in tile
+					x = new Label(""); // shows empty if nothing else in tile
 				}
 				x.setAlignment(Pos.CENTER);
 				x.setMinHeight(mapHeight / game.map.getSize());
@@ -438,7 +525,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Sets the controls needed for the game
 	 */
-	public static void playGame(BorderPane playScreen) {
+	public void playGame(BorderPane playScreen) {
 
 		// controls - actions to be done when a key is pressed
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -446,7 +533,7 @@ public class PizzaKidGUI extends Application {
 			public void handle(KeyEvent ke) {
 
 				if (gameOver == false) {
-					
+
 					if (ke.getCode() == KeyCode.UP) {
 						if (game.checkIfValidMove(1, currentTip)) {
 							game.move(1);
@@ -487,8 +574,6 @@ public class PizzaKidGUI extends Application {
 
 	}
 
-
-
 	/**
 	 * Check why the player can't move - either player has delivered or has hit an
 	 * obstacle If delivered - tips is updated If hit an obstacle - strikes is
@@ -496,12 +581,12 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param direction
 	 */
-	public static void checkIfStrikeOrTip(int direction) {
+	public void checkIfStrikeOrTip(int direction) {
 
 		// updates tips
 		((Labeled) heading.getChildren().get(2)).setText("Tips: $" + game.collectibles.getTipMoney());
-		
-		if(game.checkSurroundings(direction) instanceof Customer) {
+
+		if (game.checkSurroundings(direction) instanceof Customer) {
 			game.map.getPlayer().setPizzaDelivered(true);
 		}
 
@@ -516,8 +601,7 @@ public class PizzaKidGUI extends Application {
 	 */
 	public static void displayStrike() {
 		Label strike = new Label("X");
-		strike.setTextFill(Color.RED);
-		strike.setFont(Font.font("Consolas", 20));
+		// strike.setForeground(Color.RED);
 		state.setText("You hit an obstacle! 1 strike!");
 		right.getChildren().add(strike);
 
@@ -530,7 +614,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Resets the physical map by clearing each pane and making a new map
 	 */
-	public static void resetMap() {
+	public void resetMap() {
 
 		gameOver = false;
 
@@ -551,90 +635,57 @@ public class PizzaKidGUI extends Application {
 
 		showGUIMap(mapGUI);
 	}
-	
-	public static void getInitials() 
-	//this method makes a window pop-up after the game is over, which asks for the player's initials so that the player's score can be recorded
-	{
 
-		
+	public static void getInitials()
+//this method makes a window pop-up after the game is over, which asks for the player's initials so that the player's score can be recorded
+	{
+//		gameOver = true;
+//		timeLeftForOrder.setText("");
+
 		VBox vbox = new VBox();
+		HBox hbox = new HBox();
 		Stage stage = new Stage();
 		stage.setTitle("Game Over");
-		
-		//labels that show on the screen
 		Label gameOverLabel = new Label("Game's Over!");
-		String scoreText = "You earned $" + game.collectibles.getTipMoney() + ".";
-		Label showScore = new Label(scoreText);
-		Label enterInitials = new Label("Enter your 3 initials below: ");
-		
-		
-		
-		//style of the labels
+		Label enterInitials = new Label("Enter your intials below: ");
+
 		enterInitials.setFont(Font.font("Consolas", 15));
 		enterInitials.setTextFill(Color.BLACK);
 		enterInitials.setAlignment(Pos.CENTER);
+		enterInitials.setMinWidth(width / 2);
 
-		
-		gameOverLabel.setFont(Font.font("Consolas", 20));
+		gameOverLabel.setFont(Font.font("Consolas", 25));
 		gameOverLabel.setTextFill(Color.BLACK);
-		gameOverLabel.setAlignment(Pos.CENTER);
+		enterInitials.setAlignment(Pos.CENTER);
+		enterInitials.setMinWidth(width / 2);
 
-		
-		showScore.setFont(Font.font("Consolas", 15));
-		showScore.setTextFill(Color.BLACK);
-		showScore.setAlignment(Pos.CENTER);
-		
 //		
 		TextField enterText = new TextField();
-		double textFieldWidth = 100.0;
-		enterText.setMaxWidth(textFieldWidth);
+		// String initials = enterText.getText();
+//		
+		vbox.getChildren().add(gameOverLabel); // adds label "Game's Over" onto screen
+		vbox.getChildren().add(enterInitials); // adds instructions to enter player's intials
+		vbox.getChildren().add(enterText); // adds textfield onto screen
 
-		Scene sceneI = new Scene(vbox, 300, 300); 
-		stage.setScene(sceneI); 
+		Scene sceneI = new Scene(vbox, 300, 300);
+		stage.setScene(sceneI);
 		stage.show();
-		
-		//Action event for pressing Save button
-		//Creates new 'initials' variable which is just what the player enters.
-		//Adds underscores to player's initials if they entered less than 3 chars.
-		//Only saves the first 3 chars if player enters more than 3 chars. Also sets to upper case.
-		//Also closes the Game Over screen and returns player to start screen.
-        EventHandler<ActionEvent> saveInitials = new EventHandler<ActionEvent>() 
-        { 
-            public void handle(ActionEvent e) 
-            { 
-            	String initials = enterText.getText();
-            	
-            	while(initials.length() < 3)
-            	{
-            		initials += "_";
-            	}
 
-            	PizzaKid.addScore(initials.toUpperCase().substring(0, 3), game.collectibles.getTipMoney());
-            	
-            	stage.close();
-            	resetMap();
-				playScreen.setVisible(false);
-				startScreen.setVisible(true);
-				startScreen.toFront();
-				gameOver = true;
-            	
-            } 
-        }; 
-        
-  
-        Button saveInfo = new Button("Save");
-        saveInfo.setFont(Font.font("Consolas", 18));
+		// action event
+		EventHandler<ActionEvent> saveInitials = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				PizzaKid.addScore(enterText.getText().toUpperCase().substring(0, 3), game.collectibles.getTipMoney());
+				stage.close();
+			}
+		};
 
-        vbox.getChildren().add(gameOverLabel);  //adds label "Game's Over" onto screen
-        vbox.getChildren().add(showScore);
-		vbox.getChildren().add(enterInitials); //adds instructions to enter player's intials
-		vbox.getChildren().add(enterText); //adds textfield onto screen
-		vbox.getChildren().add(saveInfo);//adds Save button to screen
-        
-        // when enter is pressed, sends player's score and initials to the scores.txt file, and closes the little window.
-        saveInfo.setOnAction(saveInitials);
-        
-		
+		Button saveInfo = new Button("Save");
+		vbox.getChildren().add(saveInfo);
+
+		// when enter is pressed, sends player's score and initials to the scores.txt
+		// file
+		saveInfo.setOnAction(saveInitials);
+
 	}
 
 	/**
@@ -643,12 +694,15 @@ public class PizzaKidGUI extends Application {
 	 * @param statement - reason why the game is over (time is up or 3 strikes
 	 *                  reached)
 	 */
-	public static void gameIsOver(String statement) 
-	{
+	public static void gameIsOver(String statement) {
 		gameOver = true;
-		state.setText("Game Over! ");
+		state.setText("Game Over! " + statement + "\n" + "Your total tip is: $" + game.collectibles.getTipMoney()
+				+ "\nPress reset to play again!");
 		timeLeftForOrder.setText("");
-
+//	game = new PizzaKid();
+//	game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
+//	game.collectibles = new Collectibles(0, 0);
+		// showGUIMap(mapGUI);
 	}
 
 }
