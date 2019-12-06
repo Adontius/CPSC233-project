@@ -273,6 +273,12 @@ public class PizzaKidGUI extends Application {
 		HSScreen.getChildren().add(player4);
 		HSScreen.getChildren().add(player5);
 		
+		//formatting of highscores
+		player1.setFont(Font.font("Arial", 15));
+		player1.setTextFill(Color.BLACK);
+		player1.setAlignment(Pos.CENTER);
+		player1.setMinWidth(width / 4);
+		
 		Scene sceneIII = new Scene(HSScreen, 300, 300);
 		stage.setScene(sceneIII);
 		stage.show();
