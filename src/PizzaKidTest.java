@@ -269,7 +269,7 @@ public class PizzaKidTest {
 			System.out.println("Exception caught");
 		}
 		
-		assertEquals("Check if the player has moved down", "Tst: 5.0", in);
+		assertEquals("Check if initials and scores are being added into file", "Tst: 5.0", in);
 	}
 	
 	// help 
