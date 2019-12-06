@@ -1,11 +1,8 @@
 import java.util.Scanner;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -42,22 +39,22 @@ public class PizzaKidGUI extends Application {
 	public static Scanner input = new Scanner(System.in);
 
 	// GUI related variables
-	int height = 700;
+	static int height = 700;
 	static int width = 1000;
 
-	int buttonHeight = 80;
-	int buttonWidth = 100;
+	static int buttonHeight = 80;
+	static int buttonWidth = 100;
 
 	static int mapHeight = 540; // makes each tile size 45x45 pixels
 	static int mapWidth = 540;
 
 	StackPane root = new StackPane();
 	static VBox startScreen = new VBox();
-	BorderPane playScreen = new BorderPane();
+	static BorderPane playScreen = new BorderPane();
 
 	boolean isPlaying = false;
 
-	int timeDisplayInSeconds = 0;
+	static int timeDisplayInSeconds = 0;
 
 	public static void main(String[] args) {
 		game.map = new Map(new Avatar(), 17, PizzaKid.createTilesFor17());
@@ -265,7 +262,7 @@ public class PizzaKidGUI extends Application {
 	 * Initializes the physical parts of the play screen (creates a map, setting
 	 * header, footer, left side and right side)
 	 */
-	public void initializePlayScreen() {
+	public static void initializePlayScreen() {
 
 		// playScreen
 		setPlayScreenStyle();
@@ -302,7 +299,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Sets the style of the play screen
 	 */
-	public void setPlayScreenStyle() {
+	public static void setPlayScreenStyle() {
 		playScreen.setMinHeight(height);
 		playScreen.setMinWidth(width);
 		String style2 = "-fx-background-color: #ADD8E6;"; // light blue bkgrd
@@ -316,7 +313,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param heading - HBox containing the elements of the heading
 	 */
-	public void setHeadings(HBox heading) {
+	public static void setHeadings(HBox heading) {
 
 		Label title = new Label("PizzaKid");
 		Label time = new Label("Time left: " + timeDisplayInSeconds);
@@ -353,7 +350,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param map - GridMap which contains the graphical map
 	 */
-	public void setMap(GridPane map) {
+	public static void setMap(GridPane map) {
 		map.setVgap(5);
 		map.setHgap(5);
 		map.setPadding(new Insets(10, 10, 10, 10));
@@ -368,7 +365,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param footer - HBox containing button
 	 */
-	public void setFooter(HBox footer) {
+	public static void setFooter(HBox footer) {
 
 		footer.setMinWidth(width);
 
@@ -414,7 +411,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param right - VBox containing right elements
 	 */
-	public void setRight(VBox right) {
+	public static void setRight(VBox right) {
 		Label strike = new Label("Strikes:");
 
 		// strike
@@ -431,7 +428,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param right - VBox containing left elements
 	 */
-	public void setLeft(VBox left) {
+	public static void setLeft(VBox left) {
 		Label instructions = new Label("Instructions:");
 		Label first = new Label("- Use the arrow keys to move");
 		Label second = new Label("- Deliver pizza on time to get tips");
@@ -525,7 +522,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Sets the controls needed for the game
 	 */
-	public void playGame(BorderPane playScreen) {
+	public static void playGame(BorderPane playScreen) {
 
 		// controls - actions to be done when a key is pressed
 		playScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -581,7 +578,7 @@ public class PizzaKidGUI extends Application {
 	 * 
 	 * @param direction
 	 */
-	public void checkIfStrikeOrTip(int direction) {
+	public static void checkIfStrikeOrTip(int direction) {
 
 		// updates tips
 		((Labeled) heading.getChildren().get(2)).setText("Tips: $" + game.collectibles.getTipMoney());
@@ -614,7 +611,7 @@ public class PizzaKidGUI extends Application {
 	/**
 	 * Resets the physical map by clearing each pane and making a new map
 	 */
-	public void resetMap() {
+	public static void resetMap() {
 
 		gameOver = false;
 
@@ -636,58 +633,90 @@ public class PizzaKidGUI extends Application {
 		showGUIMap(mapGUI);
 	}
 
-	public static void getInitials()
-//this method makes a window pop-up after the game is over, which asks for the player's initials so that the player's score can be recorded
+	public static void getInitials() 
+	//this method makes a window pop-up after the game is over, which asks for the player's initials so that the player's score can be recorded
 	{
-//		gameOver = true;
-//		timeLeftForOrder.setText("");
 
+		
 		VBox vbox = new VBox();
-		HBox hbox = new HBox();
 		Stage stage = new Stage();
 		stage.setTitle("Game Over");
+		
+		//labels that show on the screen
 		Label gameOverLabel = new Label("Game's Over!");
-		Label enterInitials = new Label("Enter your intials below: ");
-
+		String scoreText = "You earned $" + game.collectibles.getTipMoney() + ".";
+		Label showScore = new Label(scoreText);
+		Label enterInitials = new Label("Enter your 3 initials below: ");
+		
+		
+		
+		//style of the labels
 		enterInitials.setFont(Font.font("Consolas", 15));
 		enterInitials.setTextFill(Color.BLACK);
 		enterInitials.setAlignment(Pos.CENTER);
-		enterInitials.setMinWidth(width / 2);
 
-		gameOverLabel.setFont(Font.font("Consolas", 25));
+		
+		gameOverLabel.setFont(Font.font("Consolas", 20));
 		gameOverLabel.setTextFill(Color.BLACK);
-		enterInitials.setAlignment(Pos.CENTER);
-		enterInitials.setMinWidth(width / 2);
+		gameOverLabel.setAlignment(Pos.CENTER);
 
+		
+		showScore.setFont(Font.font("Consolas", 15));
+		showScore.setTextFill(Color.BLACK);
+		showScore.setAlignment(Pos.CENTER);
+		
 //		
 		TextField enterText = new TextField();
-		// String initials = enterText.getText();
-//		
-		vbox.getChildren().add(gameOverLabel); // adds label "Game's Over" onto screen
-		vbox.getChildren().add(enterInitials); // adds instructions to enter player's intials
-		vbox.getChildren().add(enterText); // adds textfield onto screen
+		double textFieldWidth = 100.0;
+		enterText.setMaxWidth(textFieldWidth);
 
-		Scene sceneI = new Scene(vbox, 300, 300);
-		stage.setScene(sceneI);
+		Scene sceneI = new Scene(vbox, 300, 300); 
+		stage.setScene(sceneI); 
 		stage.show();
+		
+		//Action event for pressing Save button
+		//Creates new 'initials' variable which is just what the player enters.
+		//Adds underscores to player's initials if they entered less than 3 chars.
+		//Only saves the first 3 chars if player enters more than 3 chars. Also sets to upper case.
+		//Also closes the Game Over screen and returns player to start screen.
+        EventHandler<ActionEvent> saveInitials = new EventHandler<ActionEvent>() 
+        { 
+            public void handle(ActionEvent e) 
+            { 
+            	String initials = enterText.getText();
+            	
+            	while(initials.length() < 3)
+            	{
+            		initials += "_";
+            	}
 
-		// action event
-		EventHandler<ActionEvent> saveInitials = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				PizzaKid.addScore(enterText.getText().toUpperCase().substring(0, 3), game.collectibles.getTipMoney());
-				stage.close();
-			}
-		};
+            	PizzaKid.addScore(initials.toUpperCase().substring(0, 3), game.collectibles.getTipMoney());
+            	
+            	stage.close();
+            	resetMap();
+				playScreen.setVisible(false);
+				startScreen.setVisible(true);
+				startScreen.toFront();
+				gameOver = true;
+            	
+            } 
+        }; 
+        
+  
+        Button saveInfo = new Button("Save");
+        saveInfo.setFont(Font.font("Consolas", 18));
 
-		Button saveInfo = new Button("Save");
-		vbox.getChildren().add(saveInfo);
-
-		// when enter is pressed, sends player's score and initials to the scores.txt
-		// file
-		saveInfo.setOnAction(saveInitials);
-
+        vbox.getChildren().add(gameOverLabel);  //adds label "Game's Over" onto screen
+        vbox.getChildren().add(showScore);
+		vbox.getChildren().add(enterInitials); //adds instructions to enter player's intials
+		vbox.getChildren().add(enterText); //adds textfield onto screen
+		vbox.getChildren().add(saveInfo);//adds Save button to screen
+        
+        // when enter is pressed, sends player's score and initials to the scores.txt file, and closes the little window.
+        saveInfo.setOnAction(saveInitials);
+        
+		
 	}
-
 	/**
 	 * Makes the gameOver variable true, shows results to user, and resets the map
 	 * 
