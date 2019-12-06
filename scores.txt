@@ -1,3 +1,9 @@
 ALN: 124.5
 AAW: 8.0
+<<<<<<< HEAD
 MMM: 11.5
+=======
+GAS: 8.0
+___: 0.0
+GAS: 0.0
+>>>>>>> branch 'master' of https://github.com/Adontius/CPSC233-project.git
