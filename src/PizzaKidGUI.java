@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -142,13 +143,20 @@ public class PizzaKidGUI extends Application {
 		bottom.setAlignment(Pos.CENTER);
 		bottom.setMinHeight(height / 2);
 
+		//start button
 		Button start = new Button("START");
-		start.setFont(Font.font("Courier New", 30));
+		start.setFont(Font.font("Consolas", 30));
 		start.setMinSize(buttonWidth, buttonHeight);
 
+		//how to play button
 		Button howTo = new Button("HOW TO PLAY");
-		howTo.setFont(Font.font("Courier New", 30));
+		howTo.setFont(Font.font("Consolas", 30));
 		howTo.setMinSize(buttonWidth, buttonHeight);
+		
+		//highscores button
+		Button seeHighscores = new Button("HIGHSCORES");
+		seeHighscores.setFont(Font.font("Consolas", 30));
+		seeHighscores.setMinSize(buttonWidth, buttonHeight);
 
 		// event in start button
 		start.setOnAction(new EventHandler<ActionEvent>() {
@@ -167,6 +175,17 @@ public class PizzaKidGUI extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				setHowToPlayScreen();
+			}
+		});
+		
+		seeHighscores.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				try {
+					setHighscoreScreen();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -221,6 +240,48 @@ public class PizzaKidGUI extends Application {
 		
 		Scene sceneII = new Scene(howToPlayScreen, 300, 300);
 		stage.setScene(sceneII);
+		stage.show();
+	}
+	
+	public static void setHighscoreScreen() throws IOException
+	// this method makes a window pop-up when button for "highscores" is pressed
+	{
+		Stage stage = new Stage();
+		stage.setTitle("Highscores!");
+		
+		VBox HSScreen = new VBox();
+		
+		Label player1 = new Label(Collectibles.getHighScores(0));
+		Label player2 = new Label(Collectibles.getHighScores(1));
+		Label player3 = new Label(Collectibles.getHighScores(2));
+		Label player4 = new Label(Collectibles.getHighScores(3));
+		Label player5 = new Label(Collectibles.getHighScores(4));
+
+
+		Button quitButton = new Button("Close");
+
+		quitButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				stage.close();
+			}
+		});
+
+		HSScreen.getChildren().add(player1);
+		HSScreen.getChildren().add(player2);
+		HSScreen.getChildren().add(player3);
+		HSScreen.getChildren().add(player4);
+		HSScreen.getChildren().add(player5);
+//
+//
+//		// instructions
+//		instructions.setFont(Font.font("Arial", 15));
+//		instructions.setTextFill(Color.BLACK);
+//		instructions.setAlignment(Pos.CENTER);
+//		instructions.setMinWidth(width / 4);
+		
+		Scene sceneIII = new Scene(HSScreen, 300, 300);
+		stage.setScene(sceneIII);
 		stage.show();
 	}
 
@@ -705,6 +766,37 @@ public class PizzaKidGUI extends Application {
         saveInfo.setOnAction(saveInitials);
         
 		
+	}
+	
+	public static void displayHS() 
+		{
+	
+		VBox vbox = new VBox();
+		Stage stage = new Stage();
+		stage.setTitle("highsc");
+		
+		//labels that show on the screen
+		Label gameOverLabel = new Label("Game's Over!");
+		String scoreText = "You earned $" + game.collectibles.getTipMoney() + ".";
+		Label showScore = new Label(scoreText);
+		Label enterInitials = new Label("Enter your 3 initials below: ");
+		
+		
+		
+		//style of the labels
+		enterInitials.setFont(Font.font("Consolas", 15));
+		enterInitials.setTextFill(Color.BLACK);
+		enterInitials.setAlignment(Pos.CENTER);
+	
+		
+		gameOverLabel.setFont(Font.font("Consolas", 20));
+		gameOverLabel.setTextFill(Color.BLACK);
+		gameOverLabel.setAlignment(Pos.CENTER);
+	
+		
+		showScore.setFont(Font.font("Consolas", 15));
+		showScore.setTextFill(Color.BLACK);
+		showScore.setAlignment(Pos.CENTER);
 	}
 	
 	

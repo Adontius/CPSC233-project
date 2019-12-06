@@ -69,7 +69,7 @@ public class Collectibles
 		return this.time;
 	}
 	
-	public static void getHighScores() throws IOException
+	public static String getHighScores(int index) throws IOException
 	{
 		DataInputStream readScores = new DataInputStream(new FileInputStream(PizzaKid.scoresFile));
 		int numberOfScores = PizzaKid.scoresFile.length();
@@ -90,14 +90,13 @@ public class Collectibles
 		Collections.sort(allScores);
 		Collections.reverse(allScores);
 		
-		System.out.println(allScores);
-		
+		ArrayList<String> top5Scores= new ArrayList<String>();
 		for(int i = 0; i < 5; i++) 
 		{
-			reader.nextLine();
+			top5Scores.add(reader.nextLine());
 		}
 		
-		reader.close();
+		return top5Scores.get(index);
 		
 		
 	}
