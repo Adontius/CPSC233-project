@@ -191,6 +191,7 @@ public class PizzaKidGUI extends Application {
 
 		bottom.getChildren().add(start);
 		bottom.getChildren().add(howTo);
+		bottom.getChildren().add(seeHighscores);
 	}
 
 
@@ -228,8 +229,6 @@ public class PizzaKidGUI extends Application {
 		howToPlayScreen.getChildren().add(fifth);
 		howToPlayScreen.getChildren().add(sixth);
 		howToPlayScreen.getChildren().add(seventh);
-		howToPlayScreen.getChildren().add(state);
-		howToPlayScreen.getChildren().add(timeLeftForOrder);
 		howToPlayScreen.getChildren().add(quitButton);
 
 		// instructions
@@ -246,6 +245,7 @@ public class PizzaKidGUI extends Application {
 	public static void setHighscoreScreen() throws IOException
 	// this method makes a window pop-up when button for "highscores" is pressed
 	{
+
 		Stage stage = new Stage();
 		stage.setTitle("Highscores!");
 		
@@ -272,12 +272,38 @@ public class PizzaKidGUI extends Application {
 		HSScreen.getChildren().add(player3);
 		HSScreen.getChildren().add(player4);
 		HSScreen.getChildren().add(player5);
+		HSScreen.getChildren().add(quitButton);
 		
 		//formatting of highscores
-		player1.setFont(Font.font("Arial", 15));
+		player1.setFont(Font.font("Consolas", 15));
 		player1.setTextFill(Color.BLACK);
 		player1.setAlignment(Pos.CENTER);
 		player1.setMinWidth(width / 4);
+		player1.setPadding(new Insets(10, 0, 0, 0));
+		
+		player2.setFont(Font.font("Consolas", 15));
+		player2.setTextFill(Color.BLACK);
+		player2.setAlignment(Pos.CENTER);
+		player2.setMinWidth(width / 4);
+		player2.setPadding(new Insets(10, 0, 0, 0));
+
+		player3.setFont(Font.font("Consolas", 15));
+		player3.setTextFill(Color.BLACK);
+		player3.setAlignment(Pos.CENTER);
+		player3.setMinWidth(width / 4);
+		player3.setPadding(new Insets(10, 0, 0, 0));
+
+		player4.setFont(Font.font("Consolas", 15));
+		player4.setTextFill(Color.BLACK);
+		player4.setAlignment(Pos.CENTER);
+		player4.setMinWidth(width / 4);
+		player4.setPadding(new Insets(10, 0, 0, 0));
+
+		player5.setFont(Font.font("Consolas", 15));
+		player5.setTextFill(Color.BLACK);
+		player5.setAlignment(Pos.CENTER);
+		player5.setMinWidth(width / 4);
+		player5.setPadding(new Insets(10, 0, 40, 0));
 		
 		Scene sceneIII = new Scene(HSScreen, 300, 300);
 		stage.setScene(sceneIII);

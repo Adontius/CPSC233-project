@@ -75,29 +75,55 @@ public class Collectibles
 		int numberOfScores = PizzaKid.scoresFile.length();
 		
 		ArrayList<Double> allScores= new ArrayList<Double>(); //creates an arraylist to hold the scores from the scores.txt file
+		ArrayList<String> allInitials= new ArrayList<String>(); //creates an arraylist to hold the scores from the scores.txt file
 		
 		Scanner reader = new Scanner(readScores);
 		
 		// loop through the file and separates initials from scores (into two separate arraylists)
 		while(reader.hasNextLine())
 		{
+			try {
 			String everything = reader.nextLine(); //creates array of split up initials and scores, from the scores.txt file .split(": ", 1)
 
-			allScores.add(Double.parseDouble(everything));
-			
+			allScores.add(Double.parseDouble(everything.substring(4)));
+			allInitials.add(everything.substring(0, 3));
+			} catch (Exception e) {
+				System.out.println("Something wrong with file! Remove unwanted string");
+			}
 		}
 		
-		Collections.sort(allScores);
-		Collections.reverse(allScores);
+		//sorting the two arrays
+		for (int i = 0; i < allScores.size(); i++) 
+        {
+            for (int j = i + 1; j < allScores.size(); j++) 
+            {
+                if (allScores.get(i) < allScores.get(j)) 
+                {
+                    double temp = allScores.get(i);
+                    allScores.set(i, allScores.get(j));
+                    allScores.set(j, temp);
+                    String tempName = allInitials.get(i);
+                    allInitials.set(i, allInitials.get(j));
+                    allInitials.set(j, tempName);
+                }
+            }
+        }
 		
 		ArrayList<String> top5Scores= new ArrayList<String>();
-		for(int i = 0; i < 5; i++) 
+		int n;
+		if(allScores.size() >= 5) {
+			n = 5;
+		} else {
+			n = allScores.size();
+		}
+		for(int i = 0; i < n; i++) 
 		{
-			top5Scores.add(reader.nextLine());
+			top5Scores.add(allInitials.get(i) + ": $" + allScores.get(i));
 		}
 		
 		return top5Scores.get(index);
 		
 		
 	}
+	
 }
