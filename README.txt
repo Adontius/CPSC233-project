@@ -1,11 +1,11 @@
 CPSC 233 - T03 - Group 4
-Authors: Alice, Gerard, Khushi, Anson
+Authors: Alice, Anson, Gerard
 
-Demo 3 (Nov 22nd 2019):
+Interactive Demo (December 6, 2019):
 
 Project Name: Pizza Kid!
 
-For Demonstration 3 of our project, please go to our GitHub
+For the Interactive Demo of our project, please go to our GitHub
 repository at https://github.com/Adontius/CPSC233-project/tree/master/src, or under GitHub user
 Adontius/CPSC233-project.  
 
